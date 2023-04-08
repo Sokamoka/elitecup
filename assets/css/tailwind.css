@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  .button {
+    @apply border-2 rounded-md px-4 py-1.5 font-semibold text-base text-center transition-colors duration-150 ease-out;
+  }
+
+  .button.is-outlined {
+    @apply border-purple-600 text-white hover:border-purple-500;
+  }
+
+  .button.is-primary {
+    @apply bg-red-500 text-white border-red-500 hover:bg-red-400 hover:border-red-400;
+  }
+
+  .button.is-link,
+  a.is-link {
+    @apply text-red-500 hover:text-red-700 font-semibold border-transparent;
+  }
+}
