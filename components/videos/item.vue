@@ -8,7 +8,7 @@
       />
     </div>
     <div class="flex-1 min-w-0">
-      <p class="text-sm font-medium leading-tight text-gray-900">Barani-HSMH Banska Bystrica - EC Red Bull Salzburg</p>
+      <p class="text-sm font-semibold leading-tight text-gray-900">Barani-HSMH Banska Bystrica - EC Red Bull Salzburg</p>
       <p class="text-sm text-gray-500 truncate dark:text-gray-400">September 5, 2023</p>
     </div>
   </div>

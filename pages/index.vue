@@ -1,16 +1,6 @@
 <template>
   <div class="pt-8">
-    <div class="flex flex-col sm:flex-row gap-4 mb-4">
-      <div class="flex-1">
-        <NewsCard main-image="https://www.elitecup.eu/_upload/news_pic/750x420/4_10743.jpg" />
-      </div>
-      <div class="w-full sm:w-1/3">
-        <NewsCard />
-        <NewsCard />
-        <NewsCard />
-        <NewsCard />
-      </div>
-    </div>
+    <MainNews />
 
     <Banner />
 

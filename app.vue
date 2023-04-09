@@ -2,7 +2,9 @@
   <div class="container mx-auto px-4">
     <BaseHeader />
     <MainMenu />
-    <NuxtPage />
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
     <BaseFooter />
   </div>
 </template>
