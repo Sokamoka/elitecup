@@ -7,10 +7,12 @@ interface ApiResponse {
     title: string;
     lead: string;
     content: string;
-    createdAt: Date;
+    createdAt: string;
     id: string | number;
   };
 };
+
+const toDate = (date: string) => toDefaultDate(new Date(date));
 
 const { data: post }: ApiResponse = await useFetch(`/api/news?id=${route.params.id}`);
 </script>
@@ -18,8 +20,8 @@ const { data: post }: ApiResponse = await useFetch(`/api/news?id=${route.params.
 <template>
   <NuxtLayout name="sub" class="mb-8">
     <div>
-      <img class="aspect-video" :src="post.image" :alt="post.title" />
-      <time class="block text-gray-400 my-2 text-sm">{{ post.createdAt }}</time>
+      <img class="w-full rounded-lg" :src="post.image" :alt="post.title" />
+      <time class="block text-gray-400 my-2 text-sm">{{ toDate(post.createdAt) }}</time>
       <h1 class="text-2xl text-gray-900 font-bold">{{ post.title }}</h1>
       <p class="text-base text-gray-500 mb-8">{{ post.lead }}</p>
       <div class="text-gray-900" v-html="post.content" />

@@ -1,5 +1,16 @@
-<script setup>
-const { data: news } = await useFetch('/api/news');
+<script lang="ts" setup>
+interface ApiResponse {
+  image: string;
+  title: string;
+  lead: string;
+  content: string;
+  createdAt: string;
+  id: string | number;
+}
+
+const toDate = (date: string) => toDefaultDate(new Date(date));
+
+const { data: news } = await useFetch<{ data: Ref<ApiResponse[]> }>('/api/news');
 </script>
 
 <template>
@@ -10,7 +21,7 @@ const { data: news } = await useFetch('/api/news');
           <img class="h-32 aspect-video" :src="item.image" alt="Bonnie image" />
         </div>
         <div class="flex-1 flex flex-col items-stretch min-w-0">
-          <time class="text-gray-400 mb-2 text-sm">{{ item.createdAt }}</time>
+          <time class="text-gray-400 mb-2 text-sm">{{ toDate(item.createdAt) }}</time>
           <p class="text-xl font-bold leading-tight text-gray-900 mb-2">
             {{ item.title }}
           </p>

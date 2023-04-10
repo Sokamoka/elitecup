@@ -1,5 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: false,
+
+  nitro: {
+    preset: "netlify",
+  },
+
   modules: ['@nuxtjs/tailwindcss', '@vueuse/nuxt', '@nuxtjs/google-fonts'],
 
   tailwindcss: {
@@ -8,7 +14,7 @@ export default defineNuxtConfig({
 
   googleFonts: {
     families: {
-      Inter: true,
+      'Roboto Condensed': true,
       download: true,
       inject: true,
     },
