@@ -10,10 +10,11 @@ interface ApiResponse {
 
 const toDate = (date: string) => toDefaultDate(new Date(date));
 
-const { data: news } = await useFetch<{ data: Ref<ApiResponse[]> }>('/api/news');
+const { data: news } = await useFetch<{ data: ApiResponse[] }>('/api/news');
 </script>
 
 <template>
+  <h1 class="text-2xl text-gray-900 font-bold mt-8">News</h1>
   <NuxtLayout name="sub" class="mb-8">
     <div class="flex flex-col space-y-8">
       <div v-for="item in news" :key="item.id" class="flex space-x-4 w-full">

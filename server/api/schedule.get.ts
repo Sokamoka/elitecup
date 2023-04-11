@@ -1,6 +1,8 @@
 export default defineEventHandler((event) => {
-  const { start, limit } = getQuery(event);
-  return mockSchedule;
+  let { start, limit } = getQuery(event);
+  start = Number(start);
+  limit = Number(limit);
+  return mockSchedule.slice(start, start + limit);
 });
 
 const mockSchedule = [
@@ -30,10 +32,10 @@ const mockSchedule = [
     homeTeamScore: 7,
     awayTeamName: 'Dunaújvárosi Acélbikák',
     awayTeamScore: 2,
-    gameName: 'EL 29',
+    gameName: 'EL 30',
     location: 'Győr',
     gameDate: '2020-12-02T18:30:00+01:00',
-    id: 59370,
+    id: 59371,
     divisionName: 'Alapszakasz',
     championshipName: 'Erste Liga',
     broadcast: false,

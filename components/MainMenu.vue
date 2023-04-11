@@ -4,8 +4,8 @@
     <NuxtLink to="/news">News</NuxtLink>
     <span>U-18</span>
     <span>U-16</span>
-    <NuxtLink to="/news">Schedule</NuxtLink>
-    <NuxtLink to="/news">Videos</NuxtLink>
+    <NuxtLink to="/schedule">Schedule</NuxtLink>
+    <NuxtLink to="/videos">Videos</NuxtLink>
     <span>Project</span>
     <span>Contacts</span>
   </div>
