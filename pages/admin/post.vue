@@ -7,8 +7,7 @@ definePageMeta({
 <template>
   <div class="py-8">
     <div class="rounded-lg bg-white shadow-sm p-4 w-full">
-      News
-      <NuxtLink to="admin/post">New</NuxtLink>
+      Edit Post
     </div>
   </div>
 </template>

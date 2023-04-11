@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+definePageMeta({
+  layout: false,
+});
+
 const route = useRoute();
 
 interface ApiResponse {
@@ -10,7 +14,7 @@ interface ApiResponse {
     createdAt: string;
     id: string | number;
   };
-};
+}
 
 const toDate = (date: string) => toDefaultDate(new Date(date));
 
