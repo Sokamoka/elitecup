@@ -18,7 +18,9 @@
       <div class="row-span-2">
         <MainBox title="Schedule" class="h-full">
           <template #header-append>
-            <FormButton variant="link" class="text-sm"> All games </FormButton>
+            <NuxtLink to="/schedule" v-slot="{ navigate }"  custom>
+              <FormButton variant="link" class="text-sm" @click="navigate"> All games </FormButton>
+            </NuxtLink>
           </template>
           <Schedule />
         </MainBox>
