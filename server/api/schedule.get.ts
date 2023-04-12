@@ -1,6 +1,5 @@
 import { ofetch } from 'ofetch';
 import { sortBy, prop } from 'ramda';
-import { useArrayJoin, useAsyncQueue } from '@vueuse/core';
 
 export default defineEventHandler(async (event) => {
   let { start, limit } = getQuery(event);
@@ -9,16 +8,10 @@ export default defineEventHandler(async (event) => {
 
   const divisions = ['Preliminary Round - A', 'Preliminary Round - B'];
 
-  // const { activeIndex, result } = useAsyncQueue(divisions.map((id) => fetchFromVBR(id)));
-  // console.log(activeIndex.value)
-  // console.log(result);
-
   try {
-    const u18 = await fetchFromVBR('Preliminary Round - A');
-    const u16 = await fetchFromVBR('Preliminary Round - B');
+    const [u18, u16] = await Promise.all(divisions.map((id) => fetchFromVBR(id)));
 
     const result = [...u18.data, ...u16.data];
-    // console.log(result);
     const sorted = sortBy(prop('gameDate'))(result);
     return sorted.slice(start, start + limit);
   } catch (error) {

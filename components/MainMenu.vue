@@ -1,12 +1,17 @@
-
 <template>
-  <div class="flex flex-col sm:flex-row bg-gray-900 p-4 rounded-lg text-white font-bold uppercase sm:space-x-8">
-    <NuxtLink to="/news">News</NuxtLink>
-    <span>U-18</span>
-    <span>U-16</span>
-    <NuxtLink to="/schedule">Schedule</NuxtLink>
-    <NuxtLink to="/videos">Videos</NuxtLink>
-    <span>Project</span>
-    <span>Contacts</span>
+  <div class="flex flex-col sm:flex-row bg-gray-900 px-4 rounded-lg text-white font-bold uppercase">
+    <NuxtLink to="/news" class="p-3">News</NuxtLink>
+    <span class="p-3">U-18</span>
+    <span class="p-3">U-16</span>
+    <NuxtLink to="/schedule" class="p-3">Schedule</NuxtLink>
+    <NuxtLink to="/videos" class="p-3">Videos</NuxtLink>
+    <span class="p-3">Project</span>
+    <span class="p-3">Contacts</span>
   </div>
 </template>
+
+<style scoped>
+.router-link-active {
+  @apply bg-red-500;
+}
+</style>
