@@ -4,6 +4,8 @@ definePageMeta({
 });
 
 const route = useRoute();
+const { locale, locales } = useI18n();
+const localePath = useLocalePath();
 
 interface ApiResponse {
   data: {
@@ -16,7 +18,9 @@ interface ApiResponse {
   };
 }
 
-const toDate = (date: string) => toDefaultDate(new Date(date));
+const currentIso = computed(() => locales.value?.find((loc) => loc.code === locale.value));
+
+const toDate = (date: string) => toDefaultDate(new Date(date), currentIso.value?.iso);
 
 const { data: post }: ApiResponse = await useFetch(`/api/news?id=${route.params.id}`);
 </script>
@@ -33,7 +37,7 @@ const { data: post }: ApiResponse = await useFetch(`/api/news?id=${route.params.
     <template #sidebar>
       <MainBox title="Schedule">
         <template #header-append>
-          <NuxtLink to="/schedule" v-slot="{ navigate }" custom>
+          <NuxtLink :to="localePath('/schedule')" v-slot="{ navigate }" custom>
             <FormButton variant="link" class="text-sm" @click="navigate"> All games </FormButton>
           </NuxtLink>
         </template>

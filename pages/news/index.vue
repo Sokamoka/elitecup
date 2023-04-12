@@ -12,6 +12,8 @@ definePageMeta({
   layout: false,
 });
 
+const localePath = useLocalePath();
+
 const toDate = (date: string) => toDefaultDate(new Date(date));
 
 const { data: news } = await useFetch<{ data: ApiResponse[] }>('/api/news');
@@ -34,7 +36,7 @@ const { data: news } = await useFetch<{ data: ApiResponse[] }>('/api/news');
             {{ item.title }}
           </p>
           <div class="flex-1 text-base text-gray-500">{{ item.lead }}</div>
-          <NuxtLink :to="`/news/${item.id}`">
+          <NuxtLink :to="localePath(`/news/${item.id}`)">
             <FormButton variant="link" class="-ml-4 w-min text-sm whitespace-nowrap">Read more ></FormButton>
           </NuxtLink>
         </div>

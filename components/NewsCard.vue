@@ -26,9 +26,12 @@ const props = defineProps({
   },
 });
 
+const { locale } = useI18n();
+const localePath = useLocalePath();
+
 const isMainNewsCard = computed(() => Boolean(props.mainImage));
 
-const toDate = (date: string) => toDefaultDate(new Date(date));
+const toDate = (date: string) => toDefaultDate(new Date(date), locale.value);
 </script>
 <template>
   <div class="bg-white border border-gray-200 rounded-lg mb-4 overflow-hidden">
@@ -42,7 +45,7 @@ const toDate = (date: string) => toDefaultDate(new Date(date));
         {{ lead }}
       </dd>
 
-      <NuxtLink :to="`/news/${id}`" v-slot="{ navigate }" custom>
+      <NuxtLink :to="localePath(`/news/${id}`)" v-slot="{ navigate }" custom>
         <FormButton v-if="isMainNewsCard" variant="primary" @click="navigate">Read more ></FormButton>
         <FormButton v-else variant="link" class="text-sm p-2 -ml-2.5 -mb-2" @click="navigate">Read more ></FormButton>
       </NuxtLink>

@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     preset: "netlify",
   },
 
-  modules: ['@nuxtjs/tailwindcss', '@vueuse/nuxt', '@nuxtjs/google-fonts'],
+  modules: ['@nuxtjs/tailwindcss', '@vueuse/nuxt', '@nuxtjs/google-fonts','@nuxtjs/i18n'],
 
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.css',
@@ -19,4 +19,22 @@ export default defineNuxtConfig({
       inject: true,
     },
   },
+
+  i18n: {
+    locales: [
+      {
+        code: 'en',
+        iso: 'en-US',
+        file: 'en-US.json'
+      },
+      {
+        code: 'hu',
+        iso: 'hu-HU',
+        file: 'hu-HU.json'
+      },
+    ],
+    lazy: true,
+    langDir: 'lang',
+    defaultLocale: 'en'
+  }
 });

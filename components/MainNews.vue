@@ -1,5 +1,6 @@
 <script setup>
-const { data: news } = await useFetch('/api/news');
+const { locale } = useI18n();
+const { data: news } = await useFetch(`/api/news?lang=${locale.value}`);
 const moreNews = computed(() => [...news.value].slice(1, 5));
 </script>
 
