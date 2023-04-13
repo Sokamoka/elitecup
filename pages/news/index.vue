@@ -12,11 +12,12 @@ definePageMeta({
   layout: false,
 });
 
+const { locale } = useI18n();
 const localePath = useLocalePath();
 
 const toDate = (date: string) => toDefaultDate(new Date(date));
 
-const { data: news } = await useFetch<{ data: ApiResponse[] }>('/api/news');
+const { data: news } = await useFetch<{ data: ApiResponse[] }>(`/api/news?lang=${locale.value}`);
 </script>
 
 <template>

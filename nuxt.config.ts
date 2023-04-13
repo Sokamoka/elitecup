@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     preset: "netlify",
   },
 
-  modules: ['@nuxtjs/tailwindcss', '@vueuse/nuxt', '@nuxtjs/google-fonts','@nuxtjs/i18n'],
+  modules: ['@nuxtjs/tailwindcss', '@vueuse/nuxt', '@nuxtjs/google-fonts','@nuxtjs/i18n','@nuxt/content'],
 
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.css',
