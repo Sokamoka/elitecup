@@ -4,6 +4,9 @@
     "news": "News",
     "schedule": "Schedule",
     "videos": "Videos",
-    "project": "Project"
-  }
+    "project": "Project",
+    "contacts": "Contacts"
+  },
+  "email": "E-mail",
+  "phone": "Phone"
 }

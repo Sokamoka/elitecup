@@ -9,8 +9,8 @@ const localePath = useLocalePath();
     <span class="p-3">U-16</span>
     <NuxtLink :to="localePath('/schedule')" class="p-3">{{ $t('menu.schedule') }}</NuxtLink>
     <NuxtLink :to="localePath('/videos')" class="p-3">{{ $t('menu.videos') }}</NuxtLink>
-    <NuxtLink :to="localePath('/project')" class="p-3">{{ $t('menu.project') }}</NuxtLink>
-    <span class="p-3">Contacts</span>
+    <NuxtLink :to="localePath('/page/project')" class="p-3">{{ $t('menu.project') }}</NuxtLink>
+    <NuxtLink :to="localePath('/page/contacts')" class="p-3">{{ $t('menu.contacts') }}</NuxtLink>
   </div>
 </template>
 

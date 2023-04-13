@@ -4,6 +4,9 @@
     "news": "Hírek",
     "schedule": "Versenynaptár",
     "videos": "Videók",
-    "project": "Projekt"
-  }
+    "project": "Projekt",
+    "contacts": "Kapcsolat"
+  },
+  "email": "E-mail",
+  "phone": "Telefon"
 }
