@@ -23,5 +23,6 @@ const mainClasses = computed(() => [
 <template>
   <button type="button" :class="mainClasses">
     <slot />
+    <Icon name="ic:baseline-keyboard-arrow-right" />
   </button>
 </template>

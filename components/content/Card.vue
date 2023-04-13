@@ -12,18 +12,22 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="border border-gray-300 rounded-lg p-4">
+  <div
+    class="border border-gray-300 rounded-lg hover:border-gray-500 hover:outline hover:outline-gray-500"
+  >
     <div class="flex flex-col gap-4">
-      <div class="image aspect-video">
+      <div class="image aspect-video bg-white rounded-lg p-4">
         <ContentSlot :use="$slots.default" unwrap="p" />
       </div>
-      <dl>
+      <dl class="p-4">
         <dt class="text-gray-900 text-xs font-bold">{{ $t('email') }}</dt>
-        <dd>
+        <dd class="space-x-2">
+          <Icon name="ic:outline-email" class="text-gray-400" />
           <a :href="`mailto:${email}`">{{ email }}</a>
         </dd>
         <dt class="text-gray-900 text-xs font-bold">{{ $t('phone') }}</dt>
-        <dd>
+        <dd class="space-x-2">
+          <Icon name="ic:outline-local-phone" class="text-gray-400" />
           <a :href="`tel:${phone}`">{{ phone }}</a>
         </dd>
       </dl>

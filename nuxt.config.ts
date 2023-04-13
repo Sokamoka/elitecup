@@ -3,10 +3,24 @@ export default defineNuxtConfig({
   ssr: false,
 
   nitro: {
-    preset: "netlify",
+    preset: 'netlify',
   },
 
-  modules: ['@nuxtjs/tailwindcss', '@vueuse/nuxt', '@nuxtjs/google-fonts','@nuxtjs/i18n','@nuxt/content'],
+  vue: {
+    compilerOptions: {
+      isCustomElement: (tag) => tag.includes('mjsz-vbr-'),
+    },
+  },
+
+  modules: [
+    '@nuxtjs/tailwindcss',
+    '@vueuse/nuxt',
+    '@nuxtjs/google-fonts',
+    '@nuxtjs/i18n',
+    '@nuxt/content',
+    'nuxt-headlessui',
+    'nuxt-icon',
+  ],
 
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.css',
@@ -25,16 +39,20 @@ export default defineNuxtConfig({
       {
         code: 'en',
         iso: 'en-US',
-        file: 'en-US.json'
+        file: 'en-US.json',
       },
       {
         code: 'hu',
         iso: 'hu-HU',
-        file: 'hu-HU.json'
+        file: 'hu-HU.json',
       },
     ],
     lazy: true,
     langDir: 'lang',
-    defaultLocale: 'en'
-  }
+    defaultLocale: 'en',
+  },
+
+  headlessui: {
+    prefix: 'Headless',
+  },
 });
