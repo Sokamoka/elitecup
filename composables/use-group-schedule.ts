@@ -1,7 +1,9 @@
 import { format, parseISO, intlFormat } from 'date-fns';
 
-export function useGroupSchedule(data: Ref) {
-  const grouped = computed(() => groupByGameDate(data.value));
+// console.log(Intl.DateTimeFormat().resolvedOptions().timeZone);
+
+export function useGroupSchedule(data: Ref, locale: Ref) {
+  const grouped = computed(() => groupByGameDate(unref(data)));
 
   const formatGameDate = (date: string) =>
     intlFormat(
@@ -13,7 +15,7 @@ export function useGroupSchedule(data: Ref) {
         day: 'numeric',
       },
       {
-        locale: 'en-US',
+        locale: unref(locale)?.iso,
       }
     );
 

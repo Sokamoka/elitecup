@@ -1,11 +1,16 @@
 {
-  "test": "TESSST",
+  "common": {
+    "allGames": "All games"
+  },
   "menu": {
     "news": "News",
     "schedule": "Schedule",
     "videos": "Videos",
     "project": "Project",
     "contacts": "Contacts"
+  },
+  "title": {
+    "schedule": "Schedule"
   },
   "email": "E-mail",
   "phone": "Phone"

@@ -1,3 +1,6 @@
+<script setup>
+const localePath = useLocalePath();
+</script>
 <template>
   <div class="pt-8">
     <MainNews />
@@ -16,18 +19,11 @@
       </div>
       <div><MainBox title="Instagram" class="h-full" /></div>
       <div class="row-span-2">
-        <MainBox title="Schedule" class="h-full">
-          <template #header-append>
-            <NuxtLink to="/schedule" v-slot="{ navigate }"  custom>
-              <FormButton variant="link" class="text-sm" @click="navigate"> All games </FormButton>
-            </NuxtLink>
-          </template>
-          <Schedule />
-        </MainBox>
+        <ScheduleMainBox />
       </div>
     </div>
 
-    <PlayerStatistics></PlayerStatistics>
+    <PlayerStatistics />
 
     <Teams />
   </div>

@@ -35,14 +35,7 @@ const { data: post }: ApiResponse = await useFetch(`/api/news?id=${route.params.
       <div class="text-gray-900" v-html="post.content" />
     </div>
     <template #sidebar>
-      <MainBox title="Schedule">
-        <template #header-append>
-          <NuxtLink :to="localePath('/schedule')" v-slot="{ navigate }" custom>
-            <FormButton variant="link" class="text-sm" @click="navigate"> All games </FormButton>
-          </NuxtLink>
-        </template>
-        <Schedule />
-      </MainBox>
+      <ScheduleMainBox />
     </template>
   </NuxtLayout>
 </template>

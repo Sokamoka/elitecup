@@ -1,9 +1,9 @@
 <script setup>
-const start = ref(0);
-const limit = 12;
-const { data } = await useFetch(`/api/schedule?start=${start.value}&limit=${limit}`);
+const { locale, locales } = useI18n();
+const { range } = useScheduleMain();
 
-const { grouped, formatGameDate, formatGameDateTime } = useGroupSchedule(data);
+const currentLocale = computed(() => locales.value?.find((loc) => loc.code === locale.value));
+const { grouped, formatGameDate, formatGameDateTime } = useGroupSchedule(range, currentLocale);
 </script>
 
 <template>

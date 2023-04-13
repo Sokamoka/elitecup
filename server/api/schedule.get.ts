@@ -2,27 +2,28 @@ import { ofetch } from 'ofetch';
 import { sortBy, prop } from 'ramda';
 
 export default defineEventHandler(async (event) => {
-  let { start, limit } = getQuery(event);
-  start = Number(start);
-  limit = Number(limit);
+  // let { start, limit } = getQuery(event);
+  // start = Number(start);
+  // limit = Number(limit);
 
   const divisions = ['Preliminary Round - A', 'Preliminary Round - B'];
 
   try {
-    const [u18, u16] = await Promise.all(divisions.map((id) => fetchFromVBR(id)));
+    const [u18, u16] = await Promise.all(divisions.map((id) => fetchFromVBR2(id)));
 
     const result = [...u18.data, ...u16.data];
     const sorted = sortBy(prop('gameDate'))(result);
-    return sorted.slice(start, start + limit);
+    return sorted;
   } catch (error) {
     console.log(error);
   }
 
-  const sorted = sortBy(prop('gameDate'))(mockSchedule);
-  return sorted.slice(start, start + limit);
+  // const sorted = sortBy(prop('gameDate'))(mockSchedule);
+  // return sorted;
+  return [];
 });
 
-async function fetchFromVBR(id: string) {
+function fetchFromVBR(id: string) {
   const url = `https://api.icehockey.hu/vbr/v1/gamesList?championshipId=3312&division=${id}`;
   // const url = `http://localhost:3333/vbr/v1/gamesList?championshipId=3314&division=Alapszakasz`;
 
@@ -36,6 +37,22 @@ async function fetchFromVBR(id: string) {
       'X-API-KEY': 'dd8adf5fdb738b3741fa579b5ede5ce69b681f62',
     },
   });
+}
+
+async function fetchFromVBR2(id: string) {
+  const url = `https://api.icehockey.hu/vbr/v1/gamesList?championshipId=3312&division=${id}`;
+
+  const response = await fetch(url, {
+    method: 'GET',
+    cache: 'no-cache',
+    headers: {
+      origin: 'http://localhost:3000',
+      'Content-Type': 'application/json',
+      'X-API-KEY': 'dd8adf5fdb738b3741fa579b5ede5ce69b681f62',
+    },
+  });
+  const responseData = await response.json();
+  return responseData;
 }
 
 const mockSchedule = [

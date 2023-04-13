@@ -1,11 +1,16 @@
 {
-  "test": "TESSSZZZZT",
+  "common": {
+    "allGames": "Összes mérkőzés"
+  },
   "menu": {
     "news": "Hírek",
     "schedule": "Versenynaptár",
     "videos": "Videók",
     "project": "Projekt",
     "contacts": "Kapcsolat"
+  },
+  "title": {
+    "schedule": "Versenynaptár"
   },
   "email": "E-mail",
   "phone": "Telefon"

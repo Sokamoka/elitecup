@@ -45,14 +45,7 @@ const { data: news } = await useFetch<{ data: ApiResponse[] }>(`/api/news?lang=$
     </div>
 
     <template #sidebar>
-      <MainBox title="Schedule">
-        <template #header-append>
-          <NuxtLink to="/schedule" v-slot="{ navigate }" custom>
-            <FormButton variant="link" class="text-sm" @click="navigate"> All games </FormButton>
-          </NuxtLink>
-        </template>
-        <Schedule />
-      </MainBox>
+      <ScheduleMainBox />
     </template>
   </NuxtLayout>
 </template>
