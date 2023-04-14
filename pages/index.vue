@@ -23,7 +23,9 @@ const localePath = useLocalePath();
       </div>
     </div>
 
-    <PlayerStatistics />
+    <ClientOnly>
+      <PlayerStatistics />
+    </ClientOnly>
 
     <Teams />
   </div>
