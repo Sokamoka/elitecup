@@ -6,7 +6,7 @@ const localePath = useLocalePath();
   <MainBox :title="$t('title.schedule')" class="h-full">
     <template #header-append>
       <NuxtLink :to="localePath('/schedule')" v-slot="{ navigate }" custom>
-        <FormButton variant="link" class="text-sm" @click="navigate">{{ $t('common.allGames') }}</FormButton>
+        <FormButton variant="link" class="text-sm -mr-4" @click="navigate">{{ $t('common.allGames') }}</FormButton>
       </NuxtLink>
     </template>
     <Schedule />

@@ -31,7 +31,7 @@ const props = defineProps({
     <div class="grid grid-cols-[20px_1fr_40px] grid-flow-row text-sm gap-2">
       <template v-for="player in data" :key="player.id">
         <img :src="player.teamLogo" :title="player.teamName" class="w-4 h-4">
-        <span class="text-white">{{ player.lastName }} {{ player.firstName }}</span>
+        <span class="text-white truncate">{{ player.lastName }} {{ player.firstName }}</span>
         <span class="text-gray-400 text-right">{{ player[dataKey] }}</span>
       </template>
     </div>
