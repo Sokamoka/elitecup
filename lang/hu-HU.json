@@ -10,7 +10,16 @@
     "contacts": "Kapcsolat"
   },
   "title": {
-    "schedule": "Versenynaptár"
+    "schedule": "Versenynaptár",
+    "statistics": "Statisztikák"
+  },
+  "statistics": {
+    "points": "Pontok",
+    "goals": "Gólok",
+    "assists": "Gólpasszok",
+    "plusMinus": "+/-",
+    "penalties": "Büntetések",
+    "goalies": "Kapusok"
   },
   "email": "E-mail",
   "phone": "Telefon"

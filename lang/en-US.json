@@ -10,7 +10,16 @@
     "contacts": "Contacts"
   },
   "title": {
-    "schedule": "Schedule"
+    "schedule": "Schedule",
+    "statistics": "Statistics"
+  },
+  "statistics": {
+    "points": "Points",
+    "goals": "Goals",
+    "assists": "Assists",
+    "plusMinus": "+/-",
+    "penalties": "Penalties",
+    "goalies": "Goalies"
   },
   "email": "E-mail",
   "phone": "Phone"

@@ -35,46 +35,51 @@ const penaltyStatU16 = usePlayerStatsByType(penaltiesStatsU16Data, 'pim');
 <template>
   <HeadlessTabGroup as="div" class="bg-gray-900 rounded-lg p-4 mb-8">
     <HeadlessTabList class="flex items-end gap-4 border-b border-gray-300 pb-2">
-      <span class="text-white text-2xl font-bold">Statistics</span>
-      <HeadlessTab class="text-white">U-18</HeadlessTab>
-      <HeadlessTab class="text-white">U-16</HeadlessTab>
+      <span class="text-white text-2xl font-bold mr-2">{{ $t('title.statistics') }}</span>
+      <HeadlessTab as="template" v-slot="{ selected }">
+        <button :class="['font-bold leading-7 outline-none', selected ? 'text-white' : 'text-gray-400']">U-18</button>
+      </HeadlessTab>
+      <HeadlessTab as="template" v-slot="{ selected }">
+        <button :class="['font-bold leading-7 outline-none', selected ? 'text-white' : 'text-gray-400']">U-16</button>
+      </HeadlessTab>
     </HeadlessTabList>
     <HeadlessTabPanels>
-      <HeadlessTabPanel class="grid sm:grid-cols-3 md:grid-cols-6 mb-2 gap-4">
+      <HeadlessTabPanel class="grid sm:grid-cols-3 lg:grid-cols-6 mb-2 gap-4">
         <PlayerStatisticCard
-          title="Points"
+          :title="$t('statistics.points')"
           :data="pointStat"
           data-key="point"
           :external-link="localePath('/u18/statistics?report=points')"
         />
 
-        <PlayerStatisticCard title="Goals" :data="goalStat" data-key="g" />
+        <PlayerStatisticCard :title="$t('statistics.goals')" :data="goalStat" data-key="g" />
 
-        <PlayerStatisticCard title="Assists" :data="assistsStat" data-key="a" />
+        <PlayerStatisticCard :title="$t('statistics.assists')" :data="assistsStat" data-key="a" />
 
-        <PlayerStatisticCard title="+/-" :data="plusMinusStat" data-key="plusMinus" />
+        <PlayerStatisticCard :title="$t('statistics.plusMinus')" :data="plusMinusStat" data-key="plusMinus" />
 
-        <PlayerStatisticCard title="Penalties" :data="penaltyStat" data-key="pim" />
+        <PlayerStatisticCard :title="$t('statistics.penalties')" :data="penaltyStat" data-key="pim" />
 
-        <PlayerStatisticCard title="Goalies" :data="percentStat" data-key="svsPercent" />
+        <PlayerStatisticCard :title="$t('statistics.goalies')" :data="percentStat" data-key="svsPercent" />
       </HeadlessTabPanel>
-      <HeadlessTabPanel class="grid sm:grid-cols-3 md:grid-cols-6 mb-2 gap-4">
+
+      <HeadlessTabPanel class="grid sm:grid-cols-3 lg:grid-cols-6 mb-2 gap-4">
         <PlayerStatisticCard
-          title="Points"
+          :title="$t('statistics.points')"
           :data="pointStatU16"
           data-key="point"
           :external-link="localePath('/u18/statistics?report=points')"
         />
 
-        <PlayerStatisticCard title="Goals" :data="goalStatU16" data-key="g" />
+        <PlayerStatisticCard :title="$t('statistics.goals')" :data="goalStatU16" data-key="g" />
 
-        <PlayerStatisticCard title="Assists" :data="assistsStatU16" data-key="a" />
+        <PlayerStatisticCard :title="$t('statistics.assists')" :data="assistsStatU16" data-key="a" />
 
-        <PlayerStatisticCard title="+/-" :data="plusMinusStatU16" data-key="plusMinus" />
+        <PlayerStatisticCard :title="$t('statistics.plusMinus')" :data="plusMinusStatU16" data-key="plusMinus" />
 
-        <PlayerStatisticCard title="Penalties" :data="penaltyStatU16" data-key="pim" />
+        <PlayerStatisticCard :title="$t('statistics.penalties')" :data="penaltyStatU16" data-key="pim" />
 
-        <PlayerStatisticCard title="Goalies" :data="percentStatU16" data-key="svsPercent" />
+        <PlayerStatisticCard :title="$t('statistics.goalies')" :data="percentStatU16" data-key="svsPercent" />
       </HeadlessTabPanel>
     </HeadlessTabPanels>
   </HeadlessTabGroup>

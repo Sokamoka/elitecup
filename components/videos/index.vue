@@ -5,7 +5,5 @@
     <VideosItem />
     <VideosItem />
     <VideosItem />
-    <VideosItem />
-    <VideosItem />
   </div>
 </template>
