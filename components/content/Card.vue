@@ -12,24 +12,18 @@ const props = defineProps({
 </script>
 
 <template>
-  <div
-    class="border border-gray-300 rounded-lg hover:border-gray-500 hover:outline hover:outline-gray-500"
-  >
+  <div class="border border-gray-200 rounded-lg hover:border-gray-400">
     <div class="flex flex-col gap-4">
-      <div class="image aspect-video bg-white rounded-lg p-4">
+      <div
+        class="flex justify-center p-4 image aspect-video bg-white border-b border-gray-200 rounded-t-lg overflow-hidden"
+      >
         <ContentSlot :use="$slots.default" unwrap="p" />
       </div>
-      <dl class="p-4">
-        <dt class="text-gray-900 text-xs font-bold">{{ $t('email') }}</dt>
-        <dd class="space-x-2">
+      <dl class="grid grid-cols-[26px_1fr] items-center gap-y-2 p-4 pt-0">
           <Icon name="ic:outline-email" class="text-gray-400" />
-          <a :href="`mailto:${email}`">{{ email }}</a>
-        </dd>
-        <dt class="text-gray-900 text-xs font-bold">{{ $t('phone') }}</dt>
-        <dd class="space-x-2">
+          <a :href="`mailto:${email}`" class="truncate">{{ email }}</a>
           <Icon name="ic:outline-local-phone" class="text-gray-400" />
-          <a :href="`tel:${phone}`">{{ phone }}</a>
-        </dd>
+          <a :href="`tel:${phone}`" class="truncate">{{ phone }}</a>
       </dl>
     </div>
   </div>
@@ -37,7 +31,10 @@ const props = defineProps({
 
 <style scoped>
 .image :deep(img) {
-  aspect-ratio: 16/10;
+  display: block;
+  aspect-ratio: 16/9;
   object-fit: contain;
+  width: auto;
+  height: auto;
 }
 </style>

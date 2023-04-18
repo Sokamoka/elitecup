@@ -34,7 +34,8 @@ const { grouped, formatGameDate, formatGameDateTime } = useGroupSchedule(schedul
               <img :src="game.homeTeamLogo" class="w-5" />
             </td>
             <td class="text-lg font-bold text-gray-900 whitespace-nowrap w-8">
-              {{ game.homeTeamScore }}:{{ game.awayTeamScore }}
+              <template v-if="game.gameStatus === 0">-:-</template>
+              <template v-else> {{ game.homeTeamScore }}:{{ game.awayTeamScore }} </template>
             </td>
             <td class="w-8">
               <span v-if="game.isOvertime" class="text-xs bg-gray-200 p-1 text-gray-400 rounded font-bold">OT</span>

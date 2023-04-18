@@ -24,7 +24,7 @@ async function fetchFromVBR2(id: string) {
     method: 'GET',
     cache: 'no-cache',
     headers: {
-      origin: 'http://localhost:3000',
+      origin: 'https://www.elitecup.eu',
       'Content-Type': 'application/json',
       'X-API-KEY': 'd86552a5fadf25a1bd666bc8634c510856bf33c9',
     },
