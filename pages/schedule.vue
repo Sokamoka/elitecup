@@ -1,6 +1,10 @@
 <script setup>
-const { locale, locales } = useI18n();
+const { locale, locales, t } = useI18n();
 const { schedule } = useScheduleRaw();
+
+useHead({
+  title: t('menu.schedule'),
+});
 
 const currentLocale = computed(() => locales.value?.find((loc) => loc.code === locale.value));
 

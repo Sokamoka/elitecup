@@ -1,5 +1,7 @@
 <script setup>
-const localePath = useLocalePath();
+useHead({
+  title: 'Main page',
+})
 </script>
 <template>
   <div class="pt-8">

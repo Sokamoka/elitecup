@@ -28,6 +28,8 @@ const { data: post }: ApiResponse = await useFetch(`/api/news?id=${route.params.
 <template>
   <NuxtLayout name="sub" class="mb-8">
     <div>
+      <Title>{{ post.title }}</Title>
+      
       <img class="w-full rounded-lg" :src="post.image" :alt="post.title" />
       <time class="block text-gray-400 my-2 text-sm">{{ toDate(post.createdAt) }}</time>
       <h1 class="text-2xl text-gray-900 font-bold">{{ post.title }}</h1>

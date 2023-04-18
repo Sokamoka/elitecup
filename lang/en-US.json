@@ -11,7 +11,8 @@
   },
   "title": {
     "schedule": "Schedule",
-    "statistics": "Statistics"
+    "statistics": "Statistics",
+    "teams": "Teams"
   },
   "statistics": {
     "points": "Points",

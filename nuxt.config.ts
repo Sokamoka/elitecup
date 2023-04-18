@@ -12,6 +12,12 @@ export default defineNuxtConfig({
     },
   },
 
+  app: {
+    head: {
+      titleTemplate: 'EliteCup.eu - %s',
+    }
+  },
+
   modules: [
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',

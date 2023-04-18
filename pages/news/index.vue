@@ -12,8 +12,13 @@ definePageMeta({
   layout: false,
 });
 
-const { locale } = useI18n();
+
+const { locale, t } = useI18n();
 const localePath = useLocalePath();
+
+useHead({
+  title: t('menu.news'),
+})
 
 const toDate = (date: string) => toDefaultDate(new Date(date));
 
@@ -23,13 +28,13 @@ const { data: news } = await useFetch<{ data: ApiResponse[] }>(`/api/news?lang=$
 <template>
   <NuxtLayout name="sub" class="mb-8">
     <template #header>
-      <h1 class="text-2xl text-gray-900 font-bold mt-8">News</h1>
+      <h1 class="text-2xl text-gray-900 font-bold mt-8">{{ $t('menu.news') }}</h1>
     </template>
 
     <div class="flex flex-col space-y-8">
       <div v-for="item in news" :key="item.id" class="flex space-x-4 w-full">
         <div class="flex-shrink-0">
-          <img class="h-32 aspect-video" :src="item.image" alt="Bonnie image" />
+          <img class="h-32 aspect-video rounded-lg" :src="item.image" alt="Bonnie image" />
         </div>
         <div class="flex-1 flex flex-col items-stretch min-w-0">
           <time class="text-gray-400 mb-2 text-sm">{{ toDate(item.createdAt) }}</time>
