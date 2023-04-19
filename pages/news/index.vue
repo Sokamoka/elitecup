@@ -1,18 +1,20 @@
 <script lang="ts" setup>
+const skip = ref(0);
+const limit = ref(10);
+
 // interface ApiResponse {
-//   image: string;
+//   mainImage: string;
 //   title: string;
 //   lead: string;
-//   content: string;
-//   createdAt: string;
-//   id: string | number;
+//   publishedAt: string;
+//   _path: string;
 // }
 
 definePageMeta({
   layout: false,
 });
 
-const { locale, t } = useI18n();
+const { t } = useI18n();
 const localePath = useLocalePath();
 
 useHead({
@@ -23,9 +25,25 @@ const toDate = (date: string) => toDefaultDate(new Date(date));
 
 // const { data: news } = await useFetch<{ data: ApiResponse[] }>(`/api/news?lang=${locale.value}`);
 
-const { data, refresh } = await useAsyncData('homepage', () => {
-  return queryContent(localePath('/news')).sort({ publishedAt: -1 }).skip(0).limit(2).find();
+const { data: allPost } = await useAsyncData('totalnews', () => {
+  return queryContent(localePath('/news')).find();
 });
+
+const totalPost = computed(() => allPost.value?.length ?? 0);
+const totalPage = computed(() => Math.ceil(totalPost.value / limit.value));
+
+const { data, refresh } = await useAsyncData('news', () => {
+  return queryContent(localePath('/news')).sort({ publishedAt: -1 }).skip(skip.value).limit(limit.value).find();
+});
+
+const prevPage = () => {
+  skip.value -= limit.value;
+  refresh();
+};
+const nextPage = () => {
+  skip.value += limit.value;
+  refresh();
+};
 </script>
 
 <template>
@@ -61,10 +79,20 @@ const { data, refresh } = await useAsyncData('homepage', () => {
             {{ item.title }}
           </p>
           <div class="flex-1 text-base text-gray-500">{{ item.lead }}</div>
-          <NuxtLink :to="localePath(item._path)">
-            <FormButton variant="link" class="-ml-4 w-min text-sm whitespace-nowrap">Read more ></FormButton>
+          <NuxtLink :to="localePath(item?._path)">
+            <FormButton variant="link" class="-ml-4 w-min text-sm whitespace-nowrap">Read more</FormButton>
           </NuxtLink>
         </div>
+      </div>
+
+      <div class="flex gap-x-2">
+        <button class="button" :disabled="skip === 0" @click="prevPage">
+          <Icon name="ic:outline-arrow-back-ios" />
+        </button>
+
+        <button class="button" :disabled="totalPage - 1 === skip" @click="nextPage">
+          <Icon name="ic:outline-arrow-forward-ios" />
+        </button>
       </div>
     </div>
 

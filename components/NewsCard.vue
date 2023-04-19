@@ -45,7 +45,7 @@ const toDate = (date: string) => toDefaultDate(new Date(date), locale.value);
         {{ lead }}
       </dd>
 
-      <NuxtLink :to="localePath(id)" v-slot="{ navigate }" custom>
+      <NuxtLink :to="localePath(id.toString())" v-slot="{ navigate }" custom>
         <FormButton v-if="isMainNewsCard" variant="primary" @click="navigate">{{ $t('common.readMore') }}</FormButton>
         <FormButton v-else variant="link" class="text-sm p-2 -ml-2.5 -mb-2" @click="navigate">{{ $t('common.readMore') }}</FormButton>
       </NuxtLink>
