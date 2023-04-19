@@ -1,6 +1,4 @@
-export function useGetStat(type: string, id: number, store: Ref) {
-  // const playerStats = usePlayerStats();
-
+export function useGetStat(type: string, id: string, store: Ref) {
   const url = `https://api.icehockey.hu/vbr/v1/${type}?championshipId=${id}`;
 
   const { execute } = useAsyncState(
