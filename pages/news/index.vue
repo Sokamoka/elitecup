@@ -1,28 +1,31 @@
 <script lang="ts" setup>
-interface ApiResponse {
-  image: string;
-  title: string;
-  lead: string;
-  content: string;
-  createdAt: string;
-  id: string | number;
-}
+// interface ApiResponse {
+//   image: string;
+//   title: string;
+//   lead: string;
+//   content: string;
+//   createdAt: string;
+//   id: string | number;
+// }
 
 definePageMeta({
   layout: false,
 });
-
 
 const { locale, t } = useI18n();
 const localePath = useLocalePath();
 
 useHead({
   title: t('menu.news'),
-})
+});
 
 const toDate = (date: string) => toDefaultDate(new Date(date));
 
-const { data: news } = await useFetch<{ data: ApiResponse[] }>(`/api/news?lang=${locale.value}`);
+// const { data: news } = await useFetch<{ data: ApiResponse[] }>(`/api/news?lang=${locale.value}`);
+
+const { data, refresh } = await useAsyncData('homepage', () => {
+  return queryContent(localePath('/news')).sort({ publishedAt: -1 }).skip(0).limit(2).find();
+});
 </script>
 
 <template>
@@ -32,7 +35,7 @@ const { data: news } = await useFetch<{ data: ApiResponse[] }>(`/api/news?lang=$
     </template>
 
     <div class="flex flex-col space-y-8">
-      <div v-for="item in news" :key="item.id" class="flex space-x-4 w-full">
+      <!-- <div v-for="item in news" :key="item.id" class="flex space-x-4 w-full">
         <div class="flex-shrink-0">
           <img class="h-32 aspect-video rounded-lg" :src="item.image" alt="Bonnie image" />
         </div>
@@ -43,6 +46,22 @@ const { data: news } = await useFetch<{ data: ApiResponse[] }>(`/api/news?lang=$
           </p>
           <div class="flex-1 text-base text-gray-500">{{ item.lead }}</div>
           <NuxtLink :to="localePath(`/news/${item.id}`)">
+            <FormButton variant="link" class="-ml-4 w-min text-sm whitespace-nowrap">Read more ></FormButton>
+          </NuxtLink>
+        </div>
+      </div> -->
+
+      <div v-for="item in data" :key="item.path" class="flex flex-col sm:flex-row space-x-4 w-full">
+        <div class="flex-shrink-0">
+          <img class="h-auto sm:h-36 aspect-[16/10] rounded-lg" :src="item.mainImage" alt="Bonnie image" />
+        </div>
+        <div class="flex-1 flex flex-col items-stretch min-w-0">
+          <time v-if="item.publishedAt" class="text-gray-400 my-2 text-sm">{{ toDate(item.publishedAt) }}</time>
+          <p class="text-xl font-bold leading-tight text-gray-900 mb-2">
+            {{ item.title }}
+          </p>
+          <div class="flex-1 text-base text-gray-500">{{ item.lead }}</div>
+          <NuxtLink :to="localePath(item._path)">
             <FormButton variant="link" class="-ml-4 w-min text-sm whitespace-nowrap">Read more ></FormButton>
           </NuxtLink>
         </div>

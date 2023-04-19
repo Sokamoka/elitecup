@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       titleTemplate: 'EliteCup.eu - %s',
-    }
+    },
   },
 
   modules: [
@@ -60,5 +60,11 @@ export default defineNuxtConfig({
 
   headlessui: {
     prefix: 'Headless',
+  },
+
+  content: {
+    navigation: {
+      fields: ['publishedAt', 'lead', 'mainImage'],
+    },
   },
 });

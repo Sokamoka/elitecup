@@ -19,8 +19,12 @@ const localePath = useLocalePath();
       </div>
 
       <div class="space-x-2">
-        <Icon name="cib:instagram" />
-        <Icon name="cib:facebook" />
+        <NuxtLink to="https://www.instagram.com/elitecup.eu/" target="_blank">
+          <Icon name="cib:instagram" />
+        </NuxtLink>
+        <NuxtLink to="https://www.facebook.com/elitecup" target="_blank">
+          <Icon name="cib:facebook" />
+        </NuxtLink>
       </div>
     </div>
     <div class="flex justify-between py-8">
@@ -28,8 +32,8 @@ const localePath = useLocalePath();
         <img src="~/assets/images/elite_cup_logo.svg" alt="Elite Cup" class="h-16" />
       </NuxtLink>
       <div class="flex items-center px-4 gap-8">
-        <img src="~/assets/images/Bauer-logo-black.svg" alt="Marczi Skate" class="h-16 object-contain">
-        <img src="~/assets/images/MS_logo.webp" alt="Marczi Skate" class="h-16 object-contain">
+        <img src="~/assets/images/Bauer-logo-black.svg" alt="Marczi Skate" class="h-16 object-contain" />
+        <img src="~/assets/images/MS_logo.webp" alt="Marczi Skate" class="h-16 object-contain" />
       </div>
     </div>
   </div>

@@ -1,14 +1,14 @@
 <script setup>
 const { locale, locales, t } = useI18n();
-const { schedule } = useScheduleRaw();
-
 useHead({
   title: t('menu.schedule'),
 });
 
+const { range, isFetchMoreVisible, fetchMore } = useScheduleRaw();
+
 const currentLocale = computed(() => locales.value?.find((loc) => loc.code === locale.value));
 
-const { grouped, formatGameDate, formatGameDateTime } = useGroupSchedule(schedule, currentLocale);
+const { grouped, formatGameDate, formatGameDateTime } = useGroupSchedule(range, currentLocale);
 </script>
 
 <template>
@@ -58,5 +58,10 @@ const { grouped, formatGameDate, formatGameDateTime } = useGroupSchedule(schedul
         </table>
       </template>
     </div>
+
+    <button v-if="isFetchMoreVisible" class="button flex items-center gap-x-2 mx-auto" @click="fetchMore">
+      <Icon name="ic:outline-add-circle-outline" />
+      {{ $t('common.moreGames') }}
+    </button>
   </div>
 </template>

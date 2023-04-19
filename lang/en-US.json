@@ -1,6 +1,8 @@
 {
   "common": {
-    "allGames": "All games"
+    "allGames": "All games",
+    "moreGames": "More games",
+    "readMore": "Read more"
   },
   "menu": {
     "news": "News",
@@ -25,7 +27,5 @@
     "plusMinus": "+/-",
     "penalties": "Penalties",
     "goalies": "Goalies"
-  },
-  "email": "E-mail",
-  "phone": "Phone"
+  }
 }
