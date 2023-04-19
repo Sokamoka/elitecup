@@ -88,7 +88,7 @@ const localePath = useLocalePath();
         <div class="px-1 py-1">
           <HeadlessMenuItem v-slot="{ active }">
             <NuxtLink
-              :to="localePath('/u18/schedule')"
+              :to="localePath('/u16/games')"
               :class="[
                 active ? 'text-red-500' : 'text-white-900',
                 'group flex w-full items-center rounded-md px-2 py-2 text-sm',

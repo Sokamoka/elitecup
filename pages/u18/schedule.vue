@@ -1,6 +1,7 @@
 <script setup>
 const { locale } = useI18n();
 </script>
+
 <template>
   <h1 class="text-2xl text-gray-900 font-bold mt-8">Schedule</h1>
   <div class="py-8">
