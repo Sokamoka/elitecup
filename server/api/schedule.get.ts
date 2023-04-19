@@ -1,11 +1,11 @@
-import { ofetch } from 'ofetch';
 import { sortBy, prop } from 'ramda';
+import { VBR_CHAMPIONSHIP_IDS } from '~/constants';
 
 export default defineEventHandler(async () => {
-  const divisions = ['3311', '3312'];
+  const chsmpionships = VBR_CHAMPIONSHIP_IDS;
 
   try {
-    const [u18, u16] = await Promise.all(divisions.map((id) => fetchFromVBR2(id)));
+    const [u18, u16] = await Promise.all(chsmpionships.map((id) => fetchFromVBR(id)));
 
     const result = [...(u18?.data ?? {}), ...(u16?.data ?? {})];
     const sorted = sortBy(prop('gameDate'))(result);
@@ -17,7 +17,7 @@ export default defineEventHandler(async () => {
   return [];
 });
 
-async function fetchFromVBR2(id: string) {
+async function fetchFromVBR(id: string) {
   const url = `https://api.icehockey.hu/vbr/v1/gamesList?division=&championshipId=${id}`;
 
   const response = await fetch(url, {

@@ -27,7 +27,7 @@ const localePath = useLocalePath();
                 'group flex w-full items-center rounded-md px-2 py-2 text-sm',
               ]"
             >
-              Schedule
+              {{ $t('menu.schedule') }}
             </NuxtLink>
           </HeadlessMenuItem>
 
@@ -39,7 +39,7 @@ const localePath = useLocalePath();
                 'group flex w-full items-center rounded-md px-2 py-2 text-sm',
               ]"
             >
-              Standings
+              {{ $t('menu.standings') }}
             </NuxtLink>
           </HeadlessMenuItem>
 
@@ -51,13 +51,27 @@ const localePath = useLocalePath();
                 'group flex w-full items-center rounded-md px-2 py-2 text-sm',
               ]"
             >
-              Statistics
+              {{ $t('menu.statistics') }}
+            </NuxtLink>
+          </HeadlessMenuItem>
+
+          <HeadlessMenuItem v-slot="{ active }">
+            <NuxtLink
+              to="/files/Cup_reg_U18.pdf"
+              :class="[
+                active ? 'text-red-500' : 'text-white-900',
+                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+              ]"
+              target="_blank"
+              rel="noopener"
+            >
+              {{ $t('menu.regulations') }}
             </NuxtLink>
           </HeadlessMenuItem>
         </div>
       </HeadlessMenuItems>
     </HeadlessMenu>
-    
+
     <HeadlessMenu as="div" class="relative inline-block text-left" v-slot="{ open }">
       <HeadlessMenuButton
         :class="[
@@ -80,11 +94,23 @@ const localePath = useLocalePath();
                 'group flex w-full items-center rounded-md px-2 py-2 text-sm',
               ]"
             >
-              Games
+              {{ $t('menu.games') }}
             </NuxtLink>
           </HeadlessMenuItem>
 
           <HeadlessMenuItem v-slot="{ active }">
+            <NuxtLink
+              :to="localePath('/u16/statistics')"
+              :class="[
+                active ? 'text-red-500' : 'text-white-900',
+                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+              ]"
+            >
+              {{ $t('menu.statistics') }}
+            </NuxtLink>
+          </HeadlessMenuItem>
+
+          <!-- <HeadlessMenuItem v-slot="{ active }">
             <NuxtLink
               :to="localePath('/u18/standings')"
               :class="[
@@ -93,6 +119,20 @@ const localePath = useLocalePath();
               ]"
             >
               Standings
+            </NuxtLink>
+          </HeadlessMenuItem> -->
+
+          <HeadlessMenuItem v-slot="{ active }">
+            <NuxtLink
+              to="/files/Cup_reg_U16.pdf"
+              :class="[
+                active ? 'text-red-500' : 'text-white-900',
+                'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+              ]"
+              target="_blank"
+              rel="noopener"
+            >
+              {{ $t('menu.regulations') }}
             </NuxtLink>
           </HeadlessMenuItem>
         </div>
