@@ -18,6 +18,12 @@ export default defineNuxtConfig({
     },
   },
 
+  runtimeConfig: {
+    public: {
+      instagramAccessToken: process.env.NUXT_INSTAGRAM_ACCESS_TOKEN,
+    }
+  },
+
   modules: [
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',

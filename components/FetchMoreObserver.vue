@@ -9,7 +9,7 @@ const FetchMoreObserver = {
     },
   },
 
-  setup(props, { emit }) {
+  setup(props: any, { emit }) {
     const target = ref(null);
 
     const { stop } = useIntersectionObserver(
