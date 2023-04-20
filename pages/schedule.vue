@@ -1,4 +1,6 @@
 <script setup>
+import FetchMoreObserver from '~/components/FetchMoreObserver.vue';
+
 const { locale, locales, t } = useI18n();
 useHead({
   title: t('menu.schedule'),
@@ -59,9 +61,11 @@ const { grouped, formatGameDate, formatGameDateTime } = useGroupSchedule(range, 
       </template>
     </div>
 
-    <button v-if="isFetchMoreVisible" class="button flex items-center gap-x-2 mx-auto" @click="fetchMore">
-      <Icon name="ic:outline-add-circle-outline" />
-      {{ $t('common.moreGames') }}
-    </button>
+    <FetchMoreObserver @intersect="fetchMore">
+      <button v-if="isFetchMoreVisible" class="button flex items-center gap-x-2 mx-auto" @click="fetchMore">
+        <Icon name="ic:outline-add-circle-outline" />
+        {{ $t('common.moreGames') }}
+      </button>
+    </FetchMoreObserver>
   </div>
 </template>
