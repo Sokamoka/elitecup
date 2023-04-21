@@ -21,8 +21,12 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       instagramAccessToken: process.env.NUXT_INSTAGRAM_ACCESS_TOKEN,
-    }
+    },
   },
+
+  plugins: [
+    { src: '~/plugins/facebook-page-plugin.ts', mode: 'client' }
+  ],
 
   modules: [
     '@nuxtjs/tailwindcss',
