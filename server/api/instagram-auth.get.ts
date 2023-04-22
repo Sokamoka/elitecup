@@ -10,7 +10,9 @@ export default defineEventHandler(async (event) => {
     const token = await getToken(code);
     const longLiveToken = await getLongLiveToken(token);
     return longLiveToken;
-  } catch (error) {}
+  } catch (error) {
+    return error;
+  }
 });
 
 function getToken(code: string) {
