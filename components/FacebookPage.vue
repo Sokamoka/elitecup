@@ -1,24 +1,34 @@
 <script setup>
-const isFBReady = ref(false);
+const app = useNuxtApp();
 
-// isFBReady.value = $FB !== undefined;
-window.addEventListener('fb-sdk-ready', onFBReady);
+const el = ref(null);
+const width = ref(0);
+const height = ref(0);
 
-function onFBReady() {
-  isFBReady.value = true;
+useEventListener(window, 'fb-sdk:ready', resizeContainer);
+useEventListener(window, 'resize', useDebounceFn(resizeContainer, 500));
+
+onMounted(() => resizeContainer());
+
+function resizeContainer() {
+  if (!app.$FB) return;
+  const { offsetWidth, offsetHeight } = unrefElement(el)?.parentNode ?? {};
+  width.value = offsetWidth;
+  height.value = offsetHeight;
+  useTimeoutFn(() => app.$FB?.XFBML.parse(), 1000);
 }
 </script>
 
 <template>
   <div
-    v-if="isFBReady"
+    ref="el"
     class="fb-page"
     data-href="https://www.facebook.com/elitecup"
-    data-tabs="timeline"
-    data-width=""
-    data-height="100%"
+    data-show-posts="true"
+    :data-width="width"
+    :data-height="height"
     data-small-header="true"
-    data-adapt-container-width="true"
+    data-adapt-container-width="false"
     data-hide-cover="true"
     data-show-facepile="false"
   >
