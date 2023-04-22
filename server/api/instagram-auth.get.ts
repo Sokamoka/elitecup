@@ -20,7 +20,7 @@ function getToken(code: string) {
   return ofetch('https://api.instagram.com/oauth/access_token', {
     method: 'POST',
     body: {
-      client_id: instagramClientId,
+      client_id: process.env.INSTAGRAM_CLIENT_ID,
       client_secret: instagramClientSecret,
       grant_type: 'authorization_code',
       redirect_uri: instagramRedirectUri,
