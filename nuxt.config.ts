@@ -19,9 +19,9 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    instagramClientId: process.env.INSTAGRAM_CLIENT_ID,
-    instagramClientSecret: process.env.INSTAGRAM_CLIENT_SECRET,
-    instagramRedirectUri: process.env.INSTAGRAM_REDIRECT_URI,
+    // instagramClientId: process.env.INSTAGRAM_CLIENT_ID,
+    // instagramClientSecret: process.env.INSTAGRAM_CLIENT_SECRET,
+    // instagramRedirectUri: process.env.INSTAGRAM_REDIRECT_URI,
     public: {
       instagramAccessToken: process.env.NUXT_INSTAGRAM_ACCESS_TOKEN,
       facebookAppId: process.env.NUXT_FACEBOOK_APP_ID,
