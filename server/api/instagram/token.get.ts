@@ -4,8 +4,8 @@ export default defineEventHandler(async (event) => {
   const { code } = getQuery(event);
 
   try {
-    const token = await getToken(code);
-    const longLiveToken = await getLongLiveToken(token);
+    const { access_token } = await getToken(code);
+    const longLiveToken = await getLongLiveToken(access_token);
     return longLiveToken;
   } catch (error) {
     return error;

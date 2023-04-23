@@ -5,8 +5,8 @@ const localePath = useLocalePath();
 </script>
 <template>
   <div>
-    <div class="flex items-center justify-between border-b border-gray-300 px-4 py-2 text-xs uppercase text-gray-400">
-      <div>
+    <div class="flex items-center border-b border-gray-300 px-4 py-2 text-xs uppercase text-gray-400">
+      <div class="flex-1">
         Elite Cup |
         <NuxtLink
           v-for="locale in locales"
@@ -32,8 +32,8 @@ const localePath = useLocalePath();
         <img src="~/assets/images/elite_cup_logo.svg" alt="Elite Cup" class="h-16" />
       </NuxtLink>
       <div class="flex items-center px-4 gap-8">
-        <img src="~/assets/images/Bauer-logo-black.svg" alt="Marczi Skate" class="h-16 object-contain" />
-        <img src="~/assets/images/MS_logo.webp" alt="Marczi Skate" class="h-16 object-contain" />
+        <img src="~/assets/images/Bauer-logo-black.svg" alt="Marczi Skate" class="h-10 sm:h-16 object-contain" />
+        <img src="~/assets/images/MS_logo.webp" alt="Marczi Skate" class="h-10 sm:h-16 object-contain" />
       </div>
     </div>
   </div>
