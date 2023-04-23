@@ -26,9 +26,7 @@ useHead({
         </MainBox>
       </div>
       <div>
-        <MainBox title="Instagram" class="h-full">
-          <GalleryBox />
-        </MainBox>
+        <GalleryBox />
       </div>
       <div class="row-span-2">
         <ScheduleMainBox />

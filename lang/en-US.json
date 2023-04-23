@@ -2,7 +2,8 @@
   "common": {
     "allGames": "All games",
     "moreGames": "More games",
-    "readMore": "Read more"
+    "readMore": "Read more",
+    "profile": "Profile"
   },
   "menu": {
     "news": "News",

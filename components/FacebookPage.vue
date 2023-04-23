@@ -12,7 +12,10 @@ onMounted(() => resizeContainer());
 
 function resizeContainer() {
   if (!app.$FB) return;
-  const { offsetWidth, offsetHeight } = unrefElement(el)?.parentNode ?? {};
+  const container = unrefElement(el)?.parentNode ?? {};
+  const { offsetWidth, offsetHeight } = container;
+  container.style.minHeight = '320px';
+
   width.value = offsetWidth;
   height.value = offsetHeight;
   useTimeoutFn(() => app.$FB?.XFBML.parse(), 1000);

@@ -2,7 +2,8 @@
   "common": {
     "allGames": "Összes mérkőzés",
     "moreGames": "Mégtöbb mérkőzés",
-    "readMore": "Tovább"
+    "readMore": "Tovább",
+    "profile": "Profil"
   },
   "menu": {
     "news": "Hírek",
