@@ -14,7 +14,7 @@ function resizeContainer() {
   if (!app.$FB) return;
   const container = unrefElement(el)?.parentNode ?? {};
   const { offsetWidth, offsetHeight } = container;
-  container.style.minHeight = '320px';
+  container.style.minHeight = '512px';
 
   width.value = offsetWidth;
   height.value = offsetHeight;
