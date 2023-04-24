@@ -1,6 +1,7 @@
 {
   "common": {
     "allGames": "All games",
+    "allVideos": "All videos",
     "moreGames": "More games",
     "readMore": "Read more",
     "profile": "Profile"
@@ -20,7 +21,8 @@
     "schedule": "Schedule",
     "schedule-u18": "U-18 Schedule",
     "statistics": "Statistics",
-    "teams": "Teams"
+    "teams": "Teams",
+    "videos": "Videos"
   },
   "statistics": {
     "points": "Points",

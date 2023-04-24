@@ -18,12 +18,7 @@ useHead({
         </MainBox>
       </div>
       <div>
-        <MainBox title="Videos">
-          <template #header-append>
-            <FormButton variant="link" class="text-sm"> All videos </FormButton>
-          </template>
-          <Videos />
-        </MainBox>
+        <VideosMainBox />
       </div>
       <div>
         <GalleryBox />

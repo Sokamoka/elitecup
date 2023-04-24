@@ -1,6 +1,7 @@
 {
   "common": {
     "allGames": "Összes mérkőzés",
+    "allVideos": "Összes videó",
     "moreGames": "Mégtöbb mérkőzés",
     "readMore": "Tovább",
     "profile": "Profil"
@@ -20,7 +21,8 @@
     "schedule": "Versenynaptár",
     "schedule-u18": "Menetrend U-18",
     "statistics": "Statisztikák",
-    "teams": "Csapatok"
+    "teams": "Csapatok",
+    "videos": "Videók"
   },
   "statistics": {
     "points": "Pontok",
