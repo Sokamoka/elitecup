@@ -3,6 +3,7 @@ definePageMeta({
   layout: 'admin-fullwidth',
 });
 
+const errorMessage = ref('');
 const user = useSupabaseUser();
 const { auth } = useSupabaseAuthClient();
 
@@ -12,11 +13,12 @@ const credentials = reactive({
 });
 
 const signIn = async () => {
-  const { data, error } = await auth.signInWithPassword({
+  errorMessage.value = '';
+  const { error } = await auth.signInWithPassword({
     email: credentials.email,
     password: credentials.password,
   });
-  console.log(data, error);
+  if (error) errorMessage.value = error.message;
 };
 
 watchEffect(() => {
@@ -28,14 +30,25 @@ watchEffect(() => {
 
 <template>
   <div class="w-full sm:w-2/5 p-4 mx-auto mt-16 bg-white rounded-lg shadow-lg">
-    <fieldset>
-      <input type="text" v-model="credentials.email" />
-    </fieldset>
-    <fieldset>
-      <input type="text" v-model="credentials.password" />
-    </fieldset>
-    <fieldset>
-      <FormButton variant="primary" class="w-full" @click="signIn">Login</FormButton>
-    </fieldset>
+    <h1 class="text-2xl font-bold mb-4">Login</h1>
+
+    <form @submit.prevent="signIn" class="space-y-4">
+      <fieldset>
+        <label class="text-xs font-semibold uppercase" for="email">E-mail:</label>
+        <FormInput id="email" v-model="credentials.email" required />
+      </fieldset>
+      <fieldset>
+        <label class="text-xs font-semibold uppercase" for="password">Password:</label>
+        <FormInput id="password" type="password" v-model="credentials.password" required />
+      </fieldset>
+
+      <div v-if="errorMessage" class="bg-red-100 border border-red-500 text-red-600 p-4 rounded-lg">
+        {{ errorMessage }}
+      </div>
+
+      <fieldset>
+        <FormButton type="submit" variant="primary" is-full-width>Login</FormButton>
+      </fieldset>
+    </form>
   </div>
 </template>
