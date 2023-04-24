@@ -13,7 +13,7 @@ body {
   }
 
   .button.is-outlined {
-    @apply border-purple-600 text-white hover:border-purple-500;
+    @apply border-slate-300 text-slate-500 hover:border-slate-500 hover:text-slate-700;
   }
 
   .button.is-primary {

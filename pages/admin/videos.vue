@@ -1,15 +1,13 @@
-<script setup>
+<script setup lang="ts">
 definePageMeta({
   layout: 'admin',
-  middleware: ['auth'],
 });
 </script>
 
 <template>
   <div class="py-8">
     <div class="rounded-lg bg-white shadow-sm p-4 w-full">
-      News
-      <NuxtLink to="admin/post">New</NuxtLink>
+      Edit Video
     </div>
   </div>
 </template>

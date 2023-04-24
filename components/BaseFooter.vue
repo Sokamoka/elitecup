@@ -7,6 +7,6 @@ const copyYear = computed(() => new Date().getFullYear());
     <p class="uppercase">
       ©{{ copyYear }} EliteCup.eu
     </p>
-    <NuxtLink to="/admin">Admin</NuxtLink>
+    <NuxtLink to="/admin" class="uppercase">Admin</NuxtLink>
   </div>
 </template>
