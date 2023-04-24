@@ -3,7 +3,7 @@ const { locale } = useI18n();
 </script>
 
 <template>
-  <h1 class="text-2xl text-gray-900 font-bold my-8">
+  <h1 class="text-2xl text-slate-900 font-bold my-8">
     {{ $t('menu.games') }}
   </h1>
   <div class="mb-8 space-y-8">

@@ -9,8 +9,8 @@ useContentHead(data)
 </script>
 
 <template>
-  <h1 class="text-2xl text-gray-900 font-bold mt-8 mb-4">{{ data.title }}</h1>
-  <main class="prose mb-8 text-gray-700">
+  <h1 class="text-2xl text-slate-900 font-bold mt-8 mb-4">{{ data.title }}</h1>
+  <main class="prose mb-8 text-slate-700">
     <ContentRenderer v-if="data" :value="data" />
   </main>
 </template>
@@ -20,6 +20,6 @@ useContentHead(data)
   @apply mb-4;
 }
 .prose a {
-  @apply text-gray-700 font-medium hover:text-red-500;
+  @apply text-slate-700 font-medium hover:text-red-500;
 }
 </style>

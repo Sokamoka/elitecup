@@ -26,7 +26,7 @@ onMounted(() => (isFakeTabVisible.value = false));
             type="button"
             :class="[
               'uppercase px-4 py-3 font-bold outline-none border-b-4',
-              { 'border-red-500 text-gray-900': selected, ' border-transparent text-gray-400': !selected },
+              { 'border-red-500 text-slate-900': selected, ' border-transparent text-slate-400': !selected },
             ]"
           >
             {{ tab.title }}

@@ -49,7 +49,7 @@ const nextPage = () => {
 <template>
   <NuxtLayout name="sub" class="mb-8">
     <template #header>
-      <h1 class="text-2xl text-gray-900 font-bold mt-8">{{ $t('menu.news') }}</h1>
+      <h1 class="text-2xl text-slate-900 font-bold mt-8">{{ $t('menu.news') }}</h1>
     </template>
 
     <div class="flex flex-col space-y-8">
@@ -58,11 +58,11 @@ const nextPage = () => {
           <img class="h-32 aspect-video rounded-lg" :src="item.image" alt="Bonnie image" />
         </div>
         <div class="flex-1 flex flex-col items-stretch min-w-0">
-          <time class="text-gray-400 mb-2 text-sm">{{ toDate(item.createdAt) }}</time>
-          <p class="text-xl font-bold leading-tight text-gray-900 mb-2">
+          <time class="text-slate-400 mb-2 text-sm">{{ toDate(item.createdAt) }}</time>
+          <p class="text-xl font-bold leading-tight text-slate-900 mb-2">
             {{ item.title }}
           </p>
-          <div class="flex-1 text-base text-gray-500">{{ item.lead }}</div>
+          <div class="flex-1 text-base text-slate-500">{{ item.lead }}</div>
           <NuxtLink :to="localePath(`/news/${item.id}`)">
             <FormButton variant="link" class="-ml-4 w-min text-sm whitespace-nowrap">Read more ></FormButton>
           </NuxtLink>
@@ -74,11 +74,11 @@ const nextPage = () => {
           <img class="h-auto sm:h-36 aspect-[16/10] rounded-lg" :src="item.mainImage" alt="Bonnie image" />
         </div>
         <div class="flex-1 flex flex-col items-stretch min-w-0">
-          <time v-if="item.publishedAt" class="text-gray-400 my-2 text-sm">{{ toDate(item.publishedAt) }}</time>
-          <p class="text-xl font-bold leading-tight text-gray-900 mb-2">
+          <time v-if="item.publishedAt" class="text-slate-400 my-2 text-sm">{{ toDate(item.publishedAt) }}</time>
+          <p class="text-xl font-bold leading-tight text-slate-900 mb-2">
             {{ item.title }}
           </p>
-          <div class="flex-1 text-base text-gray-500">{{ item.lead }}</div>
+          <div class="flex-1 text-base text-slate-500">{{ item.lead }}</div>
           <NuxtLink :to="localePath(item?._path)">
             <FormButton variant="link" class="-ml-4 w-min text-sm whitespace-nowrap">Read more</FormButton>
           </NuxtLink>

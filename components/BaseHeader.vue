@@ -5,14 +5,14 @@ const localePath = useLocalePath();
 </script>
 <template>
   <div>
-    <div class="flex items-center border-b border-gray-300 px-4 py-2 text-xs uppercase text-gray-400">
+    <div class="flex items-center border-b border-slate-300 px-4 py-2 text-xs uppercase text-slate-400">
       <div class="flex-1">
         Elite Cup |
         <NuxtLink
           v-for="locale in locales"
           :key="locale.code"
           :to="switchLocalePath(locale.code)"
-          :class="['ml-1', { 'font-bold text-gray-900': locale.code === currentLocale }]"
+          :class="['ml-1', { 'font-bold text-slate-900': locale.code === currentLocale }]"
         >
           {{ locale.code }}
         </NuxtLink>

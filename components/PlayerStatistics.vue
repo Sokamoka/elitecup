@@ -43,14 +43,14 @@ const penaltyStatU16 = usePlayerStatsByType(penaltiesStatsU16Data, 'pim');
 </script>
 
 <template>
-  <HeadlessTabGroup as="div" class="bg-gray-900 rounded-lg p-4 mb-8">
-    <HeadlessTabList class="flex items-end gap-4 border-b border-gray-300 pb-2">
+  <HeadlessTabGroup as="div" class="bg-slate-900 rounded-lg p-4 mb-8">
+    <HeadlessTabList class="flex items-end gap-4 border-b border-slate-300 pb-2">
       <span class="text-white text-2xl font-bold mr-2">{{ $t('title.statistics') }}</span>
       <HeadlessTab as="template" v-slot="{ selected }">
-        <button :class="['font-bold leading-7 outline-none', selected ? 'text-white' : 'text-gray-400']">U-18</button>
+        <button :class="['font-bold leading-7 outline-none', selected ? 'text-white' : 'text-slate-400']">U-18</button>
       </HeadlessTab>
       <HeadlessTab as="template" v-slot="{ selected }">
-        <button :class="['font-bold leading-7 outline-none', selected ? 'text-white' : 'text-gray-400']">U-16</button>
+        <button :class="['font-bold leading-7 outline-none', selected ? 'text-white' : 'text-slate-400']">U-16</button>
       </HeadlessTab>
     </HeadlessTabList>
     <HeadlessTabPanels>

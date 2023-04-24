@@ -37,9 +37,9 @@ const { data } = await useAsyncData(`content-${path}`, () => {
         <Title>{{ data?.title }}</Title>
 
         <img class="w-full rounded-lg" :src="data?.mainImage" :alt="data?.title" />
-        <time class="block text-gray-400 mt-6 mb-4 text-sm">{{ toDate(data?.publishedAt) }}</time>
+        <time class="block text-slate-400 mt-6 mb-4 text-sm">{{ toDate(data?.publishedAt) }}</time>
         <h1 class="text-3xl text-gray-950 font-bold leading-none mb-6">{{ data?.title }}</h1>
-        <h2 class="text-xl text-gray-700 mb-8">{{ data?.lead }}</h2>
+        <h2 class="text-xl text-slate-700 mb-8">{{ data?.lead }}</h2>
 
         <ContentRenderer :value="data" />
       </template>
@@ -56,6 +56,6 @@ const { data } = await useAsyncData(`content-${path}`, () => {
 
 <style scoped>
 .prose :deep(p) {
-  @apply leading-normal mb-4 text-gray-700;
+  @apply leading-normal mb-4 text-slate-700;
 }
 </style>

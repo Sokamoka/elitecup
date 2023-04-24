@@ -9,7 +9,7 @@ body {
 
 @layer components {
   .button {
-    @apply inline-flex items-center border-2 rounded-md px-4 py-1.5 disabled:text-gray-300 font-semibold text-base text-center transition-colors duration-150 ease-out;
+    @apply inline-flex items-center border-2 rounded-md px-4 py-1.5 disabled:text-slate-300 font-semibold text-base text-center transition-colors duration-150 ease-out;
   }
 
   .button.is-outlined {
