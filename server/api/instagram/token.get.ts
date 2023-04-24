@@ -13,15 +13,16 @@ export default defineEventHandler(async (event) => {
 });
 
 function getToken(code: string) {
+  const config = useRuntimeConfig();
   return ofetch('https://api.instagram.com/oauth/access_token', {
     method: 'POST',
-    body: {
-      client_id: process.env.INSTAGRAM_CLIENT_ID,
-      client_secret: process.env.INSTAGRAM_CLIENT_SECRET,
+    body: new URLSearchParams({
+      client_id: config.instagramClientId,
+      client_secret: config.instagramClientSecret,
       grant_type: 'authorization_code',
-      redirect_uri: process.env.INSTAGRAM_REDIRECT_URI,
+      redirect_uri: config.instagramClientRedirectUri,
       code,
-    },
+    }),
   });
 }
 
@@ -30,7 +31,7 @@ function getLongLiveToken(shortLivedAccessToken: string) {
     method: 'GET',
     query: {
       grant_type: 'ig_exchange_token',
-      client_secret: process.env.INSTAGRAM_CLIENT_SECRET,
+      client_secret: process.env.NUXT_INSTAGRAM_CLIENT_SECRET,
       access_token: shortLivedAccessToken,
     },
   });

@@ -1,9 +1,5 @@
 <script setup lang="ts">
 const feeds = useInstagramFeed();
-
-const navigate = async () => {
-  await navigateTo('https://www.instagram.com/elitecup.eu/', { external: true });
-};
 </script>
 
 <template>
@@ -16,8 +12,11 @@ const navigate = async () => {
     </template>
     <div class="grid grid-cols-3 grid-rows-3">
       <template v-for="feed in feeds" :key="feed.id">
-        <a :href="feed.permalink" target="_blank" class="aspect-square bg-slate-100 border">
-          <img :src="feed.media_url" />
+        <a :href="feed.permalink" target="_blank" class="aspect-square bg-slate-100 border overflow-hidden">
+          <img
+            :src="feed.media_type === 'VIDEO' ? feed.thumbnail_url : feed.media_url"
+            class="aspect-square object-cover"
+          />
         </a>
       </template>
     </div>

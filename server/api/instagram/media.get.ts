@@ -7,7 +7,7 @@ export default defineEventHandler(async () => {
     const feed = await ofetch('https://graph.instagram.com/me/media', {
       method: 'GET',
       query: {
-        fields: 'id,permalink,media_url',
+        fields: 'id,permalink,media_url,media_type,thumbnail_url',
         access_token: runtimeConfig.public.instagramAccessToken,
       },
     });
