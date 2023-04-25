@@ -31,5 +31,25 @@
     "plusMinus": "+/-",
     "penalties": "Penalties",
     "goalies": "Goalies"
+  },
+  "admin": {
+    "table": {
+      "gameId": {
+        "short": "Game ID",
+        "tooltip": "Game ID"
+      },
+      "videoUrl": {
+        "short": "Video URL",
+        "tooltip": "Video URL"
+      },
+      "gameName": {
+        "short": "Game",
+        "tooltip": "Game"
+      },
+      "action": {
+        "short": "Action",
+        "tooltip": "Action"
+      }
+    }
   }
 }

@@ -3,7 +3,7 @@
     <ul role="list" class="p-8 space-y-3">
       <li>
         <NuxtLink to="/admin" class="menu-item">
-          <Icon name="ic:twotone-home" />
+          <Icon name="ic:twotone-other-houses" />
           <span class="ml-2">Home</span>
         </NuxtLink>
       </li>

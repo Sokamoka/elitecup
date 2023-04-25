@@ -1,10 +1,10 @@
 <template>
-  <div class="w-screen h-screen bg-slate-200">
-    <div class="flex flex-col">
-      <AdminHeader />
-      <div class="flex-1 flex w-full">
+  <div class="w-screen min-h-screen flex flex-col bg-slate-200 overflow-hidden">
+    <AdminHeader />
+    <div class="flex-1 overflow-y-auto">
+      <div class="flex container mx-auto">
         <AdminMenu />
-        <div class="flex-1 px-4">
+        <div class="flex-1 px-4 overflow-hidden">
           <slot />
         </div>
       </div>

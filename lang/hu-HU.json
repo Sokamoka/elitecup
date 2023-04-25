@@ -32,6 +32,24 @@
     "penalties": "Büntetések",
     "goalies": "Kapusok"
   },
-  "email": "E-mail",
-  "phone": "Telefon"
+  "admin": {
+    "table": {
+      "gameId": {
+        "short": "Mérkőzés ID",
+        "tooltip": "Mérkőzés Azonosító"
+      },
+      "videoUrl": {
+        "short": "Videó URL",
+        "tooltip": "Videó URL"
+      },
+      "gameName": {
+        "short": "Mérkőzés",
+        "tooltip": "Mérkőzés"
+      },
+      "action": {
+        "short": "Akció",
+        "tooltip": "Akció"
+      }
+    }
+  }
 }
