@@ -1,6 +1,7 @@
 <template>
-  <div class="w-64">
-    <ul role="list" class="p-8 space-y-3">
+  <div class="w-40 xl:w-64">
+    <p class="text-xl text-slate-700 font-bold uppercase mt-10 mb-4">Menu</p>
+    <ul role="list" class="p-4 space-y-3">
       <li>
         <NuxtLink to="/admin" class="menu-item">
           <Icon name="ic:twotone-other-houses" />

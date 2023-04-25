@@ -29,7 +29,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="w-full sm:w-2/5 p-4 mx-auto mt-16 bg-white rounded-lg shadow-lg">
+  <div class="w-full sm:max-w-sm p-4 mx-auto mt-16 bg-white rounded-lg shadow-lg">
     <h1 class="text-2xl font-bold mb-4">Login</h1>
 
     <form @submit.prevent="signIn" class="space-y-4">

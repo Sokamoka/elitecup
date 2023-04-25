@@ -50,7 +50,7 @@ body {
   }
 
   table tbody {
-    @apply text-slate-600 text-base font-light;
+    @apply text-slate-600 text-base;
   }
 
   table tbody tr {

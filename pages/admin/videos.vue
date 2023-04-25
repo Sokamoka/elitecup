@@ -1,4 +1,18 @@
 <script setup lang="ts">
+type VideoItem = {
+  id: number | null;
+  created_at: string;
+  game_id: number | null;
+  game_name: string;
+  url: string;
+};
+
+interface UpdateState {
+  id: number | null;
+  gameId: number | null | undefined;
+  url: string;
+}
+
 definePageMeta({
   layout: 'admin',
 });
@@ -12,7 +26,7 @@ const columns = {
   game_name: {
     label: 'admin.table.gameName.short',
     tooltip: 'admin.table.gameName.tooltip',
-    class: 'text-left font-medium',
+    class: 'text-left font-bold',
   },
   url: {
     label: 'admin.table.videoUrl.short',
@@ -29,8 +43,9 @@ const columns = {
 const errorMessage = ref('');
 const client = useSupabaseClient();
 
-const state = reactive({
-  game: {},
+const updateState: UpdateState = reactive({
+  id: null,
+  gameId: null,
   url: '',
 });
 
@@ -42,21 +57,39 @@ const { data: games } = await useAsyncData('users', () => $fetch('/api/schedule'
   //   })),
 });
 
-const { data: videos } = await useFetch('/api/admin/videos', {
-  headers: useRequestHeaders(['cookie']),
-});
+const { data: videos } = await useFetch('/api/admin/videos');
 
-const onAddVideo = async () => {
+const onAddVideo = async (payload: Partial<VideoItem>) => {
   errorMessage.value = '';
-  const { error } = await client.from('videos').insert({
-    game_id: state.game.id,
-    game_name: `${state.game.homeTeamName} - ${state.game.awayTeamName}`,
-    url: state.url,
-  });
+  const upsertData = {
+    ...(updateState.id && { id: updateState.id }),
+    game_id: updateState.gameId,
+    url: updateState.url,
+    ...payload,
+  };
+  console.log(upsertData);
+  const { data, error } = await client.from('videos').upsert(upsertData).select().single();
 
   if (error) {
     errorMessage.value = error.message;
   }
+  console.log(data);
+};
+
+const onEdit = ({ id, game_id, url }: VideoItem) => {
+  updateState.id = id;
+  updateState.gameId = game_id;
+  updateState.url = url;
+};
+
+const onDelete = (payload: VideoItem) => {
+  console.log(payload);
+};
+
+const onCreateNew = () => {
+  updateState.id = null;
+  updateState.gameId = null;
+  updateState.url = '';
 };
 </script>
 
@@ -64,42 +97,30 @@ const onAddVideo = async () => {
   <div class="py-8">
     <div class="flex items-center justify-between mb-4">
       <h1 class="text-xl text-slate-700 font-bold uppercase">Edit Videos</h1>
-      <FormButton variant="secondary">New</FormButton>
+      <FormButton variant="secondary" @click="onCreateNew">New</FormButton>
     </div>
 
-    <div class="rounded-lg bg-white shadow-md p-4 w-full mb-8">
-      <form @submit.prevent="onAddVideo" class="space-y-4">
-        <fieldset>
-          <label class="label block">Game:</label>
-          <select v-model="state.game">
-            <option v-for="game in games" :key="game.id" :value="game">
-              {{ game.homeTeamName }} - {{ game.awayTeamName }}
-            </option>
-          </select>
-        </fieldset>
-        <fieldset>
-          <label class="label">Video url:</label>
-          <FormInput v-model="state.url" />
-        </fieldset>
-
-        <div v-if="errorMessage">
-          {{ errorMessage }}
-        </div>
-
-        <fieldset>
-          <FormButton type="submit">Add</FormButton>
-        </fieldset>
-      </form>
-    </div>
+    <AdminManageVideo
+      :games="games"
+      v-model:game-id="updateState.gameId"
+      v-model:url="updateState.url"
+      @submit="onAddVideo"
+    />
 
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
       <div class="w-full overflow-x-auto">
         <DataTable :rows="videos.videos" :columns="columns">
-          <template #cell-action>
+          <template #cell-action="{ row }">
             <div class="text-xl space-x-2">
-              <Icon name="ic:twotone-remove-red-eye" />
-              <Icon name="ic:twotone-edit" />
-              <Icon name="ic:twotone-delete" />
+              <a :href="row.url" target="_blank" class="hover:text-red-500">
+                <Icon name="ic:twotone-remove-red-eye" />
+              </a>
+              <button type="button" class="hover:text-red-500" @click="onEdit(row)">
+                <Icon name="ic:twotone-edit" />
+              </button>
+              <button type="button" class="hover:text-red-500" @click="onDelete(row)">
+                <Icon name="ic:twotone-delete" />
+              </button>
             </div>
           </template>
         </DataTable>
