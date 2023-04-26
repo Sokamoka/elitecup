@@ -1,48 +1,40 @@
-export default defineEventHandler(() => {
-  return mockVideos;
-});
+import { serverSupabaseClient } from '#supabase/server';
+import { VBR_CHAMPIONSHIP_IDS } from '~/constants';
+import { scheduleService } from '~/utils/services';
 
-const mockVideos = [
-  {
-    id: '0',
-    image: 'https://flowbite.com/docs/images/people/profile-picture-2.jpg',
-    title: 'Barani-HSMH Banska Bystrica - EC Red Bull Salzburg',
-    externalLink: 'https://www.youtube.com/watch?v=OTZP7UWz3Tw',
-    date: new Date(2022, 9, 12)
-  },
-  {
-    id: '1',
-    image: 'https://flowbite.com/docs/images/people/profile-picture-1.jpg',
-    title: 'Barani-HSMH Banska Bystrica - EC Red Bull Salzburg',
-    externalLink: 'https://www.youtube.com/watch?v=OTZP7UWz3Tw',
-    date: new Date(2022, 9, 10)
-  },
-  {
-    id: '2',
-    image: '',
-    title: 'DVTK Jegesmedvék Akadémia - Eishockey Akademie Steiermark',
-    externalLink: 'https://www.youtube.com/watch?v=OTZP7UWz3Tw',
-    date: new Date(2022, 9, 8)
-  },
-  {
-    id: '3',
-    image: 'https://flowbite.com/docs/images/people/profile-picture-3.jpg',
-    externalLink: 'https://www.youtube.com/watch?v=OTZP7UWz3Tw',
-    title: 'HC Kosice - FEHA19',
-    date: new Date(2022, 9, 8)
-  },
-  {
-    id: '4',
-    image: 'https://flowbite.com/docs/images/people/profile-picture-4.jpg',
-    externalLink: 'https://www.youtube.com/watch?v=OTZP7UWz3Tw',
-    title: 'HC Kosice - FEHA19',
-    date: new Date(2022, 9, 8)
-  },
-  {
-    id: '5',
-    image: 'https://flowbite.com/docs/images/people/profile-picture-5.jpg',
-    externalLink: 'https://www.youtube.com/watch?v=OTZP7UWz3Tw',
-    title: 'HC Kosice - FEHA19',
-    date: new Date(2022, 9, 8)
+export default defineEventHandler(async (event) => {
+  const client = serverSupabaseClient(event);
+  const { from, to } = getQuery(event);
+
+  try {
+    const { data, count } = await client
+      .from('videos')
+      .select('*', { count: 'exact' })
+      .order('created_at', { ascending: false })
+      .range(from, to);
+
+    const schedule = await scheduleService(VBR_CHAMPIONSHIP_IDS);
+
+    // Merge data
+    const videos = (data || []).reduce((acc, item) => {
+      const scheduleItem = (schedule || []).find((game) => game.id === item.game_id);
+
+      acc.push({
+        id: item.id,
+        title: item.game_name,
+        externalLink: item.url,
+        date: item.created_at,
+        image: 'https://img.youtube.com/vi/<insert-youtube-video-id-here>/default.jpg',
+        gameDate: scheduleItem?.gameDate ?? new Date(1970, 0, 1),
+        gameStatus: scheduleItem?.gameStatus ?? 0,
+      });
+      return acc;
+    }, []);
+    return { videos, count };
+  } catch (error) {
+    throw createError({
+      statusCode: 500,
+      statusMessage: error.message,
+    });
   }
-];
+});

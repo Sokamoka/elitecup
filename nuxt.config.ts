@@ -25,6 +25,7 @@ export default defineNuxtConfig({
     public: {
       instagramAccessToken: process.env.NUXT_INSTAGRAM_ACCESS_TOKEN,
       facebookAppId: process.env.NUXT_FACEBOOK_APP_ID,
+      vbrApiKey: process.env.NUXT_VBR_API_KEY,
     },
   },
 
