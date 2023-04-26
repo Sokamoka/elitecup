@@ -1,17 +1,20 @@
-export function useVideoList(options = {}) {
+export interface UseVideoListOptions {
+  limit?: number;
+}
+
+export function useVideoList(options: UseVideoListOptions = {}) {
   const { limit = 24 } = options;
   const state = ref([]);
   const skip = ref(0);
   const totalCount = ref<number>(0);
 
-  const { execute } = useAsyncState(
+  const { execute, isLoading, error } = useAsyncState(
     () =>
       $fetch('/api/videos', {
         query: { from: unref(skip), to: unref(skip) + unref(limit) - 1 },
       }),
     { videos: [], count: 0 },
     {
-      // immediate: false,
       resetOnExecute: false,
       onSuccess({ videos, count }) {
         state.value = state.value.concat(videos);
@@ -29,6 +32,8 @@ export function useVideoList(options = {}) {
 
   return {
     state,
+    isLoading,
+    error,
     isFetchMoreVisible,
     fetchMore,
   };

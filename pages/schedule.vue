@@ -6,7 +6,7 @@ useHead({
   title: t('menu.schedule'),
 });
 
-const { range, isFetchMoreVisible, fetchMore } = useScheduleRaw();
+const { range, isFetchMoreVisible, fetchMore } = await useScheduleRaw();
 
 const currentLocale = computed(() => locales.value?.find((loc) => loc.code === locale.value));
 

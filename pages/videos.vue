@@ -1,7 +1,19 @@
 <script setup lang="ts">
-const { state: videos, isFetchMoreVisible, fetchMore } = useVideoList();
+const { t } = useI18n();
+
+useHead({
+  title: t('menu.videos'),
+});
+
+const { state: videos, isLoading, error, isFetchMoreVisible, fetchMore } = useVideoList();
+
+const isLazyLoading = useLazyLoadingState({ loadingState: isLoading, delay: 300 });
 
 const { format } = useFormatDefaultDate();
+
+const onReload = () => {
+  window.location.reload();
+};
 </script>
 
 <template>
@@ -10,7 +22,16 @@ const { format } = useFormatDefaultDate();
       {{ $t('title.videos') }}
     </h1>
 
+    <div v-if="error" class="bg-red-500 p-4 text-white rounded-lg">
+      {{ error }}
+      <button type="button" @click="onReload">Reload</button>
+    </div>
+
     <div class="grid grid-flow-row grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-8">
+      <template v-if="isLazyLoading">
+        <div class="bg-slate-100 border border-slate-200 rounded-lg animate-pulse h-64" />
+        <div class="bg-slate-100 border border-slate-200 rounded-lg animate-pulse h-64" />
+      </template>
       <template v-for="video in videos" :key="video.id">
         <MainBox class="hover:border-slate-400">
           <a :href="video.externalLink" target="_blank">

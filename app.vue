@@ -1,11 +1,25 @@
-<script>
+<script setup>
 import { createConfig } from '~/assets/js/mjsz-vbr-bundle.esm-browser.js';
+const config = useRuntimeConfig();
+
 createConfig({
-  apiKey: 'dd8adf5fdb738b3741fa579b5ede5ce69b681f62',
+  apiKey: config.public.vbrApiKey,
+});
+
+const nuxtApp = useNuxtApp();
+const loading = ref(false);
+nuxtApp.hook("page:start", () => {
+  console.log('START')
+  loading.value = true;
+});
+nuxtApp.hook("page:finish", () => {
+  loading.value = false;
+  console.log('END')
 });
 </script>
 <template>
   <NuxtLayout>
+    <NuxtLoadingIndicator />
     <NuxtPage />
   </NuxtLayout>
 </template>

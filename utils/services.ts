@@ -1,4 +1,4 @@
-export async function scheduleService(championships) {
+export async function scheduleService(championships: string[]) {
   const [u18, u16] = await Promise.all(championships.map((id) => fetchFromVBR(id)));
   const result = [...(u18?.data ?? {}), ...(u16?.data ?? {})];
   return result;

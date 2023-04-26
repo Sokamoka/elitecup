@@ -4,6 +4,9 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: 'netlify',
+    routeRules: {
+      '/api/videos': { headers: { 'cache-control': 'public, max-age=300' } },
+    },
   },
 
   vue: {
@@ -29,9 +32,7 @@ export default defineNuxtConfig({
     },
   },
 
-  plugins: [
-    { src: '~/plugins/facebook-page-plugin.ts', mode: 'client' }
-  ],
+  plugins: [{ src: '~/plugins/facebook-page-plugin.ts', mode: 'client' }],
 
   modules: [
     '@nuxtjs/tailwindcss',
