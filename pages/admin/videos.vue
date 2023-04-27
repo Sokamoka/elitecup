@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { format, parseISO } from 'date-fns';
+import { ModalPromise } from '~/components/Form/Modal.vue';
 
 type VideoItem = {
   id: number | null;
@@ -23,7 +24,7 @@ const columns = {
   game_id: {
     label: 'admin.table.gameId.short',
     tooltip: 'admin.table.gameId.tooltip',
-    class: 'w-24 text-left',
+    class: 'w-[100px] text-left',
   },
   game_name: {
     label: 'admin.table.gameName.short',
@@ -33,17 +34,18 @@ const columns = {
   url: {
     label: 'admin.table.videoUrl.short',
     tooltip: 'admin.table.videoUrl.tooltip',
-    class: 'text-left',
+    class: 'text-left truncate',
   },
   action: {
     label: 'admin.table.action.short',
     tooltip: 'admin.table.action.tooltip',
-    class: 'w-10 text-right',
+    class: 'w-[120px] text-right',
   },
 };
 
 const errorMessage = ref('');
 const client = useSupabaseClient();
+// const ModalPromise = useModalPromise();
 
 const updateState: UpdateState = reactive({
   id: null,
@@ -62,7 +64,7 @@ const { data: games } = await useAsyncData('games', () => $fetch('/api/schedule'
 
 const { data: videos, refresh } = await useFetch('/api/admin/videos');
 
-const onAddVideo = async (payload: Partial<VideoItem>) => {
+const onAddVideo = async (payload: Partial<VideoItem>, resolve: void) => {
   errorMessage.value = '';
   const upsertData = {
     ...(updateState.id && { id: updateState.id }),
@@ -79,22 +81,27 @@ const onAddVideo = async (payload: Partial<VideoItem>) => {
     return;
   }
   refresh();
+  console.log(typeof resolve);
+  resolve(true);
 };
 
 const onEdit = ({ id, game_id, url }: VideoItem) => {
   updateState.id = id;
   updateState.gameId = game_id;
   updateState.url = url;
+  ModalPromise.start('Edit Video');
 };
 
 const onDelete = (payload: VideoItem) => {
   console.log(payload);
 };
 
-const onCreateNew = () => {
+const onCreateNew = async () => {
   updateState.id = null;
   updateState.gameId = null;
   updateState.url = '';
+  const result = await ModalPromise.start('Add new video');
+  console.log({ result });
 };
 </script>
 
@@ -105,13 +112,23 @@ const onCreateNew = () => {
       <FormButton variant="secondary" @click="onCreateNew">New</FormButton>
     </div>
 
-    <AdminManageVideo
+    <FormModal #default="{ resolve }">
+      <AdminManageVideo
+        :games="games"
+        v-model:game-id="updateState.gameId"
+        v-model:url="updateState.url"
+        :is-edit="Boolean(updateState.id)"
+        @submit="onAddVideo($event, resolve)"
+      />
+    </FormModal>
+
+    <!-- <AdminManageVideo
       :games="games"
       v-model:game-id="updateState.gameId"
       v-model:url="updateState.url"
       :is-edit="Boolean(updateState.id)"
       @submit="onAddVideo"
-    />
+    /> -->
 
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
       <div class="w-full overflow-x-auto">

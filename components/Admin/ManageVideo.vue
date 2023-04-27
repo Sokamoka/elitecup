@@ -60,7 +60,7 @@ const resetValidator = () => v$.value.$reset();
 defineExpose({ resetValidator });
 </script>
 <template>
-  <div class="rounded-lg bg-white shadow-md p-4 w-full mb-8">
+  <div class="p-4">
     <form @submit.prevent="onSubmit" class="space-y-4">
       <fieldset>
         <label class="label block">Game:</label>
