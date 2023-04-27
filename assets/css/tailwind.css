@@ -34,6 +34,10 @@ body {
   label {
     @apply text-xs font-semibold uppercase;
   }
+
+  .form-error {
+    @apply text-sm text-red-500 py-2;
+  }
 }
 
 @layer components {

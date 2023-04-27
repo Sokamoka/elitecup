@@ -1,4 +1,7 @@
 <script setup>
+import { useVuelidate } from '@vuelidate/core';
+import { required, email } from '@vuelidate/validators';
+
 definePageMeta({
   layout: 'admin-fullwidth',
 });
@@ -12,8 +15,19 @@ const credentials = reactive({
   password: '',
 });
 
+const rules = {
+  email: { required, email },
+  password: { required },
+};
+
+const v$ = useVuelidate(rules, credentials);
+
 const signIn = async () => {
   errorMessage.value = '';
+  console.log(v$);
+  const isValid = await v$.value.$validate();
+  if (!isValid) return;
+
   const { error } = await auth.signInWithPassword({
     email: credentials.email,
     password: credentials.password,
@@ -35,11 +49,17 @@ watchEffect(() => {
     <form @submit.prevent="signIn" class="space-y-4">
       <fieldset>
         <label class="text-xs font-semibold uppercase" for="email">E-mail:</label>
-        <FormInput id="email" v-model="credentials.email" required />
+        <FormInput id="email" v-model="credentials.email" :has-error="v$.email.$error" />
+        <p v-if="v$.email.$error" class="form-error">
+          {{ v$.email.$errors[0].$message }}
+        </p>
       </fieldset>
       <fieldset>
         <label class="text-xs font-semibold uppercase" for="password">Password:</label>
-        <FormInput id="password" type="password" v-model="credentials.password" required />
+        <FormInput id="password" type="password" v-model="credentials.password" :has-error="v$.password.$error" />
+        <p v-if="v$.password.$error" class="form-error">
+          {{ v$.password.$errors[0].$message }}
+        </p>
       </fieldset>
 
       <div v-if="errorMessage" class="bg-red-100 border border-red-500 text-red-600 p-4 rounded-lg">
