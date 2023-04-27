@@ -5,17 +5,6 @@ const config = useRuntimeConfig();
 createConfig({
   apiKey: config.public.vbrApiKey,
 });
-
-const nuxtApp = useNuxtApp();
-const loading = ref(false);
-nuxtApp.hook("page:start", () => {
-  console.log('START')
-  loading.value = true;
-});
-nuxtApp.hook("page:finish", () => {
-  loading.value = false;
-  console.log('END')
-});
 </script>
 <template>
   <NuxtLayout>

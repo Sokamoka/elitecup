@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { format, parseISO } from 'date-fns';
+
 type VideoItem = {
   id: number | null;
   created_at: string;
@@ -49,12 +51,13 @@ const updateState: UpdateState = reactive({
   url: '',
 });
 
-const { data: games } = await useAsyncData('users', () => $fetch('/api/schedule'), {
-  // transform: (users) =>
-  //   users.map((user) => ({
-  //     id: user.id,
-  //     fullName: `${user.firstName} ${user.surname}`,
-  //   })),
+const { data: games } = await useAsyncData('games', () => $fetch('/api/schedule'), {
+  transform: (games) =>
+    games.map((game) => ({
+      ...game,
+      fullName: `${game.homeTeamName} - ${game.awayTeamName}`,
+      formattedGameDate: format(parseISO(game.gameDate), 'yyyy-MM-dd hh:mm'),
+    })),
 });
 
 const { data: videos } = await useFetch('/api/admin/videos');

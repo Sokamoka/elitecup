@@ -22,9 +22,11 @@ const onReload = () => {
       {{ $t('title.videos') }}
     </h1>
 
-    <div v-if="error" class="bg-red-500 p-4 text-white rounded-lg">
-      {{ error }}
-      <button type="button" @click="onReload">Reload</button>
+    <div v-if="error" class="flex flex-col items-center">
+      <img src="~/assets/images/304.svg" class="w-full max-w-md">
+      <p class="pt-4 pb-2 font-semibold text-slate-900 text-xl leading-6 uppercase">Something went wrong</p>
+      <p class="pb-4 font-semibold text-slate-400">{{ error }}</p>
+      <FormButton variant="outlined" @click="onReload">Reload</FormButton>
     </div>
 
     <div class="grid grid-flow-row grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-8">
