@@ -1,5 +1,10 @@
 <script lang="ts">
-export const ModalPromise = createTemplatePromise<boolean, [string]>();
+export const ModalPromise = createTemplatePromise<boolean, [string]>({
+  transition: {
+    name: 'modal-fade',
+    appear: true,
+  },
+});
 
 export default {
   name: 'Modal',
@@ -32,3 +37,14 @@ export default {
     </div>
   </ModalPromise>
 </template>
+
+<style scoped>
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.5s;
+}
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
+</style>

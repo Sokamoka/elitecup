@@ -42,7 +42,7 @@ const sortBy = (column, prop) => {
 </script>
 
 <template>
-  <table class="table-fixed">
+  <table class="table xl:table-fixed">
     <thead>
       <tr>
         <template v-for="(column, prop) in columns" :key="prop">

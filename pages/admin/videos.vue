@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { format, parseISO } from 'date-fns';
 import { ModalPromise } from '~/components/Form/Modal.vue';
+import { ToastPromise } from '~/components/Form/Toast.vue';
 
 type VideoItem = {
   id: number | null;
   created_at: string;
   game_id: number | null;
   game_name: string;
+  game_date: string;
   url: string;
 };
 
@@ -34,7 +36,7 @@ const columns = {
   url: {
     label: 'admin.table.videoUrl.short',
     tooltip: 'admin.table.videoUrl.tooltip',
-    class: 'text-left truncate',
+    class: 'w-[360px] text-left truncate',
   },
   action: {
     label: 'admin.table.action.short',
@@ -43,9 +45,10 @@ const columns = {
   },
 };
 
-const errorMessage = ref('');
 const client = useSupabaseClient();
-// const ModalPromise = useModalPromise();
+
+const limit = 12;
+const page = ref(0);
 
 const updateState: UpdateState = reactive({
   id: null,
@@ -53,36 +56,55 @@ const updateState: UpdateState = reactive({
   url: '',
 });
 
-const { data: games } = await useAsyncData('games', () => $fetch('/api/schedule'), {
+const { from, to } = usePagination(page, limit);
+
+const { data: games, error } = await useAsyncData('games', () => $fetch('/api/schedule'), {
   transform: (games) =>
     games.map((game) => ({
       ...game,
       fullName: `${game.homeTeamName} - ${game.awayTeamName}`,
-      formattedGameDate: format(parseISO(game.gameDate), 'yyyy-MM-dd hh:mm'),
+      formattedGameDate: format(parseISO(game.gameDate), 'yyyy-MM-dd HH:mm'),
     })),
 });
 
-const { data: videos, refresh } = await useFetch('/api/admin/videos');
+if (error.value) {
+  ToastPromise.start(error.value.message, 'error');
+}
 
-const onAddVideo = async (payload: Partial<VideoItem>, resolve: void) => {
-  errorMessage.value = '';
+const { data: videos, refresh } = await useFetch('/api/admin/videos', {
+  query: { from: from, to: to },
+  transform: ({ videos, count }) => {
+    return {
+      videos: videos.map((game: VideoItem) => ({
+        ...game,
+        game_date: format(parseISO(game.game_date), 'yyyy, LLLL dd. HH:mm'),
+      })),
+      count,
+    };
+  },
+});
+
+const maxPage = computed(() => {
+  const count = videos.value?.count ?? 0;
+  return Math.floor(count / limit);
+});
+
+const onAddVideo = async (payload: Partial<VideoItem>, resolve: (v: boolean) => void) => {
   const upsertData = {
     ...(updateState.id && { id: updateState.id }),
     game_id: updateState.gameId,
     url: updateState.url,
     ...payload,
   };
-  console.log(upsertData);
   const { error } = await client.from('videos').upsert(upsertData).select().single();
 
   if (error) {
-    console.log(error);
-    errorMessage.value = error.message;
+    ToastPromise.start(error?.message, 'error');
     return;
   }
   refresh();
-  console.log(typeof resolve);
   resolve(true);
+  ToastPromise.start(`Update success (${payload.game_name})`);
 };
 
 const onEdit = ({ id, game_id, url }: VideoItem) => {
@@ -96,12 +118,18 @@ const onDelete = (payload: VideoItem) => {
   console.log(payload);
 };
 
-const onCreateNew = async () => {
+const onCreateNew = () => {
   updateState.id = null;
   updateState.gameId = null;
   updateState.url = '';
-  const result = await ModalPromise.start('Add new video');
-  console.log({ result });
+  ModalPromise.start('Add new video');
+};
+
+const onPrev = () => {
+  page.value--;
+};
+const onNext = () => {
+  page.value++;
 };
 </script>
 
@@ -122,20 +150,12 @@ const onCreateNew = async () => {
       />
     </FormModal>
 
-    <!-- <AdminManageVideo
-      :games="games"
-      v-model:game-id="updateState.gameId"
-      v-model:url="updateState.url"
-      :is-edit="Boolean(updateState.id)"
-      @submit="onAddVideo"
-    /> -->
-
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
       <div class="w-full overflow-x-auto">
         <DataTable :rows="videos.videos" :columns="columns">
           <template #cell-game_name="{ row }">
             <p>{{ row.game_name }}</p>
-            <p class="text-slate-400 text-sm">{{ row.game_date }}</p>
+            <p class="text-slate-400 text-sm font-normal">{{ row.game_date }}</p>
           </template>
 
           <template #cell-action="{ row }">
@@ -153,6 +173,11 @@ const onCreateNew = async () => {
           </template>
         </DataTable>
       </div>
+
+      <button v-if="page > 0" type="button" class="p-2" @click="onPrev">Prev</button>
+      <button v-if="page < maxPage" type="button" class="p-2" @click="onNext">Next</button>
     </div>
+
+    <FormToast :close-timeout="30000" />
   </div>
 </template>
