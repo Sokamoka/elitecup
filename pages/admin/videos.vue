@@ -60,7 +60,7 @@ const { data: games } = await useAsyncData('games', () => $fetch('/api/schedule'
     })),
 });
 
-const { data: videos } = await useFetch('/api/admin/videos');
+const { data: videos, refresh } = await useFetch('/api/admin/videos');
 
 const onAddVideo = async (payload: Partial<VideoItem>) => {
   errorMessage.value = '';
@@ -71,12 +71,14 @@ const onAddVideo = async (payload: Partial<VideoItem>) => {
     ...payload,
   };
   console.log(upsertData);
-  const { data, error } = await client.from('videos').upsert(upsertData).select().single();
+  const { error } = await client.from('videos').upsert(upsertData).select().single();
 
   if (error) {
+    console.log(error);
     errorMessage.value = error.message;
+    return;
   }
-  console.log(data);
+  refresh();
 };
 
 const onEdit = ({ id, game_id, url }: VideoItem) => {
@@ -107,12 +109,18 @@ const onCreateNew = () => {
       :games="games"
       v-model:game-id="updateState.gameId"
       v-model:url="updateState.url"
+      :is-edit="Boolean(updateState.id)"
       @submit="onAddVideo"
     />
 
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
       <div class="w-full overflow-x-auto">
         <DataTable :rows="videos.videos" :columns="columns">
+          <template #cell-game_name="{ row }">
+            <p>{{ row.game_name }}</p>
+            <p class="text-slate-400 text-sm">{{ row.game_date }}</p>
+          </template>
+
           <template #cell-action="{ row }">
             <div class="text-xl space-x-2">
               <a :href="row.url" target="_blank" class="hover:text-red-500">

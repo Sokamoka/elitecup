@@ -4,6 +4,7 @@ export interface Props {
   items?: any[];
   query?: string;
   displayValue?: (item: unknown) => string;
+  hasError?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -11,9 +12,10 @@ const props = withDefaults(defineProps<Props>(), {
   items: () => [],
   query: '',
   displayValue: () => '',
+  hasError: false,
 });
 
-const emit = defineEmits(['update:modelValue', 'update:query', 'change']);
+const emit = defineEmits(['update:modelValue', 'update:query', 'change', 'select']);
 
 const query = useVModel(props, 'query', emit);
 const value = useVModel(props, 'modelValue', emit);
@@ -27,10 +29,13 @@ const onChange = (event: InputEvent) => {
   <HeadlessCombobox v-model="value">
     <div class="relative mt-1">
       <div
-        class="relative w-full cursor-default overflow-hidden rounded-lg text-left border border-slate-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-opacity-75 focus-visible:rounded-lg focus-visible:ring-offset-2 focus-visible:ring-offset-slate-400"
+        :class="[
+          'relative w-full cursor-default overflow-hidden rounded-lg text-left border  focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-opacity-75 focus-visible:rounded-lg focus-visible:ring-offset-2 focus-visible:ring-offset-slate-400',
+          hasError ? 'border-red-500 bg-red-100' : 'border-slate-300 bg-slate-50',
+        ]"
       >
         <HeadlessComboboxInput
-          class="w-full bg-slate-50 text-slate-500 focus:text-slate-700 py-2 pl-2 pr-10 focus:ring-0"
+          class="w-full bg-transparent text-slate-500 focus:text-slate-700 py-2 pl-2 pr-10 focus:ring-0 outline-none"
           :displayValue="displayValue"
           spellcheck="false"
           @change="onChange"

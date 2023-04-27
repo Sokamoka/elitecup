@@ -24,7 +24,6 @@ const v$ = useVuelidate(rules, credentials);
 
 const signIn = async () => {
   errorMessage.value = '';
-  console.log(v$);
   const isValid = await v$.value.$validate();
   if (!isValid) return;
 

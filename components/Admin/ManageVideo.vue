@@ -1,16 +1,19 @@
 <script setup lang="ts">
-import Games from '~/pages/u16/games.vue';
+import { useVuelidate } from '@vuelidate/core';
+import { required, url as urlValidator } from '@vuelidate/validators';
 
 export interface Props {
   games?: [];
   gameId?: number | null;
   url?: string;
+  isEdit: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   games: () => [],
   gameId: null,
   url: '',
+  isEdit: false,
 });
 
 const emit = defineEmits(['update:gameId', 'update:url', 'submit']);
@@ -18,6 +21,13 @@ const emit = defineEmits(['update:gameId', 'update:url', 'submit']);
 const query = ref('');
 
 const { gameId, url } = useVModels(props, emit);
+
+const rules = {
+  gameId: { required },
+  url: { required },
+};
+
+const v$ = useVuelidate(rules, { url, gameId });
 
 const filteredGames = computed(() => {
   return query.value === ''
@@ -29,36 +39,57 @@ const filteredGames = computed(() => {
       );
 });
 
-const displayValue = (id) => {
-  const item = props.games?.find((it) => it.id === id);
+const displayValue = (id: number) => {
+  const item = props.games?.find((game) => game.id === id);
   return item ? item.fullName : '';
 };
 
-const onSubmit = () => {
+const onSubmit = async () => {
+  const isValid = await v$.value.$validate();
+  if (!isValid) return;
+
   const selectedGame = props.games.find((game) => game.id === gameId.value);
   emit('submit', {
     game_name: selectedGame?.fullName ?? '',
+    game_date: selectedGame?.gameDate ?? '',
   });
 };
+
+const resetValidator = () => v$.value.$reset();
+
+defineExpose({ resetValidator });
 </script>
 <template>
   <div class="rounded-lg bg-white shadow-md p-4 w-full mb-8">
     <form @submit.prevent="onSubmit" class="space-y-4">
       <fieldset>
         <label class="label block">Game:</label>
-        <FormAutocomplete v-model="gameId" v-model:query="query" :items="filteredGames" :display-value="displayValue">
+        <FormAutocomplete
+          v-model="gameId"
+          v-model:query="query"
+          :items="filteredGames"
+          :display-value="displayValue"
+          :has-error="v$.gameId.$error"
+        >
           <template #default="{ item, active }">
             <p class="font-bold">{{ item.homeTeamName }} - {{ item.awayTeamName }}</p>
             <p>
-              {{ item.formattedGameDate }} - <span :class="[active ? 'text-slate-300' : 'text-slate-500']">{{ item.name }}</span>
+              {{ item.formattedGameDate }} -
+              <span :class="[active ? 'text-slate-300' : 'text-slate-500']">{{ item.name }}</span>
             </p>
           </template>
         </FormAutocomplete>
+        <p v-if="v$.gameId.$error" class="form-error">
+          {{ v$.gameId.$errors[0].$message }}
+        </p>
       </fieldset>
 
       <fieldset>
         <label class="label">Video url:</label>
-        <FormInput v-model="url" />
+        <FormInput v-model="url" :has-error="v$.url.$error" />
+        <p v-if="v$.url.$error" class="form-error">
+          {{ v$.url.$errors[0].$message }}
+        </p>
       </fieldset>
 
       <!-- <div v-if="errorMessage">
@@ -66,7 +97,9 @@ const onSubmit = () => {
       </div> -->
 
       <fieldset>
-        <FormButton type="submit">Add</FormButton>
+        <FormButton type="submit">
+          {{ isEdit ? 'Update video' : 'Add video' }}
+        </FormButton>
       </fieldset>
     </form>
   </div>
