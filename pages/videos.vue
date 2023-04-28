@@ -1,11 +1,15 @@
 <script setup lang="ts">
+import { VIDEO_PAGE_LIMIT_PER_PAGE } from '~/constants';
+
 const { t } = useI18n();
 
 useHead({
   title: t('menu.videos'),
 });
 
-const { state: videos, isLoading, error, isFetchMoreVisible, fetchMore } = useVideoList();
+const page = ref(0);
+const { from, to } = usePagination(page, VIDEO_PAGE_LIMIT_PER_PAGE);
+const { state: videos, isLoading, isFetchMoreVisible, error } = await useVideoList({ from, to });
 
 const isLazyLoading = useLazyLoadingState({ loadingState: isLoading, delay: 300 });
 
@@ -13,6 +17,9 @@ const { format } = useFormatDefaultDate();
 
 const onReload = () => {
   window.location.reload();
+};
+const fetchMore = () => {
+  page.value++;
 };
 </script>
 
@@ -23,14 +30,14 @@ const onReload = () => {
     </h1>
 
     <div v-if="error" class="flex flex-col items-center">
-      <img src="~/assets/images/304.svg" class="w-full max-w-md">
+      <img src="~/assets/images/304.svg" class="w-full max-w-md" />
       <p class="pt-4 pb-2 font-semibold text-slate-900 text-xl leading-6 uppercase">Something went wrong</p>
       <p class="pb-4 font-semibold text-slate-400">{{ error }}</p>
       <FormButton variant="outlined" @click="onReload">Reload</FormButton>
     </div>
 
     <div class="grid grid-flow-row grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-8">
-      <template v-if="isLazyLoading">
+      <template v-if="isLazyLoading && !error && videos.length === 0">
         <div class="bg-slate-100 border border-slate-200 rounded-lg animate-pulse h-64" />
         <div class="bg-slate-100 border border-slate-200 rounded-lg animate-pulse h-64" />
       </template>

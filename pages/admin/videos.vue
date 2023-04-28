@@ -59,14 +59,6 @@ const updateState: UpdateState = reactive({
 
 const { from, to } = usePagination(page, limit);
 
-// const { data: games, error } = await useAsyncData('games', () => $fetch('/api/schedule'), {
-//   transform: (games) =>
-//     games.map((game) => ({
-//       ...game,
-//       fullName: `${game.homeTeamName} - ${game.awayTeamName}`,
-//       formattedGameDate: format(parseISO(game.gameDate), 'yyyy-MM-dd HH:mm'),
-//     })),
-// });
 const { data: games, error } = await useFetch('/api/schedule', {
   transform: (games) =>
     games.map((game) => ({

@@ -5,3 +5,5 @@ export const VBR_CHAMPIONSHIP_IDS = [VBR_CHAMPIONSHIP_ID_U16, VBR_CHAMPIONSHIP_I
 export const SORT_STATE_ORIGINAL = 'original';
 export const SORT_STATE_DESCEND = 'descend';
 export const SORT_STATE_ASCEND = 'ascend';
+
+export const VIDEO_PAGE_LIMIT_PER_PAGE = 24;
