@@ -9,7 +9,6 @@ export default defineEventHandler(async () => {
     const sorted = sortBy(prop('gameDate'))(result);
     return sorted;
   } catch (error) {
-    console.dir(error, typeof error);
     throw createError({
       statusCode: 500,
       message: error.message,

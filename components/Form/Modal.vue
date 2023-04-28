@@ -1,4 +1,6 @@
 <script lang="ts">
+import { OnClickOutside } from '@vueuse/components'
+
 export const ModalPromise = createTemplatePromise<boolean, [string]>({
   transition: {
     name: 'modal-fade',
@@ -11,6 +13,7 @@ export default {
 
   components: {
     ModalPromise,
+    OnClickOutside,
   },
 };
 </script>
@@ -22,16 +25,18 @@ export default {
 
       <div class="fixed inset-0 overflow-y-auto">
         <div class="flex min-h-full items-center justify-center p-4">
-          <div class="w-full max-w-md rounded-lg bg-white">
-            <div class="flex items-center p-4 bg-slate-200 rounded-t-lg">
-              <h1 class="flex-1 text-xl text-slate-700 font-bold">{{ args[0] }}</h1>
-              <a href="#" @click.prevent="resolve(false)" class="text-xl text-slate-500 hover:text-red-500">
-                <Icon name="ic:twotone-close" />
-              </a>
-            </div>
+          <OnClickOutside class="w-full max-w-md" @trigger="resolve(false)">
+            <div class="w-full max-w-md rounded-lg bg-white">
+              <div class="flex items-center p-4 bg-slate-200 rounded-t-lg">
+                <h1 class="flex-1 text-xl text-slate-700 font-bold">{{ args[0] }}</h1>
+                <a href="#" @click.prevent="resolve(false)" class="text-xl text-slate-500 hover:text-red-500">
+                  <Icon name="ic:twotone-close" />
+                </a>
+              </div>
 
-            <slot :resolve="resolve" :args="args" />
-          </div>
+              <slot :resolve="resolve" :args="args" />
+            </div>
+          </OnClickOutside>
         </div>
       </div>
     </div>

@@ -76,15 +76,12 @@ const { data: games, error } = await useFetch('/api/schedule', {
     })),
 
   onResponseError({ request, response, options }) {
-    console.log('ERROR!!!', { request, response, options });
+    // console.log('ERROR!!!', { request, response, options });
     const errorMessage = response._data?.message || response.statusText;
     ToastPromise.start(errorMessage, 'error');
   },
 });
 
-// if (error.value) {
-//   ToastPromise.start(error.value.message, 'error');
-// }
 
 const { data: videos, refresh } = await useFetch('/api/admin/videos', {
   query: { from: from, to: to },
@@ -189,7 +186,9 @@ const onNext = () => {
       </div>
 
       <div class="flex items-center py-2 px-4 bg-slate-300 text-slate-500 font-bold">
-        <div class="flex-1">{{ page + 1 }} / {{ maxPage + 1 }}</div>
+        <div class="flex-1">
+          {{ from }} - {{ to }} of {{ videos.count }} videos
+        </div>
         <div>
           <button type="button" class="p-2 disabled:text-slate-400" :disabled="page === 0" @click="onPrev">Prev</button>
           <button type="button" class="p-2 disabled:text-slate-400" :disabled="page === maxPage" @click="onNext">
