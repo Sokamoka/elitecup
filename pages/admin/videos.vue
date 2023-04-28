@@ -13,8 +13,22 @@ type VideoItem = {
   url: string;
 };
 
+type VideoResponseItem = {
+  id: number;
+  created_at: string;
+  game_id: number;
+  game_name: string;
+  game_date: string;
+  url: string;
+}
+
+type VideoResponse = {
+  videos: VideoResponseItem[];
+  count: number;
+}
+
 interface UpdateState {
-  id: number | null;
+  id: number | null | undefined;
   gameId: number | null | undefined;
   url: string;
 }
@@ -75,7 +89,7 @@ const { data: games } = await useFetch('/api/schedule', {
   },
 });
 
-const { data: videos, refresh } = await useFetch('/api/admin/videos', {
+const { data: videos, refresh } = await useFetch<VideoResponse>('/api/admin/videos', {
   query: { from: from, to: to },
   transform: ({ videos, count }) => {
     return {
@@ -99,7 +113,7 @@ const pageRange = computed(() => {
 });
 
 const onAddVideo = async (payload: Partial<VideoItem>, resolve: (v: boolean) => void) => {
-  const upsertData: VideoItem = {
+  const upsertData: Partial<VideoItem> = {
     ...(updateState.id && { id: updateState.id }),
     game_id: updateState.gameId || null,
     url: updateState.url,

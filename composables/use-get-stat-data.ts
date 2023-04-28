@@ -1,4 +1,5 @@
 export function useGetStat(type: string, id: string, store: Ref) {
+  const config = useRuntimeConfig();
   const url = `https://api.icehockey.hu/vbr/v1/${type}?championshipId=${id}`;
 
   const { execute } = useAsyncState(
@@ -8,7 +9,7 @@ export function useGetStat(type: string, id: string, store: Ref) {
         cache: 'no-cache',
         headers: {
           'Content-Type': 'application/json',
-          'X-API-KEY': 'd86552a5fadf25a1bd666bc8634c510856bf33c9',
+          'X-API-KEY': config.public.vbrApiKey,
         },
       }),
     { data: [] },
