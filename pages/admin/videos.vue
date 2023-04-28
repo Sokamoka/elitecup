@@ -2,6 +2,7 @@
 import { format, parseISO } from 'date-fns';
 import { ModalPromise } from '~/components/Form/Modal.vue';
 import { ToastPromise } from '~/components/Form/Toast.vue';
+import { ConfirmPromise } from '~/components/Form/Confirm.vue';
 
 type VideoItem = {
   id: number | null;
@@ -58,18 +59,32 @@ const updateState: UpdateState = reactive({
 
 const { from, to } = usePagination(page, limit);
 
-const { data: games, error } = await useAsyncData('games', () => $fetch('/api/schedule'), {
+// const { data: games, error } = await useAsyncData('games', () => $fetch('/api/schedule'), {
+//   transform: (games) =>
+//     games.map((game) => ({
+//       ...game,
+//       fullName: `${game.homeTeamName} - ${game.awayTeamName}`,
+//       formattedGameDate: format(parseISO(game.gameDate), 'yyyy-MM-dd HH:mm'),
+//     })),
+// });
+const { data: games, error } = await useFetch('/api/schedule', {
   transform: (games) =>
     games.map((game) => ({
       ...game,
       fullName: `${game.homeTeamName} - ${game.awayTeamName}`,
       formattedGameDate: format(parseISO(game.gameDate), 'yyyy-MM-dd HH:mm'),
     })),
+
+  onResponseError({ request, response, options }) {
+    console.log('ERROR!!!', { request, response, options });
+    const errorMessage = response._data?.message || response.statusText;
+    ToastPromise.start(errorMessage, 'error');
+  },
 });
 
-if (error.value) {
-  ToastPromise.start(error.value.message, 'error');
-}
+// if (error.value) {
+//   ToastPromise.start(error.value.message, 'error');
+// }
 
 const { data: videos, refresh } = await useFetch('/api/admin/videos', {
   query: { from: from, to: to },
@@ -114,8 +129,17 @@ const onEdit = ({ id, game_id, url }: VideoItem) => {
   ModalPromise.start('Edit Video');
 };
 
-const onDelete = (payload: VideoItem) => {
-  console.log(payload);
+const onDelete = async (payload: VideoItem) => {
+  const result = await ConfirmPromise.start();
+  if (!result) return;
+
+  const { error } = await client.from('videos').delete().eq('id', payload.id);
+  if (error) {
+    ToastPromise.start(error?.message, 'error');
+    return;
+  }
+  refresh();
+  ToastPromise.start(`Delete success (${payload.game_name})`);
 };
 
 const onCreateNew = () => {
@@ -139,16 +163,6 @@ const onNext = () => {
       <h1 class="text-xl text-slate-700 font-bold uppercase">Edit Videos</h1>
       <FormButton variant="secondary" @click="onCreateNew">New</FormButton>
     </div>
-
-    <FormModal #default="{ resolve }">
-      <AdminManageVideo
-        :games="games"
-        v-model:game-id="updateState.gameId"
-        v-model:url="updateState.url"
-        :is-edit="Boolean(updateState.id)"
-        @submit="onAddVideo($event, resolve)"
-      />
-    </FormModal>
 
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
       <div class="w-full overflow-x-auto">
@@ -174,10 +188,28 @@ const onNext = () => {
         </DataTable>
       </div>
 
-      <button v-if="page > 0" type="button" class="p-2" @click="onPrev">Prev</button>
-      <button v-if="page < maxPage" type="button" class="p-2" @click="onNext">Next</button>
+      <div class="flex items-center py-2 px-4 bg-slate-300 text-slate-500 font-bold">
+        <div class="flex-1">{{ page + 1 }} / {{ maxPage + 1 }}</div>
+        <div>
+          <button type="button" class="p-2 disabled:text-slate-400" :disabled="page === 0" @click="onPrev">Prev</button>
+          <button type="button" class="p-2 disabled:text-slate-400" :disabled="page === maxPage" @click="onNext">
+            Next
+          </button>
+        </div>
+      </div>
     </div>
 
+    <FormModal #default="{ resolve }">
+      <AdminManageVideo
+        :games="games"
+        v-model:game-id="updateState.gameId"
+        v-model:url="updateState.url"
+        :is-edit="Boolean(updateState.id)"
+        @submit="onAddVideo($event, resolve)"
+      />
+    </FormModal>
+
     <FormToast :close-timeout="30000" />
+    <FormConfirm />
   </div>
 </template>
