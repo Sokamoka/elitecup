@@ -19,6 +19,11 @@ const props = defineProps({
     type: String,
     default: '',
   },
+
+  gameStatus: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const { format } = useFormatDefaultDate();
@@ -31,6 +36,9 @@ const { format } = useFormatDefaultDate();
     </div>
     <div class="flex-1 min-w-0">
       <p class="text-sm font-semibold leading-tight text-slate-900">
+        <span v-if="gameStatus === 1" class="bg-red-500 text-white text-xs font-semibold rounded-sm px-1 uppercase"
+          >Live</span
+        >
         {{ title }}
       </p>
       <p class="text-sm text-slate-500 truncate dark:text-slate-400">{{ format(date) }}</p>

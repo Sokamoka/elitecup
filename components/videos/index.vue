@@ -1,7 +1,5 @@
 <script setup lang="ts">
-const { state } = useAsyncState(() => $fetch('/api/videos'), []);
-
-const videos = computed(() => state.value.slice(0, 5));
+const { state: videos } = useAsyncState(() => $fetch('/api/videos-main'), []);
 </script>
 <template>
   <div class="space-y-2 px-2 pb-4">
@@ -9,7 +7,8 @@ const videos = computed(() => state.value.slice(0, 5));
       v-for="video in videos"
       :title="video.title"
       :image="video.image"
-      :date="video.date"
+      :date="video.gameDate"
+      :game-status="video.gameStatus"
       :external-link="video.externalLink"
     />
   </div>

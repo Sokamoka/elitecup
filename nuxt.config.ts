@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     preset: 'netlify',
     routeRules: {
       '/api/videos': { headers: { 'cache-control': 'public, max-age=300' } },
+      '/api/videos-main': { headers: { 'cache-control': 'public, max-age=60' } },
     },
   },
 
