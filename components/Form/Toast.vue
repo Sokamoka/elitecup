@@ -30,7 +30,7 @@ export default {
 
 <template>
   <ToastPromise v-slot="{ resolve, args }">
-    <div class="fixed left-5 bottom-5 max-w-xs">
+    <div class="max-w-xs">
       <div
         :class="[
           'flex items-center justify-start p-4 gap-4 text-white font-bold rounded-lg shadow-lg',

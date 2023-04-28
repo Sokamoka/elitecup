@@ -33,9 +33,18 @@
     "goalies": "Kapusok"
   },
   "admin": {
+    "title": {
+      "menu": "Menü",
+      "editVideos": "Videók szerkesztése"
+    },
+    "menu": {
+      "home": "Home",
+      "editNews": "Hírek szerkesztése",
+      "videos": "Videók szerkesztése"
+    },
     "table": {
       "gameId": {
-        "short": "Mérkőzés ID",
+        "short": "Azonosító",
         "tooltip": "Mérkőzés Azonosító"
       },
       "videoUrl": {
@@ -50,6 +59,27 @@
         "short": "Akció",
         "tooltip": "Akció"
       }
+    },
+    "common": {
+      "new": "Új",
+      "pageRange": "Mutatva {0} - {1} a {2} videóból"
+    },
+    "manageVideo": {
+      "game": "Mérkőzés",
+      "url": "Videó URL",
+      "addVideo": "Videó hozzáadása",
+      "updateVideo": "Videó módosítása",
+      "modal": {
+        "editVideo": "Videó módosítása",
+        "addVideo": "Új videó hozzáadása"
+      }
+    },
+    "messages": {
+      "delete": "Sikeres törlés",
+      "update": "Sikeres módosítás",
+      "sure": "Biztos hogy törlöd?",
+      "yes": "Igen",
+      "no": "Nem"
     }
   }
 }

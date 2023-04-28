@@ -5,8 +5,8 @@ import { ToastPromise } from '~/components/Form/Toast.vue';
 import { ConfirmPromise } from '~/components/Form/Confirm.vue';
 
 type VideoItem = {
-  id: number | null;
-  created_at: string;
+  id?: number | null;
+  created_at?: string;
   game_id: number | null;
   game_name: string;
   game_date: string;
@@ -24,15 +24,15 @@ definePageMeta({
 });
 
 const columns = {
-  game_id: {
-    label: 'admin.table.gameId.short',
-    tooltip: 'admin.table.gameId.tooltip',
-    class: 'w-[100px] text-left',
-  },
   game_name: {
     label: 'admin.table.gameName.short',
     tooltip: 'admin.table.gameName.tooltip',
     class: 'text-left font-bold',
+  },
+  game_id: {
+    label: 'admin.table.gameId.short',
+    tooltip: 'admin.table.gameId.tooltip',
+    class: 'w-[100px] text-left',
   },
   url: {
     label: 'admin.table.videoUrl.short',
@@ -46,6 +46,7 @@ const columns = {
   },
 };
 
+const { t } = useI18n();
 const client = useSupabaseClient();
 
 const limit = 12;
@@ -59,7 +60,7 @@ const updateState: UpdateState = reactive({
 
 const { from, to } = usePagination(page, limit);
 
-const { data: games, error } = await useFetch('/api/schedule', {
+const { data: games } = await useFetch('/api/schedule', {
   transform: (games) =>
     games.map((game) => ({
       ...game,
@@ -67,13 +68,12 @@ const { data: games, error } = await useFetch('/api/schedule', {
       formattedGameDate: format(parseISO(game.gameDate), 'yyyy-MM-dd HH:mm'),
     })),
 
-  onResponseError({ request, response, options }) {
-    // console.log('ERROR!!!', { request, response, options });
-    const errorMessage = response._data?.message || response.statusText;
+  onResponseError({ response }) {
+    // console.log('ERROR!!!', { response });
+    const errorMessage = response.statusText;
     ToastPromise.start(errorMessage, 'error');
   },
 });
-
 
 const { data: videos, refresh } = await useFetch('/api/admin/videos', {
   query: { from: from, to: to },
@@ -93,10 +93,15 @@ const maxPage = computed(() => {
   return Math.floor(count / limit);
 });
 
+const pageRange = computed(() => {
+  const count = videos.value?.count ?? 0;
+  return [page.value * limit + 1, Math.min((page.value + 1) * limit, count)];
+});
+
 const onAddVideo = async (payload: Partial<VideoItem>, resolve: (v: boolean) => void) => {
-  const upsertData = {
+  const upsertData: VideoItem = {
     ...(updateState.id && { id: updateState.id }),
-    game_id: updateState.gameId,
+    game_id: updateState.gameId || null,
     url: updateState.url,
     ...payload,
   };
@@ -108,14 +113,14 @@ const onAddVideo = async (payload: Partial<VideoItem>, resolve: (v: boolean) => 
   }
   refresh();
   resolve(true);
-  ToastPromise.start(`Update success (${payload.game_name})`);
+  ToastPromise.start(`${t('admin.messages.update')} (${payload.game_name})`);
 };
 
 const onEdit = ({ id, game_id, url }: VideoItem) => {
   updateState.id = id;
   updateState.gameId = game_id;
   updateState.url = url;
-  ModalPromise.start('Edit Video');
+  ModalPromise.start(t('admin.manageVideo.modal.editVideo'));
 };
 
 const onDelete = async (payload: VideoItem) => {
@@ -128,14 +133,14 @@ const onDelete = async (payload: VideoItem) => {
     return;
   }
   refresh();
-  ToastPromise.start(`Delete success (${payload.game_name})`);
+  ToastPromise.start(`${t('admin.messages.delete')} (${payload.game_name})`);
 };
 
 const onCreateNew = () => {
   updateState.id = null;
   updateState.gameId = null;
   updateState.url = '';
-  ModalPromise.start('Add new video');
+  ModalPromise.start(t('admin.manageVideo.modal.addVideo'));
 };
 
 const onPrev = () => {
@@ -149,8 +154,12 @@ const onNext = () => {
 <template>
   <div class="py-8">
     <div class="flex items-center justify-between mb-4">
-      <h1 class="text-xl text-slate-700 font-bold uppercase">Edit Videos</h1>
-      <FormButton variant="secondary" @click="onCreateNew">New</FormButton>
+      <h1 class="text-xl text-slate-700 font-bold uppercase">
+        {{ $t('admin.title.editVideos') }}
+      </h1>
+      <FormButton variant="secondary" @click="onCreateNew">
+        {{ $t('admin.common.new') }}
+      </FormButton>
     </div>
 
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
@@ -179,7 +188,7 @@ const onNext = () => {
 
       <div class="flex items-center py-2 px-4 bg-slate-300 text-slate-500 font-bold">
         <div class="flex-1">
-          {{ from }} - {{ to }} of {{ videos.count }} videos
+          {{ $t('admin.common.pageRange', [pageRange[0], pageRange[1], videos.count]) }}
         </div>
         <div>
           <button type="button" class="p-2 disabled:text-slate-400" :disabled="page === 0" @click="onPrev">Prev</button>
@@ -200,7 +209,7 @@ const onNext = () => {
       />
     </FormModal>
 
-    <FormToast :close-timeout="30000" />
     <FormConfirm />
+    <FormToastContainer />
   </div>
 </template>

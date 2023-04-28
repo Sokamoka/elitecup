@@ -9,7 +9,7 @@ body {
 
 @layer components {
   .button {
-    @apply inline-flex items-center border-2 rounded-md px-4 py-1.5 disabled:text-slate-300 font-semibold text-base text-center transition-colors duration-150 ease-out shadow;
+    @apply inline-flex items-center border-2 rounded-md px-4 py-1.5 disabled:text-slate-300 font-semibold text-base text-center transition-colors duration-150 ease-out shadow-sm;
   }
 
   .button.is-outlined {
@@ -21,7 +21,7 @@ body {
   }
 
   .button.is-secondary {
-    @apply bg-slate-300 text-slate-500 border-slate-300 hover:bg-slate-200 hover:border-slate-300 hover:text-slate-700;
+    @apply bg-green-500 text-green-200 border-slate-300 hover:bg-green-600 hover:border-slate-300 hover:text-white;
   }
 
   .button.is-link,

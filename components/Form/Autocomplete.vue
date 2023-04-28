@@ -3,7 +3,7 @@ export interface Props {
   modelValue?: number | null;
   items?: any[];
   query?: string;
-  displayValue?: (item: unknown) => string;
+  displayValue?: (v: any) => void;
   hasError?: boolean;
 }
 

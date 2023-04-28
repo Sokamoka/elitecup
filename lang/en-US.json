@@ -33,6 +33,15 @@
     "goalies": "Goalies"
   },
   "admin": {
+    "title": {
+      "menu": "Menu",
+      "editVideos": "Edit Videos"
+    },
+    "menu": {
+      "home": "Home",
+      "editNews": "Edit News",
+      "videos": "Videos"
+    },
     "table": {
       "gameId": {
         "short": "Game ID",
@@ -50,6 +59,27 @@
         "short": "Action",
         "tooltip": "Action"
       }
+    },
+    "common": {
+      "new": "New",
+      "pageRange": "{0} - {1} of {2} videos"
+    },
+    "manageVideo": {
+      "game": "Game",
+      "url": "Video URL",
+      "addVideo": "Add video",
+      "updateVideo": "Update video",
+      "modal": {
+        "editVideo": "Edit video",
+        "addVideo": "Add new video"
+      }
+    },
+    "messages": {
+      "delete": "Delete success",
+      "update": "Update success",
+      "sure": "Are you sure?",
+      "yes": "Yes",
+      "no": "No"
     }
   }
 }

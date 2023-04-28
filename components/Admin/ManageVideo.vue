@@ -24,7 +24,7 @@ const { gameId, url } = useVModels(props, emit);
 
 const rules = {
   gameId: { required },
-  url: { required },
+  url: { required, urlValidator },
 };
 
 const v$ = useVuelidate(rules, { url, gameId });
@@ -63,7 +63,7 @@ defineExpose({ resetValidator });
   <div class="p-4">
     <form @submit.prevent="onSubmit" class="space-y-4">
       <fieldset>
-        <label class="label block">Game:</label>
+        <label class="label block">{{ $t('admin.manageVideo.game') }}</label>
         <FormAutocomplete
           v-model="gameId"
           v-model:query="query"
@@ -85,20 +85,16 @@ defineExpose({ resetValidator });
       </fieldset>
 
       <fieldset>
-        <label class="label">Video url:</label>
+        <label class="label">{{ $t('admin.manageVideo.url') }}</label>
         <FormInput v-model="url" :has-error="v$.url.$error" />
         <p v-if="v$.url.$error" class="form-error">
           {{ v$.url.$errors[0].$message }}
         </p>
       </fieldset>
 
-      <!-- <div v-if="errorMessage">
-        {{ errorMessage }}
-      </div> -->
-
       <fieldset>
         <FormButton type="submit">
-          {{ isEdit ? 'Update video' : 'Add video' }}
+          {{ isEdit ? $t('admin.manageVideo.updateVideo') : $t('admin.manageVideo.addVideo') }}
         </FormButton>
       </fieldset>
     </form>
