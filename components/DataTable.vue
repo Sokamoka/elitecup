@@ -28,7 +28,7 @@ const props = defineProps({
   },
 });
 
-const { isLoading, appendTo } = toRefs(props);
+const { isLoading } = toRefs(props);
 
 const emit = defineEmits(['sort']);
 

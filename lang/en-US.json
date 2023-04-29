@@ -83,7 +83,7 @@
     },
     "error": {
       "video": {
-        "unique_violation": "This match already has a video"
+        "unique_violation": "This game already has a video"
       }
     }
   }

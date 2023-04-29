@@ -1,7 +1,7 @@
 <script lang="ts">
 import { OnClickOutside } from '@vueuse/components';
 
-export const ConfirmPromise = createTemplatePromise<boolean, [string, string, string]>({
+export const ConfirmPromise = createTemplatePromise<boolean, [string?, string?, string?]>({
   transition: {
     name: 'modal-fade',
     appear: true,

@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { useVuelidate } from '@vuelidate/core';
 import { required, url as urlValidator } from '@vuelidate/validators';
+import { Games } from '~/types/games';
 
 export interface Props {
-  games?: [];
+  games: Games[];
   gameId?: number | null;
   url?: string;
-  isEdit: boolean;
+  isEdit?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -48,7 +49,7 @@ const onSubmit = async () => {
   const isValid = await v$.value.$validate();
   if (!isValid) return;
 
-  const selectedGame = props.games.find((game) => game.id === gameId.value);
+  const selectedGame = props.games?.find((game) => game.id === gameId.value);
   emit('submit', {
     game_name: selectedGame?.fullName ?? '',
     game_date: selectedGame?.gameDate ?? '',
@@ -75,7 +76,7 @@ defineExpose({ resetValidator });
             <p class="font-bold">{{ item.homeTeamName }} - {{ item.awayTeamName }}</p>
             <p>
               {{ item.formattedGameDate }} -
-              <span :class="[active ? 'text-slate-300' : 'text-slate-500']">{{ item.name }}</span> - 
+              <span :class="[active ? 'text-slate-300' : 'text-slate-500']">{{ item.name }}</span> -
               {{ item.id }}
             </p>
           </template>

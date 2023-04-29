@@ -3,6 +3,7 @@ import { format, parseISO } from 'date-fns';
 import { ModalPromise } from '~/components/Form/Modal.vue';
 import { ToastPromise } from '~/components/Form/Toast.vue';
 import { ConfirmPromise } from '~/components/Form/Confirm.vue';
+import { Games } from '~/types/games';
 
 type VideoItem = {
   id?: number | null;
@@ -35,6 +36,7 @@ interface UpdateState {
 
 definePageMeta({
   layout: 'admin',
+  middleware: ['auth'],
 });
 
 const columns = {
@@ -74,7 +76,7 @@ const updateState: UpdateState = reactive({
 
 const { from, to } = usePagination(page, limit);
 
-const { data: games } = await useFetch('/api/schedule', {
+const { data: games } = await useFetch<Games[]>('/api/schedule', {
   transform: (games) =>
     games.map((game) => ({
       ...game,
@@ -91,9 +93,9 @@ const { data: games } = await useFetch('/api/schedule', {
 
 const { data: videos, refresh } = await useFetch<VideoResponse>('/api/admin/videos', {
   query: { from: from, to: to },
-  transform: ({ videos, count }) => {
+  transform: ({ videos, count })  => {
     return {
-      videos: videos.map((game: VideoItem) => ({
+      videos: videos.map((game: VideoResponseItem) => ({
         ...game,
         game_date: format(parseISO(game.game_date), 'yyyy, LLLL dd. HH:mm'),
       })),
@@ -178,7 +180,7 @@ const onNext = () => {
 
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
       <div class="w-full overflow-x-auto">
-        <DataTable :rows="videos.videos" :columns="columns">
+        <DataTable :rows="videos?.videos" :columns="columns">
           <template #cell-game_name="{ row }">
             <p>{{ row.game_name }}</p>
             <p class="text-slate-400 text-sm font-normal">{{ row.game_date }}</p>
@@ -202,7 +204,7 @@ const onNext = () => {
 
       <div class="flex items-center py-2 px-4 bg-slate-300 text-slate-500 font-bold">
         <div class="flex-1">
-          {{ $t('admin.common.pageRange', [pageRange[0], pageRange[1], videos.count]) }}
+          {{ $t('admin.common.pageRange', [pageRange[0], pageRange[1], videos?.count]) }}
         </div>
         <div>
           <button type="button" class="p-2 disabled:text-slate-400" :disabled="page === 0" @click="onPrev">Prev</button>
