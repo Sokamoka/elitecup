@@ -22,7 +22,7 @@ const signOut = async () => {
           v-for="locale in locales"
           :key="locale.code"
           :to="switchLocalePath(locale.code)"
-          :class="['ml-1', { 'font-bold text-slate-900': locale.code === currentLocale }]"
+          :class="['ml-1 uppercase text-xs', { 'font-bold text-slate-900': locale.code === currentLocale }]"
         >
           {{ locale.code }}
         </NuxtLink>

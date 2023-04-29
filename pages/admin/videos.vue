@@ -122,7 +122,7 @@ const onAddVideo = async (payload: Partial<VideoItem>, resolve: (v: boolean) => 
   const { error } = await client.from('videos').upsert(upsertData).select().single();
 
   if (error) {
-    ToastPromise.start(error?.message, 'error');
+    ToastPromise.start(useDBError(error, 'video', t), 'error');
     return;
   }
   refresh();

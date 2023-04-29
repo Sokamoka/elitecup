@@ -75,7 +75,8 @@ defineExpose({ resetValidator });
             <p class="font-bold">{{ item.homeTeamName }} - {{ item.awayTeamName }}</p>
             <p>
               {{ item.formattedGameDate }} -
-              <span :class="[active ? 'text-slate-300' : 'text-slate-500']">{{ item.name }}</span>
+              <span :class="[active ? 'text-slate-300' : 'text-slate-500']">{{ item.name }}</span> - 
+              {{ item.id }}
             </p>
           </template>
         </FormAutocomplete>

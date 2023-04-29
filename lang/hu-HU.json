@@ -80,6 +80,11 @@
       "sure": "Biztos hogy törlöd?",
       "yes": "Igen",
       "no": "Nem"
+    },
+    "error": {
+      "video": {
+        "unique_violation": "Ehhez a mérkőzéshez már tartozik videó"
+      }
     }
   }
 }

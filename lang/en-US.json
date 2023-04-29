@@ -80,6 +80,11 @@
       "sure": "Are you sure?",
       "yes": "Yes",
       "no": "No"
+    },
+    "error": {
+      "video": {
+        "unique_violation": "This match already has a video"
+      }
     }
   }
 }

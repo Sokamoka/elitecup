@@ -20,7 +20,7 @@ export default {
 
 <template>
   <ModalPromise v-slot="{ resolve, args }">
-    <div class="relative z-50">
+    <div class="relative z-40">
       <div class="fixed inset-0 bg-black/30" aria-hidden="true" />
 
       <div class="fixed inset-0 overflow-y-auto">

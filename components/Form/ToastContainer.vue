@@ -9,7 +9,7 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <template>
-  <div class="fixed left-5 bottom-5 flex flex-col gap-4">
+  <div class="fixed left-5 bottom-5 flex flex-col gap-4 z-50">
     <FormToast :close-timeout="props.closeTimeout" />
   </div>
 </template>

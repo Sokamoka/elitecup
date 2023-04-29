@@ -1,5 +1,5 @@
 <script lang="ts">
-export const ToastPromise = createTemplatePromise<boolean, [string]>({
+export const ToastPromise = createTemplatePromise<boolean, [string, string?]>({
   transition: {
     name: 'fade',
     appear: true,
