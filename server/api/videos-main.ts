@@ -1,17 +1,8 @@
 import { serverSupabaseClient } from '#supabase/server';
 import { VBR_CHAMPIONSHIP_IDS } from '~/constants';
+import { ScheduleItem, VideosResponse, VideosSchema } from '~/types/Videos';
 import { scheduleService } from '~/utils/services';
 import { getYouTubeVideoId } from '~/utils/youtube';
-
-export interface VideosResponse {
-  id: number;
-  title: string;
-  externalLink: string;
-  date: string;
-  image: string;
-  gameDate: string;
-  gameStatus: number;
-}
 
 export default defineEventHandler(async (event) => {
   const client = serverSupabaseClient(event);
@@ -30,11 +21,11 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const schedule = await scheduleService(VBR_CHAMPIONSHIP_IDS);
+  const schedule: ScheduleItem[] = await scheduleService(VBR_CHAMPIONSHIP_IDS);
 
   // Merge data
-  const videos: VideosResponse[] = (data || []).reduce<VideosResponse[]>((acc, item) => {
-    const scheduleItem = (schedule || []).find((game) => game.id === item.game_id);
+  const videos = (data || []).reduce<VideosResponse[]>((acc: VideosResponse[], item: VideosSchema) => {
+    const scheduleItem = (schedule || []).find((game: ScheduleItem) => game.id === item.game_id);
 
     acc.push({
       id: item.id,
@@ -42,7 +33,7 @@ export default defineEventHandler(async (event) => {
       externalLink: item.url,
       date: item.created_at,
       image: getVideoImage(item.url),
-      gameDate: scheduleItem?.gameDate ?? new Date(1970, 0, 1),
+      gameDate: scheduleItem?.gameDate ?? new Date(1970, 0, 1).toString(),
       gameStatus: scheduleItem?.gameStatus ?? 0,
     });
     return acc;

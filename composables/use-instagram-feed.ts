@@ -1,6 +1,13 @@
 import { slice } from 'ramda';
 
-export function useInstagramFeed() {
+type Feed = {
+  permalink: string;
+  media_type: string;
+  thumbnail_url: string;
+  media_url: string;
+};
+
+export function useInstagramFeed(): ComputedRef<Feed[]> {
   const feed = useInstagramFeedState();
 
   const { execute } = useAsyncState(

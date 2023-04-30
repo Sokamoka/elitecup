@@ -1,7 +1,7 @@
 import { ofetch } from 'ofetch';
 
 export default defineEventHandler(async (event) => {
-  const { code } = getQuery(event);
+  const { code }: any = getQuery(event);
 
   try {
     const { access_token } = await getToken(code);

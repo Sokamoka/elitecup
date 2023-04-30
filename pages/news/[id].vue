@@ -8,18 +8,7 @@ const { locale, locales } = useI18n();
 
 const { path } = useRoute();
 
-// interface ApiResponse {
-//   data: {
-//     image: string;
-//     title: string;
-//     lead: string;
-//     content: string;
-//     createdAt: string;
-//     id: string | number;
-//   };
-// }
-
-const currentIso = computed(() => locales.value?.find((loc) => loc.code === locale.value));
+const currentIso = computed(() => locales.value.find((loc) => loc.code === locale.value));
 
 const toDate = (date: string) => toDefaultDate(new Date(date), currentIso.value?.iso);
 
