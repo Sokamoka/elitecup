@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { tabsContext } from './internal';
+import { tabsContext, ApiElement } from './internal';
 
-const tabPanels = ref([]);
-const isFakeTabVisible = ref(true);
+const tabPanels = ref<ApiElement[]>([]);
+const isFakeTabVisible = ref<boolean>(true);
 
 const api = {
-  add: (element) => {
+  add: (element: ApiElement) => {
     tabPanels.value.push(element);
   },
 };
