@@ -9,7 +9,7 @@ body {
 
 @layer components {
   .button {
-    @apply inline-flex items-center border-2 rounded-md px-4 py-2 disabled:text-slate-300 font-semibold text-base text-center transition-colors duration-150 ease-out shadow-sm;
+    @apply inline-flex items-center border-2 rounded-md px-4 py-2 disabled:text-slate-300 font-semibold text-center transition-colors duration-150 ease-out shadow-sm;
   }
 
   .button.is-outlined {
@@ -27,6 +27,14 @@ body {
   .button.is-link,
   a.is-link {
     @apply text-red-500 hover:text-red-700 font-semibold border-transparent shadow-none;
+  }
+
+  .button.is-xs {
+    @apply text-xs px-2 py-1;
+  }
+
+  .button.is-sm {
+    @apply text-sm px-3 py-1.5;
   }
 }
 

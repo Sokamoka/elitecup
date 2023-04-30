@@ -33,4 +33,7 @@ const localePath = useLocalePath();
 .menu-item {
   @apply flex items-center text-slate-500 hover:text-slate-700 font-medium leading-6;
 }
+.menu-item.router-link-exact-active {
+  @apply font-bold text-slate-900;
+}
 </style>

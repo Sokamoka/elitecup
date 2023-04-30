@@ -2,7 +2,13 @@
 const props = defineProps({
   variant: {
     type: String,
-    default: "primary",
+    default: 'primary',
+  },
+
+  size: {
+    type: String,
+    default: '',
+    validator: (value: string) => ['xs', 'sm'].includes(value),
   },
 
   isFullWidth: {
@@ -12,10 +18,10 @@ const props = defineProps({
 });
 
 const mainClasses = computed(() => [
-  "button",
-  [`is-${props.variant}`],
+  'button',
+  [`is-${props.variant}`, props.size ? `is-${props.size}` : ''],
   {
-    "w-full": props.isFullWidth,
+    'w-full': props.isFullWidth,
   },
 ]);
 </script>

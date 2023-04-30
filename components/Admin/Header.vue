@@ -22,7 +22,10 @@ const signOut = async () => {
           v-for="locale in locales"
           :key="locale.code"
           :to="switchLocalePath(locale.code)"
-          :class="['ml-1 uppercase text-xs', { 'font-bold text-slate-900': locale.code === currentLocale }]"
+          :class="[
+            'ml-1 uppercase text-xs',
+            locale.code === currentLocale ? 'font-bold text-slate-900' : 'text-slate-500',
+          ]"
         >
           {{ locale.code }}
         </NuxtLink>
@@ -32,6 +35,6 @@ const signOut = async () => {
         <FormButton variant="link" class="text-sm" @click="navigate"> Back to Main page </FormButton>
       </NuxtLink>
     </div>
-    <FormButton v-if="user" variant="outlined" class="text-sm"  @click="signOut">Sign Out</FormButton>
+    <FormButton v-if="user" variant="outlined" size="sm" @click="signOut">Sign Out</FormButton>
   </div>
 </template>

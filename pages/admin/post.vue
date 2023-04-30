@@ -18,7 +18,7 @@ const onCreateNew = () => {
       <h1 class="text-xl text-slate-700 font-bold uppercase">
         {{ $t('admin.title.news') }}
       </h1>
-      <FormButton variant="secondary" @click="onCreateNew">
+      <FormButton variant="secondary" size="sm" @click="onCreateNew">
         {{ $t('admin.common.new') }}
       </FormButton>
     </div>
