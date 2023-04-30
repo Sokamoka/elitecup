@@ -1,7 +1,9 @@
+import { VBRSchedule } from "~/types/Videos";
+
 export function useScheduleRaw(options: { limit: number }) {
   const { limit = 12 } = options || {};
 
-  const schedule = useSchedule();
+  const schedule: Ref<VBRSchedule[]> = useSchedule();
   const end = ref(limit);
 
   const { execute } = useAsyncState(() => $fetch('/api/schedule'), [], {

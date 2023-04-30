@@ -2,13 +2,13 @@
 const skip = ref(0);
 const limit = ref(10);
 
-// interface ApiResponse {
-//   mainImage: string;
-//   title: string;
-//   lead: string;
-//   publishedAt: string;
-//   _path: string;
-// }
+interface ApiResponse {
+  mainImage: string;
+  title: string;
+  lead: string;
+  publishedAt: string;
+  _path: string;
+}
 
 definePageMeta({
   layout: false,
@@ -79,7 +79,7 @@ const nextPage = () => {
             {{ item.title }}
           </p>
           <div class="flex-1 text-base text-slate-500">{{ item.lead }}</div>
-          <NuxtLink :to="localePath(item?._path)">
+          <NuxtLink :to="localePath(item._path)">
             <FormButton variant="link" class="-ml-4 w-min text-sm whitespace-nowrap">Read more</FormButton>
           </NuxtLink>
         </div>

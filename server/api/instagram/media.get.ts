@@ -12,7 +12,7 @@ export default defineEventHandler(async () => {
       },
     });
     return feed;
-  } catch (error) {
+  } catch (error: any) {
     throw createError({
       statusCode: 500,
       statusMessage: error.message,

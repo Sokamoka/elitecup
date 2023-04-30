@@ -17,6 +17,10 @@ export interface VideosResponse {
   gameStatus: number;
 }
 
+export interface VBRSchedule {
+  homeTeamName: string;
+}
+
 export interface ScheduleItem {
   id: number;
   game_name: string;

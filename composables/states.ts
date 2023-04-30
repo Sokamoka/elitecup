@@ -1,4 +1,4 @@
-export const useSchedule = () => useState<Ref[]>('schedule', () => []);
+export const useSchedule = () => useState<[]>('schedule', () => []);
 export const usePlayerStatsU18 = () => useState<[]>('playerStatsU18', () => []);
 export const usePlayerStatsU16 = () => useState<[]>('playerStatsU16', () => []);
 export const useGoalieStatsU18 = () => useState<[]>('goalieStatsU18', () => []);

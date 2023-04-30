@@ -1,7 +1,8 @@
 import { groupBy, head, map, prop, sortBy, keys, curry } from 'ramda';
+import { VBRSchedule } from '~/types/Videos';
 
 export function useTeams() {
-  const schedule = useSchedule();
+  const schedule: Ref<VBRSchedule[]> = useSchedule();
 
   const teams = computed(() => {
     const grouped = groupBy(prop('homeTeamName'))(unref(schedule));
