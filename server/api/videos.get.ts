@@ -45,5 +45,5 @@ function getVideoImage(link: string) {
   if (videoId) {
     return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
   }
-  return '/img/elite_cup_logo.svg';
+  return '/img/elitecup_default_video.svg';
 }

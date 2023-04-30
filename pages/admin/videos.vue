@@ -3,7 +3,7 @@ import { format, parseISO } from 'date-fns';
 import { ModalPromise } from '~/components/Form/Modal.vue';
 import { ToastPromise } from '~/components/Form/Toast.vue';
 import { ConfirmPromise } from '~/components/Form/Confirm.vue';
-import { Games } from '~/types/games';
+import { Games } from '~/types/Games';
 
 type VideoItem = {
   id?: number | null;

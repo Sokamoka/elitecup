@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useVuelidate } from '@vuelidate/core';
 import { required, url as urlValidator } from '@vuelidate/validators';
-import { Games } from '~/types/games';
+import { Games } from '~/types/Games';
 
 export interface Props {
   games: Games[];

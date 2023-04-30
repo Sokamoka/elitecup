@@ -35,10 +35,12 @@
   "admin": {
     "title": {
       "menu": "Menü",
+      "dashboard": "Irányítópult",
+      "news": "Hírek szerkesztése",
       "editVideos": "Videók szerkesztése"
     },
     "menu": {
-      "home": "Home",
+      "home": "Irányítópult",
       "editNews": "Hírek szerkesztése",
       "videos": "Videók szerkesztése"
     },

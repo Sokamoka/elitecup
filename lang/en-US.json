@@ -35,10 +35,12 @@
   "admin": {
     "title": {
       "menu": "Menu",
+      "dashboard": "Dashboard",
+      "news": "Manage News",
       "editVideos": "Edit Videos"
     },
     "menu": {
-      "home": "Home",
+      "home": "Dashboard",
       "editNews": "Edit News",
       "videos": "Videos"
     },

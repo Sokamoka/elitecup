@@ -51,10 +51,11 @@ const fetchMore = () => {
               >
                 Live
               </div>
-              <img v-if="video.image" class="aspect-video object-cover" :src="video.image" alt="Bonnie image" />
+              <img v-if="video.image" class="aspect-video object-cover bg-slate-100" :src="video.image" alt="Bonnie image" />
               <div v-else class="aspect-video bg-slate-100" />
-              <figcaption class="p-4 flex-1 text-slate-900 font-bold leading-tight">
-                {{ video.title }}
+              <figcaption class="p-4 flex-1">
+                <p class="text-slate-900 font-bold leading-tight">{{ video.title }}</p>
+                <time class="text-slate-500">{{ format(video.gameDate) }}</time>
               </figcaption>
               <time class="pb-4 px-4 text-slate-500 text-sm mt-4">
                 {{ format(video.date) }}
