@@ -32,6 +32,6 @@ const signOut = async () => {
         <FormButton variant="link" class="text-sm" @click="navigate"> Back to Main page </FormButton>
       </NuxtLink>
     </div>
-    <FormButton v-if="user" variant="outlined" class="text-xs"  @click="signOut">Sign Out</FormButton>
+    <FormButton v-if="user" variant="outlined" class="text-sm"  @click="signOut">Sign Out</FormButton>
   </div>
 </template>

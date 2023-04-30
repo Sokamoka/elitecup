@@ -1,7 +1,8 @@
 <script setup>
 definePageMeta({
-  layout: 'admin',
-  middleware: ['auth'],
+  // layout: 'admin',
+  // middleware: ['auth'],
+  key: 'admin/dashboard'
 });
 </script>
 

@@ -43,7 +43,7 @@ export default {
         <div class="hidden">{{ onResolve(resolve) }}</div>
 
         <Icon
-          :name="args[1] === 'success' ? 'ic:twotone-check-circle' : 'ic:twotone-error'"
+          :name="args[1] === 'success' || args[1] === undefined ? 'ic:twotone-check-circle' : 'ic:twotone-error'"
           class="text-2xl shrink-0"
         />
 

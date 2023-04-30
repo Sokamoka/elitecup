@@ -1,8 +1,15 @@
 <script setup>
+import { ConfirmPromise } from '~/components/Form/Confirm.vue';
+
 definePageMeta({
-  layout: 'admin',
-  middleware: ['auth'],
+  // layout: 'admin',
+  // middleware: ['auth'],
+  key: 'admin/manage-news'
 });
+
+const onCreateNew = () => {
+  ConfirmPromise.start();
+};
 </script>
 
 <template>

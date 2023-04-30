@@ -21,12 +21,12 @@ type VideoResponseItem = {
   game_name: string;
   game_date: string;
   url: string;
-}
+};
 
 type VideoResponse = {
   videos: VideoResponseItem[];
   count: number;
-}
+};
 
 interface UpdateState {
   id: number | null | undefined;
@@ -35,8 +35,9 @@ interface UpdateState {
 }
 
 definePageMeta({
-  layout: 'admin',
-  middleware: ['auth'],
+  // layout: 'admin',
+  // middleware: ['auth'],
+  key: 'admin/videos',
 });
 
 const columns = {
@@ -93,7 +94,7 @@ const { data: games } = await useFetch<Games[]>('/api/schedule', {
 
 const { data: videos, refresh } = await useFetch<VideoResponse>('/api/admin/videos', {
   query: { from: from, to: to },
-  transform: ({ videos, count })  => {
+  transform: ({ videos, count }) => {
     return {
       videos: videos.map((game: VideoResponseItem) => ({
         ...game,
@@ -224,8 +225,5 @@ const onNext = () => {
         @submit="onAddVideo($event, resolve)"
       />
     </FormModal>
-
-    <FormConfirm />
-    <FormToastContainer />
   </div>
 </template>
