@@ -2,7 +2,7 @@ import { serverSupabaseClient } from '#supabase/server';
 
 export default eventHandler(async (event) => {
   const client = serverSupabaseClient(event);
-  const { from, to } = getQuery(event);
+  const { from, to }: any = getQuery(event);
 
   const { data, count, error } = await client
     .from('videos')

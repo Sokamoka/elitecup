@@ -1,5 +1,5 @@
 <script lang="ts">
-const FetchMoreObserver = {
+export default defineComponent({
   name: 'FetchMoreObserver',
 
   props: {
@@ -9,7 +9,9 @@ const FetchMoreObserver = {
     },
   },
 
-  setup(props: any, { emit }) {
+  emits: ['intersect'],
+
+  setup(props, { emit }) {
     const target = ref(null);
 
     const { stop } = useIntersectionObserver(
@@ -26,8 +28,7 @@ const FetchMoreObserver = {
       target,
     };
   },
-};
-export default FetchMoreObserver;
+});
 </script>
 
 <template>

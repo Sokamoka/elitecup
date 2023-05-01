@@ -3,7 +3,7 @@ export interface Props {
   modelValue?: number | null;
   items?: any[];
   query?: string;
-  displayValue?: (v: any) => void;
+  displayValue?: (item: any) => string;
   hasError?: boolean;
 }
 
@@ -36,7 +36,7 @@ const onChange = (event: InputEvent) => {
       >
         <HeadlessComboboxInput
           class="w-full bg-transparent text-slate-500 focus:text-slate-700 py-2 pl-2 pr-10 focus:ring-0 outline-none"
-          :displayValue="displayValue"
+          :display-value="displayValue"
           spellcheck="false"
           @change="onChange"
         />
