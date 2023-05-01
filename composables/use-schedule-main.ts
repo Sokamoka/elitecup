@@ -1,8 +1,9 @@
 import { addDays, isAfter, isBefore, subDays } from 'date-fns';
 import { compose, map, slice } from 'ramda';
+import { ScheduleItem } from '~/types/Videos';
 
 export function useScheduleMain() {
-  const schedule = useSchedule();
+  const schedule: Ref<ScheduleItem[]> = useSchedule();
 
   const { execute } = useAsyncState(() => $fetch('/api/schedule'), [], {
     immediate: false,
@@ -32,7 +33,7 @@ const transformGames = (game: { name: string }) => ({
   name: game.name.includes('U16') ? 'U-16' : 'U-18',
 });
 
-const getDateRange = (data: []) => {
+const getDateRange = (data: ScheduleItem[]) => {
   const now = new Date();
 
   const current = data.find((game) => isAfter(new Date(game.gameDate), now));

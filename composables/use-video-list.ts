@@ -7,7 +7,7 @@ export interface UseVideoListOptions {
 
 export async function useVideoList(options: UseVideoListOptions) {
   const { from, to } = options;
-  const state = shallowRef([]);
+  const state = shallowRef<VideosResponse[]>([]);
   const totalCount = ref<number>(0);
 
   const { data, error, pending } = await useFetch<{ videos: VideosResponse[]; count: number }>('/api/videos', {
@@ -17,8 +17,8 @@ export async function useVideoList(options: UseVideoListOptions) {
   watch(
     data,
     (res) => {
-      const { videos, count } = res || {};
-      state.value = state.value.concat(videos);
+      let { videos = [], count = 0 } = res || {};
+      state.value = (state.value as VideosResponse[]).concat(videos);
       totalCount.value = count || 0;
     },
     {

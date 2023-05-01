@@ -1,30 +1,15 @@
 <script setup lang="ts">
-const props = defineProps({
-  title: {
-    type: String,
-    default: '',
-  },
+import { PlayerStats } from '~/types/PlayerStats';
 
-  data: {
-    type: Array,
-    default: () => [],
-  },
+interface Props {
+  title: string;
+  data: PlayerStats[];
+  dataKey: 'point' | 'g' | 'a' | 'plusMinus' | 'svsPercent' | 'pim';
+  externalLink: string;
+  externalParams: string;
+}
 
-  dataKey: {
-    type: String,
-    required: true,
-  },
-
-  externalLink: {
-    type: String,
-    default: '',
-  },
-
-  externalParams: {
-    type: String,
-    default: '',
-  },
-});
+const props = defineProps<Props>();
 
 const router = useRouter();
 
