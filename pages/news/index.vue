@@ -1,14 +1,16 @@
 <script lang="ts" setup>
+import { News } from '~/types/News';
+
 const skip = ref(0);
 const limit = ref(10);
 
-interface ApiResponse {
-  mainImage: string;
-  title: string;
-  lead: string;
-  publishedAt: string;
-  _path: string;
-}
+// interface ApiResponse {
+//   mainImage: string;
+//   title: string;
+//   lead: string;
+//   publishedAt: string;
+//   _path: string;
+// }
 
 definePageMeta({
   layout: false,
@@ -26,15 +28,15 @@ const toDate = (date: string) => toDefaultDate(new Date(date));
 // const { data: news } = await useFetch<{ data: ApiResponse[] }>(`/api/news?lang=${locale.value}`);
 
 const { data: allPost } = await useAsyncData('totalnews', () => {
-  return queryContent(localePath('/news')).find();
+  return queryContent<News>(localePath('/news')).find();
 });
 
 const totalPost = computed(() => allPost.value?.length ?? 0);
 const totalPage = computed(() => Math.ceil(totalPost.value / limit.value));
 
-const { data, refresh } = await useAsyncData('news', () => {
-  return queryContent(localePath('/news')).sort({ publishedAt: -1 }).skip(skip.value).limit(limit.value).find();
-});
+const { data, refresh } = await useAsyncData('news', () =>
+  queryContent<News>(localePath('/news')).sort({ publishedAt: -1 }).skip(skip.value).limit(limit.value).find()
+);
 
 const prevPage = () => {
   skip.value -= limit.value;
@@ -69,7 +71,7 @@ const nextPage = () => {
         </div>
       </div> -->
 
-      <div v-for="item in data" :key="item.path" class="flex flex-col sm:flex-row space-x-4 w-full">
+      <div v-for="item in data" :key="item._path" class="flex flex-col sm:flex-row space-x-4 w-full">
         <div class="flex-shrink-0">
           <img class="h-auto sm:h-36 aspect-[16/10] rounded-lg" :src="item.mainImage" alt="Bonnie image" />
         </div>

@@ -1,32 +1,50 @@
-<script setup>
+<script setup lang="ts">
 import { SORT_STATE_ASCEND, SORT_STATE_DESCEND, SORT_STATE_ORIGINAL } from '~/constants';
 
-const props = defineProps({
+interface ColumnProps {
+  label: string;
+  tooltip: string;
+  class: string;
+  sortOrders: { target: string; direction: string }[];
+}
+
+interface Props {
   columns: {
-    type: Object,
-    default: () => ({}),
-  },
+    any: ColumnProps;
+  };
+  rows: any[];
+  sort: { sortTarget: string; orders: [any] };
+  isLoading: boolean;
+}
 
-  rows: {
-    type: Array,
-    default: () => [],
-  },
+const props = defineProps<Props>();
 
-  sort: {
-    type: Object,
-    default: () => ({}),
-  },
+// const props = defineProps({
+//   columns: {
+//     type: Object,
+//     default: () => ({}),
+//   },
 
-  isLoading: {
-    type: Boolean,
-    default: false,
-  },
+//   rows: {
+//     type: Array,
+//     default: () => [],
+//   },
 
-  appendTo: {
-    type: [Object, String],
-    default: null,
-  },
-});
+//   sort: {
+//     type: Object,
+//     default: () => ({}),
+//   },
+
+//   isLoading: {
+//     type: Boolean,
+//     default: false,
+//   },
+
+//   appendTo: {
+//     type: [Object, String],
+//     default: null,
+//   },
+// });
 
 const { isLoading } = toRefs(props);
 
@@ -35,7 +53,7 @@ const emit = defineEmits(['sort']);
 const columns = computed(() => props.columns);
 const columnCount = computed(() => Object.keys(props.columns).length);
 
-const sortBy = (column, prop) => {
+const sortBy = (column: ColumnProps, prop: string) => {
   if (!column.sortOrders) return;
   emit('sort', { target: prop, orders: column.sortOrders });
 };
@@ -56,10 +74,6 @@ const sortBy = (column, prop) => {
                 'is-asc': prop === sort.sortTarget && sort.orders[0].direction === SORT_STATE_ASCEND,
               },
             ]"
-            @mouseenter="show"
-            @mouseleave="hide"
-            @focus="show"
-            @blur="hide"
             @click="sortBy(column, prop)"
             @keydown.space.prevent="sortBy(column, prop)"
             @keydown.enter.prevent="sortBy(column, prop)"

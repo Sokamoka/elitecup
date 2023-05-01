@@ -181,7 +181,7 @@ const onNext = () => {
 
     <div class="bg-white shadow-md rounded-lg overflow-hidden">
       <div class="w-full overflow-x-auto">
-        <DataTable :rows="videos?.videos" :columns="columns">
+        <DataTable :rows="videos?.videos || []" :columns="columns">
           <template #cell-game_name="{ row }">
             <p>{{ row.game_name }}</p>
             <p class="text-slate-400 text-sm font-normal">{{ row.game_date }}</p>
