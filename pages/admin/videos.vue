@@ -4,6 +4,7 @@ import { ModalPromise } from '~/components/Form/Modal.vue';
 import { ToastPromise } from '~/components/Form/Toast.vue';
 import { ConfirmPromise } from '~/components/Form/Confirm.vue';
 import { Games } from '~/types/Games';
+import { DataTableColumns } from '~/types/DataTable';
 
 type VideoItem = {
   id?: number | null;
@@ -40,7 +41,7 @@ definePageMeta({
   key: 'admin/videos',
 });
 
-const columns = {
+const columns: DataTableColumns = {
   game_name: {
     label: 'admin.table.gameName.short',
     tooltip: 'admin.table.gameName.tooltip',

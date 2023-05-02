@@ -4,14 +4,14 @@ import { required, url as urlValidator } from '@vuelidate/validators';
 import { Games } from '~/types/Games';
 
 export interface Props {
-  games: Games[];
+  games: Games[] | null;
   gameId?: number | null;
   url?: string;
   isEdit?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  games: () => [],
+  // games: () => [],
   gameId: null,
   url: '',
   isEdit: false,
@@ -32,12 +32,12 @@ const v$ = useVuelidate(rules, { url, gameId });
 
 const filteredGames = computed(() => {
   return query.value === ''
-    ? props.games
-    : props.games.filter(
+    ? props.games || []
+    : props.games?.filter(
         (game) =>
           game.homeTeamName.toLowerCase().replace(/\s+/g, '').includes(query.value.toLowerCase().replace(/\s+/g, '')) ||
           game.awayTeamName.toLowerCase().replace(/\s+/g, '').includes(query.value.toLowerCase().replace(/\s+/g, ''))
-      );
+      ) ?? [];
 });
 
 const displayValue = (id: number) => {

@@ -1,20 +1,12 @@
 <script setup lang="ts">
 import { SORT_STATE_ASCEND, SORT_STATE_DESCEND, SORT_STATE_ORIGINAL } from '~/constants';
-
-interface ColumnProps {
-  label: string;
-  tooltip: string;
-  class: string;
-  sortOrders: { target: string; direction: string }[];
-}
+import { DataTableColumn } from '~/types/DataTable';
 
 interface Props {
-  columns: {
-    any: ColumnProps;
-  };
+  columns: Record<string, DataTableColumn>;
   rows: any[];
-  sort: { sortTarget: string; orders: [any] };
-  isLoading: boolean;
+  sort?: { sortTarget: string; orders: [any] };
+  isLoading?: boolean;
 }
 
 const props = defineProps<Props>();
@@ -53,7 +45,7 @@ const emit = defineEmits(['sort']);
 const columns = computed(() => props.columns);
 const columnCount = computed(() => Object.keys(props.columns).length);
 
-const sortBy = (column: ColumnProps, prop: string) => {
+const sortBy = (column: DataTableColumn, prop: string) => {
   if (!column.sortOrders) return;
   emit('sort', { target: prop, orders: column.sortOrders });
 };
@@ -68,10 +60,10 @@ const sortBy = (column: ColumnProps, prop: string) => {
             :class="[
               [column.class],
               {
-                'is-active': prop === sort.sortTarget && sort.orders[0].direction !== SORT_STATE_ORIGINAL,
+                'is-active': prop === sort?.sortTarget && sort.orders[0].direction !== SORT_STATE_ORIGINAL,
                 'is-sortable': column.sortOrders,
-                'is-desc': prop === sort.sortTarget && sort.orders[0].direction === SORT_STATE_DESCEND,
-                'is-asc': prop === sort.sortTarget && sort.orders[0].direction === SORT_STATE_ASCEND,
+                'is-desc': prop === sort?.sortTarget && sort.orders[0].direction === SORT_STATE_DESCEND,
+                'is-asc': prop === sort?.sortTarget && sort.orders[0].direction === SORT_STATE_ASCEND,
               },
             ]"
             @click="sortBy(column, prop)"
@@ -83,19 +75,19 @@ const sortBy = (column: ColumnProps, prop: string) => {
             <slot :name="`header-${prop}`" :column="column">
               {{ $t(column.label) }}
             </slot>
-            <Icon name="tabler:arrows-sort" v-if="column.sortOrders && prop !== sort.sortTarget" class="is-icon-sort" />
+            <Icon name="tabler:arrows-sort" v-if="column.sortOrders && prop !== sort?.sortTarget" class="is-icon-sort" />
             <Icon
-              v-if="prop === sort.sortTarget && sort.orders[0].direction === SORT_STATE_ORIGINAL"
+              v-if="prop === sort?.sortTarget && sort.orders[0].direction === SORT_STATE_ORIGINAL"
               name="tabler:arrows-sort"
               class="is-icon-sort"
             />
             <Icon
-              v-if="prop === sort.sortTarget && sort.orders[0].direction === SORT_STATE_DESCEND"
+              v-if="prop === sort?.sortTarget && sort?.orders[0].direction === SORT_STATE_DESCEND"
               name="tabler:sort-ascending"
               class="is-icon-sort"
             />
             <Icon
-              v-if="prop === sort.sortTarget && sort.orders[0].direction === SORT_STATE_ASCEND"
+              v-if="prop === sort?.sortTarget && sort.orders[0].direction === SORT_STATE_ASCEND"
               name="tabler:sort-descending"
               class="is-icon-sort"
             />
@@ -111,7 +103,7 @@ const sortBy = (column: ColumnProps, prop: string) => {
           :class="[
             [_.class],
             {
-              'is-active': prop === sort.sortTarget && sort.orders[0].direction !== SORT_STATE_ORIGINAL,
+              'is-active': prop === sort?.sortTarget && sort.orders[0].direction !== SORT_STATE_ORIGINAL,
             },
           ]"
         >
