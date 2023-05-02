@@ -5,10 +5,11 @@ import { ToastPromise } from '~/components/Form/Toast.vue';
 import { ConfirmPromise } from '~/components/Form/Confirm.vue';
 import { Games } from '~/types/Games';
 import { DataTableColumns } from '~/types/DataTable';
+import { Database } from '~/types/Database';
 
 type VideoItem = {
-  id?: number | null;
-  created_at?: string;
+  id?: number | null | undefined;
+  created_at?: string | null | undefined;
   game_id: number | null;
   game_name: string;
   game_date: string;
@@ -65,7 +66,7 @@ const columns: DataTableColumns = {
 };
 
 const { t } = useI18n();
-const client = useSupabaseClient();
+const client = useSupabaseClient<Database>();
 
 const limit = 12;
 const page = ref(0);
@@ -116,8 +117,8 @@ const pageRange = computed(() => {
   return [page.value * limit + 1, Math.min((page.value + 1) * limit, count)];
 });
 
-const onAddVideo = async (payload: Partial<VideoItem>, resolve: (v: boolean) => void) => {
-  const upsertData: Partial<VideoItem> = {
+const onAddVideo = async (payload: Pick<VideoItem, 'game_name' | 'game_date'>, resolve: (v: boolean) => void) => {
+  const upsertData: VideoItem = {
     ...(updateState.id && { id: updateState.id }),
     game_id: updateState.gameId || null,
     url: updateState.url,

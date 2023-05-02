@@ -23,7 +23,7 @@
     "date-fns": "^2.29.3",
     "nuxt": "^3.3.3",
     "nuxt-headlessui": "^1.1.1",
-    "nuxt-icon": "^0.3.3",
+    "nuxt-icon": "^0.4.0",
     "ramda": "^0.29.0"
   }
 }
