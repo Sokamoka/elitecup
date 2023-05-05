@@ -21,7 +21,7 @@ body {
   }
 
   .button.is-secondary {
-    @apply bg-green-500 text-green-200 border-slate-300 hover:bg-green-600 hover:border-slate-300 hover:text-white;
+    @apply bg-green-500 text-green-200 border-green-500 hover:bg-green-600 hover:border-green-600 hover:text-white;
   }
 
   .button.is-link,
