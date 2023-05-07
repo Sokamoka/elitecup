@@ -1,3 +1,22 @@
+<script setup lang="ts">
+// const { $quill } = useNuxtApp();
+import { Quill } from '@vueup/vue-quill';
+
+const state = reactive({
+  title: '',
+  lead: null,
+  content: null,
+});
+
+const quill = new Quill();
+
+// console.dir($quill);
+// onMounted(() => console.log($quill));
+const html = computed(() => {
+  if (!state.content) return '';
+  return quill.clipboard;
+});
+</script>
 <template>
   <div class="py-8">
     <div class="flex gap-2 items-center mb-4">
@@ -23,22 +42,29 @@
         </fieldset>
 
         <fieldset>
-          <label class="text-xs font-semibold uppercase" for="lead">Lead:</label>
-          <FormInput id="lead" :has-error="false" />
+          <label class="text-xs font-semibold uppercase" for="lead">Lead</label>
+          <!-- <FormInput id="lead" :has-error="false" /> -->
+          <QuillEditor theme="snow" v-model:content="state.lead" />
         </fieldset>
 
-        <fieldset>Content
-          <div contenteditable="true" class="p-4 border border-slate-300"></div>
+        <fieldset>
+          <label class="text-xs font-semibold uppercase">Content</label>
+          <QuillEditor theme="snow" v-model:content="state.content" />
+
+          <div ref="html" />
+          <pre>
+            {{ html }}
+          </pre>
         </fieldset>
       </div>
       <div class="w-full md:w-2/5">
         <fieldset>
-          <label class="text-xs font-semibold uppercase" for="slug">Slug:</label>
+          <label class="text-xs font-semibold uppercase" for="slug">Slug</label>
           <FormInput id="slug" :has-error="false" />
         </fieldset>
 
         <fieldset>
-          <label class="text-xs font-semibold uppercase" for="locale">Locale:</label>
+          <label class="text-xs font-semibold uppercase" for="locale">Locale</label>
           <FormInput id="locale" :has-error="false" />
         </fieldset>
       </div>

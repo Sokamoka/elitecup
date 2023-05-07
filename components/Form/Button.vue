@@ -8,7 +8,7 @@ const props = defineProps({
   size: {
     type: String,
     default: '',
-    validator: (value: string) => ['xs', 'sm'].includes(value),
+    validator: (value: string) => ['xs', 'sm', ''].includes(value),
   },
 
   isFullWidth: {

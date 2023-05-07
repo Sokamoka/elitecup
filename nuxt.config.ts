@@ -33,7 +33,7 @@ export default defineNuxtConfig({
     },
   },
 
-  plugins: [{ src: '~/plugins/facebook-page-plugin.ts', mode: 'client' }],
+  plugins: [{ src: '~/plugins/facebook-page-plugin.ts', mode: 'client' }, '~/plugins/quill.client.ts'],
 
   modules: [
     '@nuxtjs/tailwindcss',
