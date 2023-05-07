@@ -1,15 +1,11 @@
 <script setup>
-import { ConfirmPromise } from '~/components/Form/Confirm.vue';
-
 definePageMeta({
   // layout: 'admin',
-  // middleware: ['auth'],
-  key: 'admin/manage-news'
+  middleware: ['auth'],
+  key: 'admin/manage-news',
 });
 
-const onCreateNew = () => {
-  ConfirmPromise.start();
-};
+const localePath = useLocalePath();
 </script>
 
 <template>
@@ -18,9 +14,12 @@ const onCreateNew = () => {
       <h1 class="text-xl text-slate-700 font-bold uppercase">
         {{ $t('admin.title.news') }}
       </h1>
-      <FormButton variant="secondary" size="sm" @click="onCreateNew">
-        {{ $t('admin.common.new') }}
-      </FormButton>
+
+      <NuxtLink :to="localePath('/admin/manage-post/new')" v-slot="{ navigate }" custom>
+        <FormButton variant="secondary" size="sm" @click="navigate">
+          {{ $t('admin.common.new') }}
+        </FormButton>
+      </NuxtLink>
     </div>
 
     <div class="rounded-lg bg-white shadow-sm p-4 w-full">

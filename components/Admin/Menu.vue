@@ -14,7 +14,7 @@ const localePath = useLocalePath();
         </NuxtLink>
       </li>
       <li>
-        <NuxtLink :to="localePath('/admin/post')" class="menu-item">
+        <NuxtLink :to="localePath('/admin/manage-post')" class="menu-item">
           <Icon name="ic:twotone-newspaper" />
           <span class="ml-2 truncate">{{ $t('admin.menu.editNews') }}</span>
         </NuxtLink>
