@@ -102,7 +102,7 @@ function isActive(option) {
 </script>
 
 <template>
-  <div class="flex gap-2 border border-slate-300 p-2 rounded-t-xl">
+  <div class="flex gap-2 border border-slate-300 p-2 rounded-t-lg">
     <button
       v-for="{ slug, option, active, icon } in textActions"
       type="button"

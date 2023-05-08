@@ -1,9 +1,9 @@
 export default defineEventHandler((event) => {
-  const {id, lang } = getQuery(event);
+  const { id, lang } = getQuery(event);
   if (id) {
     return mockNews.find((item) => item.id === Number(id));
   }
-  return mockNews.filter(article => article.lang === lang);
+  return mockNews.filter((article) => article.lang === lang);
 });
 
 const mockNews = [

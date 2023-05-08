@@ -65,7 +65,9 @@
     },
     "common": {
       "new": "Új",
-      "pageRange": "Mutatva {0} - {1} a {2} videóból"
+      "pageRange": "Mutatva {0} - {1} a {2} videóból",
+      "save": "Mentés",
+      "publish": "Publikálás"
     },
     "manageVideo": {
       "game": "Mérkőzés",

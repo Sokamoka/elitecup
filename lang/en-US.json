@@ -65,7 +65,9 @@
     },
     "common": {
       "new": "New",
-      "pageRange": "{0} - {1} of {2} videos"
+      "pageRange": "{0} - {1} of {2} videos",
+      "save": "Save",
+      "publish": "Publish"
     },
     "manageVideo": {
       "game": "Game",
