@@ -1,0 +1,53 @@
+<script lang="ts" setup>
+definePageMeta({
+  layout: false,
+  middleware: ['news'],
+});
+
+const route = useRoute();
+console.log(route);
+const { locale, locales } = useI18n();
+
+const currentIso = computed(() => locales.value.find((loc) => loc.code === locale.value));
+
+const toDate = (date: string) => toDefaultDate(new Date(date), currentIso.value?.iso);
+
+const { data, error } = await useFetch('/api/post', {
+  query: { id: route.params.id },
+});
+
+// preview
+// if (!route.query?.preview && !data.value?.isActive) {
+//   console.log('NOT-ACTIVE');
+// }
+</script>
+
+<template>
+  <NuxtLayout name="sub" class="mb-8">
+    <main class="prose">
+      <template v-if="data">
+        <Title>{{ data?.title }}</Title>
+
+        <img class="w-full rounded-lg" :src="data?.mainImage" :alt="data?.title" />
+        <time class="block text-slate-400 mt-6 mb-4 text-sm">{{ toDate(data?.published_at) }}</time>
+        <h1 class="text-3xl text-gray-950 font-bold leading-none mb-6">{{ data?.title }}</h1>
+        <h2 class="text-xl text-slate-700 mb-8" v-html="data?.lead" />
+
+        <div v-html="data.content"></div>
+      </template>
+      <div v-else>
+        Ezen a nyelven nem elérhető ez a hír
+        <button class="button">Go to news page</button>
+      </div>
+    </main>
+    <template #sidebar>
+      <ScheduleMainBox />
+    </template>
+  </NuxtLayout>
+</template>
+
+<style scoped>
+.prose :deep(p) {
+  @apply leading-normal mb-4 text-slate-700;
+}
+</style>
