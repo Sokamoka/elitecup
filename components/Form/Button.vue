@@ -1,5 +1,10 @@
 <script lang="ts" setup>
 const props = defineProps({
+  tag: {
+    type: String,
+    default: 'button',
+  },
+
   variant: {
     type: String,
     default: 'primary',
@@ -27,8 +32,8 @@ const mainClasses = computed(() => [
 </script>
 
 <template>
-  <button type="button" :class="mainClasses">
+  <component :is="tag" :type="tag === 'button' ? 'button' : null" :class="mainClasses">
     <slot />
     <Icon name="ic:baseline-keyboard-arrow-right" />
-  </button>
+  </component>
 </template>

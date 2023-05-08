@@ -67,7 +67,8 @@
       "new": "New",
       "pageRange": "{0} - {1} of {2} videos",
       "save": "Save",
-      "publish": "Publish"
+      "publish": "Publish",
+      "preview": "Preview"
     },
     "manageVideo": {
       "game": "Game",

@@ -53,7 +53,7 @@ const editor = useEditor({
   onUpdate,
   editorProps: {
     attributes: {
-      class: `prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto p-4 bg-slate-100 rounded-b-lg focus:outline-none ${
+      class: `prose max-w-none prose-sm sm:prose sm:max-w-none p-4 bg-slate-100 rounded-b-lg focus:outline-none ${
         props.height ? `min-h-[${props.height}px]` : ''
       }`,
     },
@@ -69,7 +69,6 @@ watch(
     // JSON
     // const isSame = JSON.stringify(this.editor.getJSON()) === JSON.stringify(value)
 
-    console.log('UPDATE');
     editor.value.commands.setContent(value, false);
   }
 );

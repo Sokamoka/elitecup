@@ -27,7 +27,7 @@ const state = reactive({
 
 if (id !== 'new') {
   console.log('LOAD DATA');
-  const { data, error } = await useFetch('/api/post', {
+  const { data, error } = await useFetch('/api/admin/post', {
     query: { id },
   });
 
@@ -79,7 +79,11 @@ function formatDateTime(date: string | null) {
       <FormButton variant="primary" size="sm">
         {{ $t('admin.common.publish') }}
       </FormButton>
-      
+
+      <FormButton tag="a" :href="`/news/post-${state.slug}?preview=true`" target="_blank" variant="outlined" size="sm">
+        {{ $t('admin.common.preview') }}
+      </FormButton>
+
       <FormButton variant="secondary" size="sm" @click="save">
         {{ $t('admin.common.save') }}
       </FormButton>
@@ -168,6 +172,11 @@ function formatDateTime(date: string | null) {
       <FormButton variant="primary" size="sm">
         {{ $t('admin.common.publish') }}
       </FormButton>
+
+      <FormButton tag="a" :href="`/news/post-${state.slug}?preview=true`" target="_blank" variant="outlined" size="sm">
+        {{ $t('admin.common.preview') }}
+      </FormButton>
+
       <FormButton variant="secondary" size="sm" @click="save">
         {{ $t('admin.common.save') }}
       </FormButton>

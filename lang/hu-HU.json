@@ -67,7 +67,8 @@
       "new": "Új",
       "pageRange": "Mutatva {0} - {1} a {2} videóból",
       "save": "Mentés",
-      "publish": "Publikálás"
+      "publish": "Publikálás",
+      "preview": "Előnézet"
     },
     "manageVideo": {
       "game": "Mérkőzés",
