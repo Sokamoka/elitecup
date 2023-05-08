@@ -32,7 +32,6 @@
     "@tiptap/extension-underline": "^2.0.3",
     "@tiptap/pm": "^2.0.3",
     "@tiptap/starter-kit": "^2.0.3",
-    "@tiptap/vue-3": "^2.0.3",
-    "@vueup/vue-quill": "^1.1.1"
+    "@tiptap/vue-3": "^2.0.3"
   }
 }
