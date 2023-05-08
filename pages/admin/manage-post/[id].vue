@@ -25,19 +25,7 @@ const state = reactive({
   publishedAt: null,
 });
 
-if (id !== 'new') {
-  console.log('LOAD DATA');
-  const { data, error } = await useFetch('/api/admin/post', {
-    query: { id },
-  });
-
-  if (error.value) {
-    ToastPromise.start(error.value, 'error');
-    // return;
-  }
-  console.log(data.value);
-  convertPostResponse(data.value, state);
-}
+if (id !== 'new') fetchData();
 
 const rules = {
   title: { required },
@@ -45,6 +33,19 @@ const rules = {
 };
 
 const v$ = useVuelidate(rules, state);
+
+async function fetchData() {
+  const { data, error } = await useFetch('/api/admin/post', {
+    query: { id },
+  });
+
+  if (error.value) {
+    ToastPromise.start(error.value, 'error');
+    return;
+  }
+  console.log(data.value);
+  convertPostResponse(data.value, state);
+}
 
 async function save() {
   const isValid = await v$.value.$validate();
@@ -80,7 +81,7 @@ function formatDateTime(date: string | null) {
         {{ $t('admin.common.publish') }}
       </FormButton>
 
-      <FormButton tag="a" :href="`/news/post-${state.slug}?preview=true`" target="_blank" variant="outlined" size="sm">
+      <FormButton tag="a" :href="`/news/${state.slug}?preview=true`" target="_blank" variant="outlined" size="sm">
         {{ $t('admin.common.preview') }}
       </FormButton>
 
@@ -173,7 +174,7 @@ function formatDateTime(date: string | null) {
         {{ $t('admin.common.publish') }}
       </FormButton>
 
-      <FormButton tag="a" :href="`/news/post-${state.slug}?preview=true`" target="_blank" variant="outlined" size="sm">
+      <FormButton tag="a" :href="`/news/${state.slug}?preview=true`" target="_blank" variant="outlined" size="sm">
         {{ $t('admin.common.preview') }}
       </FormButton>
 
