@@ -88,7 +88,6 @@ const { data: games } = await useFetch<Games[]>('/api/schedule', {
     })),
 
   onResponseError({ response }) {
-    // console.log('ERROR!!!', { response });
     const errorMessage = response.statusText;
     ToastPromise.start(errorMessage, 'error');
   },

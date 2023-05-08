@@ -4,6 +4,8 @@ import { required } from '@vuelidate/validators';
 import { snakeKeys, toSnakeCase } from 'js-convert-case';
 import { Database } from '~/types/Database';
 import { ToastPromise } from '~/components/Form/Toast.vue';
+import { convertPostResponse } from '~/utils/posts';
+import { omit } from 'ramda';
 
 const isSlugOpen = ref<boolean>(false);
 const route = useRoute();
@@ -18,6 +20,7 @@ const state = reactive({
   lead: '',
   content: '',
   locale: 'hu',
+  isActive: false,
   createdAt: null,
   publishedAt: null,
 });
@@ -33,13 +36,7 @@ if (id !== 'new') {
     // return;
   }
   console.log(data.value);
-  state.title = data.value.title;
-  state.slug = data.value.slug;
-  state.lead = data.value.lead;
-  state.content = data.value.content;
-  state.locale = data.value.locale;
-  state.createdAt = data.value.created_at;
-  state.publishedAt = data.value.published_at;
+  convertPostResponse(data.value, state);
 }
 
 const rules = {
@@ -53,18 +50,23 @@ async function save() {
   const isValid = await v$.value.$validate();
   if (!isValid) return;
 
-  const payload = snakeKeys({ ...state, ...(id !== 'new' && { id }) });
-
-  const { error } = await client.from('posts').upsert(payload).select().single();
+  const payload = snakeKeys({ ...omit(['createdAt', 'publishedAt'], state), ...(id !== 'new' && { id }) });
+  const { error, data } = await client.from('posts').upsert(payload).select().single();
   if (error) {
     ToastPromise.start(useDBError(error, 'post', t), 'error');
     return;
   }
+  state.createdAt = data.created_at;
   ToastPromise.start('Save success!');
 }
 
 function onTitleChange() {
   state.slug = toSnakeCase(state.title);
+}
+
+function formatDateTime(date: string | null) {
+  if (!date) return '';
+  return toDefaultDateTime(new Date(date), 'hu-HU');
 }
 </script>
 <template>
@@ -77,6 +79,7 @@ function onTitleChange() {
       <FormButton variant="primary" size="sm">
         {{ $t('admin.common.publish') }}
       </FormButton>
+      
       <FormButton variant="secondary" size="sm" @click="save">
         {{ $t('admin.common.save') }}
       </FormButton>
@@ -87,8 +90,8 @@ function onTitleChange() {
         <fieldset>
           <label class="text-xs font-semibold uppercase" for="locale">Created At</label>
           <p class="text-sm text-slate-500 bg-slate-100 p-3 rounded-md">
-            <template v-if="state.publishedAt">
-              {{ state.createdAt }}
+            <template v-if="state.createdAt">
+              {{ formatDateTime(state.createdAt) }}
             </template>
             <template v-else> New post </template>
           </p>
@@ -98,7 +101,7 @@ function onTitleChange() {
           <label class="text-xs font-semibold uppercase" for="locale">Published At</label>
           <p class="text-sm text-slate-500 bg-slate-100 p-3 rounded-md">
             <template v-if="state.publishedAt">
-              {{ state.publishedAt }}
+              {{ formatDateTime(state.publishedAt) }}
             </template>
             <template v-else> Not published </template>
           </p>
@@ -135,7 +138,13 @@ function onTitleChange() {
           >
             <div class="overflow-hidden">
               <label class="text-xs font-semibold uppercase" for="slug">Slug</label>
-              <FormInput id="slug" v-model="state.slug" :has-error="v$.slug.$error" />
+              <FormInput
+                id="slug"
+                v-model="state.slug"
+                :has-error="v$.slug.$error"
+                :aria-hidden="!isSlugOpen"
+                :tabindex="isSlugOpen ? 0 : -1"
+              />
               <p v-if="v$.slug.$error" class="form-error">
                 {{ v$.slug.$errors[0].$message }}
               </p>
@@ -155,7 +164,7 @@ function onTitleChange() {
       </fieldset>
     </div>
 
-    <div class="flex justify-end gap-4 py-4">
+    <div class="flex justify-end gap-2 py-4">
       <FormButton variant="primary" size="sm">
         {{ $t('admin.common.publish') }}
       </FormButton>
