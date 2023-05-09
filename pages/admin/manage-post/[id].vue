@@ -2,10 +2,11 @@
 import useVuelidate from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { snakeKeys, toSnakeCase } from 'js-convert-case';
+import { omit } from 'ramda';
+import { ConfirmPromise } from '~/components/Form/Confirm.vue';
 import { Database } from '~/types/Database';
 import { ToastPromise } from '~/components/Form/Toast.vue';
 import { convertPostResponse } from '~/utils/posts';
-import { omit } from 'ramda';
 
 const isSlugOpen = ref<boolean>(false);
 const route = useRoute();
@@ -25,7 +26,12 @@ const state = reactive({
   publishedAt: null,
 });
 
-if (id !== 'new') fetchData();
+const { data, error, execute } = await useFetch('/api/admin/post', {
+  query: { id },
+  immediate: false,
+});
+
+if (id !== 'new') execute();
 
 const rules = {
   title: { required },
@@ -34,18 +40,12 @@ const rules = {
 
 const v$ = useVuelidate(rules, state);
 
-async function fetchData() {
-  const { data, error } = await useFetch('/api/admin/post', {
-    query: { id },
-  });
-
-  if (error.value) {
-    ToastPromise.start(error.value, 'error');
-    return;
-  }
-  console.log(data.value);
-  convertPostResponse(data.value, state);
-}
+watch(data, (response) => {
+  convertPostResponse(response, state);
+});
+watch(error, (error) => {
+  ToastPromise.start(error, 'error');
+});
 
 async function save() {
   const isValid = await v$.value.$validate();
@@ -69,6 +69,34 @@ function formatDateTime(date: string | null) {
   if (!date) return '';
   return toDefaultDateTime(new Date(date), 'hu-HU');
 }
+
+async function onPublishPost() {
+  const isValid = await v$.value.$validate();
+  if (!isValid) return;
+  const result = await ConfirmPromise.start('Are you sure you want to publish this post?');
+  if (!result) return;
+  const { error, data } = await client
+    .from('posts')
+    .update({ published_at: new Date(), is_active: true })
+    .eq('id', id)
+    .select('published_at')
+    .single();
+  if (error) {
+    ToastPromise.start(useDBError(error, 'post', t), 'error');
+    return;
+  }
+  state.publishedAt = data.published_at;
+  ToastPromise.start('Publish success!');
+}
+
+async function onActivate(value: boolean) {
+  const { error } = await client.from('posts').update({ is_active: value }).eq('id', id);
+  if (error) {
+    ToastPromise.start(useDBError(error, 'post', t), 'error');
+    return;
+  }
+  ToastPromise.start('Activation changed!');
+}
 </script>
 <template>
   <div class="py-8">
@@ -76,8 +104,10 @@ function formatDateTime(date: string | null) {
       <h1 class="flex-1 text-xl text-slate-700 font-bold uppercase">
         {{ $t('admin.title.news') }}
       </h1>
-
-      <FormButton variant="primary" size="sm">
+      <div v-if="state.publishedAt">
+        <FormToggle v-model="state.isActive" label="Active" @update:model-value="onActivate" />
+      </div>
+      <FormButton v-else variant="primary" size="sm" @click="onPublishPost">
         {{ $t('admin.common.publish') }}
       </FormButton>
 
@@ -169,8 +199,11 @@ function formatDateTime(date: string | null) {
       </fieldset>
     </div>
 
-    <div class="flex justify-end gap-2 py-4">
-      <FormButton variant="primary" size="sm">
+    <div class="flex items-center justify-end gap-2 py-4">
+      <div v-if="state.publishedAt">
+        <FormToggle v-model="state.isActive" label="Active" @update:model-value="onActivate" />
+      </div>
+      <FormButton v-else variant="primary" size="sm">
         {{ $t('admin.common.publish') }}
       </FormButton>
 

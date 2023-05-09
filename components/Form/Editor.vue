@@ -9,36 +9,43 @@ const props = defineProps<{ modelValue: string; height?: number }>();
 const emit = defineEmits(['update:modelValue']);
 
 const textActions = [
-  { slug: 'bold', icon: 'ic:twotone-format-bold', active: 'bold' },
-  { slug: 'italic', icon: 'ic:twotone-format-italic', active: 'italic' },
-  { slug: 'underline', icon: 'ic:twotone-format-underlined', active: 'underline' },
-  { slug: 'strike', icon: 'ic:twotone-strikethrough-s', active: 'strike' },
-  {
-    slug: 'align',
-    option: 'left',
-    icon: 'ic:twotone-format-align-left',
-    active: { textAlign: 'left' },
-  },
-  {
-    slug: 'align',
-    option: 'center',
-    icon: 'ic:twotone-format-align-center',
-    active: { textAlign: 'center' },
-  },
-  {
-    slug: 'align',
-    option: 'right',
-    icon: 'ic:twotone-format-align-right',
-    active: { textAlign: 'right' },
-  },
-  {
-    slug: 'align',
-    option: 'justify',
-    icon: 'ic:twotone-format-align-justify',
-    active: { textAlign: 'justify' },
-  },
-
-  { slug: 'clear', icon: 'ic:twotone-format-clear', active: 'clear' },
+  [
+    { slug: 'bold', icon: 'ic:twotone-format-bold', active: 'bold' },
+    { slug: 'italic', icon: 'ic:twotone-format-italic', active: 'italic' },
+    { slug: 'underline', icon: 'ic:twotone-format-underlined', active: 'underline' },
+    { slug: 'strike', icon: 'ic:twotone-strikethrough-s', active: 'strike' },
+  ],
+  [
+    {
+      slug: 'align',
+      option: 'left',
+      icon: 'ic:twotone-format-align-left',
+      active: { textAlign: 'left' },
+    },
+    {
+      slug: 'align',
+      option: 'center',
+      icon: 'ic:twotone-format-align-center',
+      active: { textAlign: 'center' },
+    },
+    {
+      slug: 'align',
+      option: 'right',
+      icon: 'ic:twotone-format-align-right',
+      active: { textAlign: 'right' },
+    },
+    {
+      slug: 'align',
+      option: 'justify',
+      icon: 'ic:twotone-format-align-justify',
+      active: { textAlign: 'justify' },
+    },
+  ],
+  [
+    { slug: 'bulletList', icon: 'ri-list-unordered', active: 'bulletList' },
+    { slug: 'orderedList', icon: 'ri-list-ordered', active: 'orderedList' },
+  ],
+  [{ slug: 'clear', icon: 'ic:twotone-format-clear', active: 'clear' }],
 ];
 
 const editor = useEditor({
@@ -85,13 +92,13 @@ function onActionClick(slug: string, option: string) {
     underline: () => vm.toggleUnderline().run(),
     strike: () => vm.toggleStrike().run(),
     align: () => vm.setTextAlign(option).run(),
+    bulletList: () => vm.toggleBulletList().run(),
+    orderedList: () => vm.toggleOrderedList().run(),
     clear: () => {
       vm.clearNodes().run();
       vm.unsetAllMarks().run();
     },
   };
-  console.log(slug, option);
-
   actionTriggers[slug]();
 }
 
@@ -102,17 +109,16 @@ function isActive(option) {
 
 <template>
   <div class="flex gap-2 border border-slate-300 p-2 rounded-t-lg">
-    <button
-      v-for="{ slug, option, active, icon } in textActions"
-      type="button"
-      :class="[isActive(active) ? 'opacity-100' : 'opacity-40']"
-      @click="onActionClick(slug, option)"
-    >
-      <Icon :name="icon" class="text-xl" />
-    </button>
+    <div v-for="(group, index) in textActions" :key="index" class="flex gap-2 border-r border-slate-300">
+      <button
+        v-for="{ slug, option, active, icon } in group"
+        type="button"
+        :class="['last:mr-2', isActive(active) ? 'opacity-100' : 'opacity-40']"
+        @click="onActionClick(slug, option)"
+      >
+        <Icon :name="icon" class="text-xl" />
+      </button>
+    </div>
   </div>
-  <editor-content
-    :editor="editor"
-    class="border border-t-0 border-slate-300 rounded-b-lg"
-  />
+  <editor-content :editor="editor" class="border border-t-0 border-slate-300 rounded-b-lg" />
 </template>
