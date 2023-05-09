@@ -41,9 +41,7 @@ const toDate = (date: string) => toDefaultDate(new Date(date), locale.value);
         {{ toDate(createdAt) }}
       </time>
       <dt :class="['font-bold text-slate-900 uppercase', isMainNewsCard ? 'text-2xl' : 'text-base']">{{ title }}</dt>
-      <dd :class="['text-slate-500 mb-4', isMainNewsCard ? 'text-base' : 'text-sm']">
-        {{ lead }}
-      </dd>
+      <dd :class="['text-slate-500 mb-4', isMainNewsCard ? 'text-base' : 'text-sm']" v-html="lead" />
 
       <NuxtLink :to="localePath(id.toString())" v-slot="{ navigate }" custom>
         <FormButton v-if="isMainNewsCard" variant="primary" @click="navigate">{{ $t('common.readMore') }}</FormButton>

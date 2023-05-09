@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { News } from '~/types/News';
 
-const skip = ref(0);
-const limit = ref(10);
+const page = ref(0);
+const limit = 5;
 
 // interface ApiResponse {
 //   mainImage: string;
@@ -16,36 +16,35 @@ definePageMeta({
   layout: false,
 });
 
-const { t } = useI18n();
+const { locale, t } = useI18n();
 const localePath = useLocalePath();
 
 useHead({
   title: t('menu.news'),
 });
 
-const toDate = (date: string) => toDefaultDate(new Date(date));
+const { from, to } = usePagination(page, limit);
 
-// const { data: news } = await useFetch<{ data: ApiResponse[] }>(`/api/news?lang=${locale.value}`);
-
-const { data: allPost } = await useAsyncData('totalnews', () => {
-  return queryContent<News>(localePath('/news')).find();
+const { data } = await useFetch<{ posts: News[]; count: number }>('/api/news-list', {
+  query: {
+    locale: locale.value,
+    from,
+    to,
+  },
 });
 
-const totalPost = computed(() => allPost.value?.length ?? 0);
-const totalPage = computed(() => Math.ceil(totalPost.value / limit.value));
-
-const { data, refresh } = await useAsyncData('news', () =>
-  queryContent<News>(localePath('/news')).sort({ publishedAt: -1 }).skip(skip.value).limit(limit.value).find()
-);
+const maxPage = computed(() => {
+  const count = data.value?.count ?? 0;
+  return Math.ceil(count / limit) - 1;
+});
 
 const prevPage = () => {
-  skip.value -= limit.value;
-  refresh();
+  page.value--;
 };
 const nextPage = () => {
-  skip.value += limit.value;
-  refresh();
+  page.value++;
 };
+const toDate = (date: string) => toDefaultDate(new Date(date));
 </script>
 
 <template>
@@ -55,28 +54,30 @@ const nextPage = () => {
     </template>
 
     <div class="flex flex-col space-y-8">
-      <div v-for="item in data" :key="item.id" class="flex flex-col sm:flex-row space-x-4 w-full">
+      <div v-for="item in data?.posts" :key="item.id" class="flex flex-col sm:flex-row space-x-4 w-full">
         <div class="flex-shrink-0">
-          <img class="h-auto sm:h-36 aspect-[16/10] rounded-lg" :src="item.mainImage" alt="Bonnie image" />
+          <img class="h-auto sm:h-36 aspect-[16/10] rounded-lg" :src="item.image" :alt="item.title" />
         </div>
         <div class="flex-1 flex flex-col items-stretch min-w-0">
-          <time v-if="item.publishedAt" class="text-slate-400 my-2 text-sm">{{ toDate(item.publishedAt) }}</time>
+          <time v-if="item.published_at" class="text-slate-400 my-2 text-sm">{{ toDate(item.published_at) }}</time>
           <p class="text-xl font-bold leading-tight text-slate-900 mb-2">
             {{ item.title }}
           </p>
-          <div class="flex-1 text-base text-slate-500">{{ item.lead }}</div>
-          <NuxtLink :to="localePath(item._path)">
-            <FormButton variant="link" class="-ml-4 w-min text-sm whitespace-nowrap">Read more</FormButton>
+          <div class="flex-1 text-base text-slate-500" v-html="item.lead" />
+          <NuxtLink :to="localePath(`/news/${item.slug}`)">
+            <FormButton variant="link" class="-ml-4 w-min text-sm whitespace-nowrap">
+              {{ $t('common.readMore') }}
+            </FormButton>
           </NuxtLink>
         </div>
       </div>
 
       <div class="flex gap-x-2">
-        <button class="button" :disabled="skip === 0" @click="prevPage">
+        <button class="button" :disabled="page === 0" @click="prevPage">
           <Icon name="ic:outline-arrow-back-ios" />
         </button>
 
-        <button class="button" :disabled="totalPage - 1 === skip" @click="nextPage">
+        <button class="button" :disabled="page === maxPage" @click="nextPage">
           <Icon name="ic:outline-arrow-forward-ios" />
         </button>
       </div>

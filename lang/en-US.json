@@ -61,6 +61,22 @@
       "action": {
         "short": "Action",
         "tooltip": "Action"
+      },
+      "title": {
+        "short": "Title",
+        "tooltip": "Title"
+      },
+      "locale": {
+        "short": "Lang",
+        "tooltip": "Lang"
+      },
+      "publishedAt": {
+        "short": "Published at",
+        "tooltip": "Published at"
+      },
+      "active": {
+        "short": "Active",
+        "tooltip": "Active"
       }
     },
     "common": {

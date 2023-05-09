@@ -42,8 +42,8 @@ const textActions = [
     },
   ],
   [
-    { slug: 'bulletList', icon: 'ri-list-unordered', active: 'bulletList' },
-    { slug: 'orderedList', icon: 'ri-list-ordered', active: 'orderedList' },
+    { slug: 'bulletList', icon: 'ic:twotone-format-list-bulleted', active: 'bulletList' },
+    { slug: 'orderedList', icon: 'ic:twotone-format-list-numbered', active: 'orderedList' },
   ],
   [{ slug: 'clear', icon: 'ic:twotone-format-clear', active: 'clear' }],
 ];
@@ -71,21 +71,21 @@ watch(
   () => props.modelValue,
   (value) => {
     // console.log('WATCH');
-    if (editor.value.getHTML() === value) return;
+    if (editor.value?.getHTML() === value) return;
 
     // JSON
     // const isSame = JSON.stringify(this.editor.getJSON()) === JSON.stringify(value)
 
-    editor.value.commands.setContent(value, false);
+    editor.value?.commands.setContent(value, false);
   }
 );
 
 function onUpdate() {
-  emit('update:modelValue', editor.value.getHTML());
+  emit('update:modelValue', editor.value?.getHTML());
 }
 
 function onActionClick(slug: string, option: string) {
-  const vm = editor.value.chain().focus();
+  const vm = editor.value?.chain().focus();
   const actionTriggers = {
     bold: () => vm.toggleBold().run(),
     italic: () => vm.toggleItalic().run(),
@@ -102,7 +102,7 @@ function onActionClick(slug: string, option: string) {
   actionTriggers[slug]();
 }
 
-function isActive(option) {
+function isActive(option: {}) {
   return editor.value?.isActive(option);
 }
 </script>

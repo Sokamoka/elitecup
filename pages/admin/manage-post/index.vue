@@ -8,24 +8,24 @@ definePageMeta({
 
 const columns = {
   title: {
-    label: 'admin.table.gameName.short',
-    tooltip: 'admin.table.gameName.tooltip',
+    label: 'admin.table.title.short',
+    tooltip: 'admin.table.title.tooltip',
     class: 'text-left font-bold',
   },
   locale: {
-    label: 'admin.table.videoUrl.short',
-    tooltip: 'admin.table.videoUrl.tooltip',
-    class: 'text-left truncate',
+    label: 'admin.table.locale.short',
+    tooltip: 'admin.table.locale.tooltip',
+    class: 'w-[80px] text-center',
   },
   published_at: {
-    label: 'admin.table.videoUrl.short',
-    tooltip: 'admin.table.videoUrl.tooltip',
-    class: 'text-left truncate',
+    label: 'admin.table.publishedAt.short',
+    tooltip: 'admin.table.publishedAt.tooltip',
+    class: 'w-[140px] text-center',
   },
   is_active: {
-    label: 'admin.table.videoUrl.short',
-    tooltip: 'admin.table.videoUrl.tooltip',
-    class: 'text-left truncate',
+    label: 'admin.table.active.short',
+    tooltip: 'admin.table.active.tooltip',
+    class: 'w-[100px] text-center',
   },
   action: {
     label: 'admin.table.action.short',
@@ -54,8 +54,8 @@ const { data: posts } = await useFetch('/api/admin/posts', {
   },
 });
 
-function onDelete({id}) {
-  console.log('DELETE:', id)
+function onDelete({ id }) {
+  console.log('DELETE:', id);
 }
 </script>
 
@@ -77,12 +77,26 @@ function onDelete({id}) {
       <div class="w-full overflow-x-auto">
         <DataTable :rows="posts.posts || []" :columns="columns">
           <template #cell-title="{ row }">
-            <p>{{ row.title }}</p>
+            <NuxtLink :to="localePath(`/admin/manage-post/${row.id}`)">
+              {{ row.title }}
+            </NuxtLink>
             <p class="text-slate-400 text-sm font-normal">{{ row.created_at }}</p>
           </template>
 
           <template #cell-published_at="{ row }">
-            <p class="bg-green-500 rounded-full text-xs text-white text-center">Published</p>
+            <span v-if="row.published_at" class="bg-red-500 rounded-full text-xs text-white text-center py-0.5 px-3 uppercase font-semibold">
+              Published
+            </span>
+            <span v-else class="bg-slate-300 rounded-full text-xs text-slate-500 text-center py-0.5 px-3 uppercase font-semibold">Not Published</span>
+          </template>
+
+          <template #cell-locale="{ row }">
+            <Icon v-if="row.locale === 'en'" name="flagpack:us" />
+            <Icon v-if="row.locale === 'hu'" name="flagpack:hu" />
+          </template>
+
+          <template #cell-is_active="{ row }">
+            <Icon name="ic:twotone-check-circle" :class="['text-xl', row.is_active ? 'text-green-500' : 'text-slate-300']" />
           </template>
 
           <template #cell-action="{ row }">

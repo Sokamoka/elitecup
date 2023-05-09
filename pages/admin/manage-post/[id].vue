@@ -16,6 +16,7 @@ const client = useSupabaseClient<Database>();
 const id = route.params.id;
 
 const state = reactive({
+  id: null,
   title: '',
   slug: '',
   lead: '',
@@ -51,14 +52,16 @@ async function save() {
   const isValid = await v$.value.$validate();
   if (!isValid) return;
 
-  const payload = snakeKeys({ ...omit(['createdAt', 'publishedAt'], state), ...(id !== 'new' && { id }) });
+  const payload = snakeKeys({ ...omit(['createdAt', 'publishedAt', 'id'], state), ...(id !== 'new' && { id }) });
   const { error, data } = await client.from('posts').upsert(payload).select().single();
   if (error) {
     ToastPromise.start(useDBError(error, 'post', t), 'error');
     return;
   }
   state.createdAt = data.created_at;
+  state.id = data.id;
   ToastPromise.start('Save success!');
+  return;
 }
 
 function onTitleChange() {
@@ -75,22 +78,26 @@ async function onPublishPost() {
   if (!isValid) return;
   const result = await ConfirmPromise.start('Are you sure you want to publish this post?');
   if (!result) return;
+  if (!state.id) {
+    await save();
+  }
   const { error, data } = await client
     .from('posts')
     .update({ published_at: new Date(), is_active: true })
-    .eq('id', id)
-    .select('published_at')
+    .eq('id', state.id)
+    .select('published_at, is_active')
     .single();
   if (error) {
     ToastPromise.start(useDBError(error, 'post', t), 'error');
     return;
   }
   state.publishedAt = data.published_at;
+  state.isActive = data.is_active;
   ToastPromise.start('Publish success!');
 }
 
 async function onActivate(value: boolean) {
-  const { error } = await client.from('posts').update({ is_active: value }).eq('id', id);
+  const { error } = await client.from('posts').update({ is_active: value }).eq('id', state.id);
   if (error) {
     ToastPromise.start(useDBError(error, 'post', t), 'error');
     return;
@@ -100,7 +107,7 @@ async function onActivate(value: boolean) {
 </script>
 <template>
   <div class="py-8">
-    <div class="flex gap-2 items-center mb-4">
+    <div class="flex flex-col sm:flex-row gap-2 items-center mb-4">
       <h1 class="flex-1 text-xl text-slate-700 font-bold uppercase">
         {{ $t('admin.title.news') }}
       </h1>
@@ -111,11 +118,18 @@ async function onActivate(value: boolean) {
         {{ $t('admin.common.publish') }}
       </FormButton>
 
-      <FormButton tag="a" :href="`/news/${state.slug}?preview=true`" target="_blank" variant="outlined" size="sm">
+      <FormButton
+        tag="a"
+        :href="`/news/${state.slug}?preview=true`"
+        target="_blank"
+        variant="outlined"
+        size="sm"
+        class="w-full sm:w-auto"
+      >
         {{ $t('admin.common.preview') }}
       </FormButton>
 
-      <FormButton variant="secondary" size="sm" @click="save">
+      <FormButton variant="secondary" size="sm" class="w-full sm:w-auto" @click="save">
         {{ $t('admin.common.save') }}
       </FormButton>
     </div>
@@ -203,7 +217,7 @@ async function onActivate(value: boolean) {
       <div v-if="state.publishedAt">
         <FormToggle v-model="state.isActive" label="Active" @update:model-value="onActivate" />
       </div>
-      <FormButton v-else variant="primary" size="sm">
+      <FormButton v-else variant="primary" size="sm" @click="onPublishPost">
         {{ $t('admin.common.publish') }}
       </FormButton>
 

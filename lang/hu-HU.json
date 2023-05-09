@@ -61,6 +61,22 @@
       "action": {
         "short": "Akció",
         "tooltip": "Akció"
+      },
+      "title": {
+        "short": "Cím",
+        "tooltip": "Cím"
+      },
+      "locale": {
+        "short": "Nyelv",
+        "tooltip": "Nyelv"
+      },
+      "publishedAt": {
+        "short": "Publikálva",
+        "tooltip": "Publikálva"
+      },
+      "active": {
+        "short": "Aktív",
+        "tooltip": "Aktív"
       }
     },
     "common": {
