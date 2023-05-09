@@ -8,6 +8,11 @@ import { Database } from '~/types/Database';
 import { ToastPromise } from '~/components/Form/Toast.vue';
 import { convertPostResponse } from '~/utils/posts';
 
+definePageMeta({
+  middleware: ['auth'],
+  key: 'admin/manage-news',
+});
+
 const isSlugOpen = ref<boolean>(false);
 const route = useRoute();
 const { t } = useI18n();

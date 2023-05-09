@@ -38,7 +38,7 @@ interface UpdateState {
 
 definePageMeta({
   // layout: 'admin',
-  // middleware: ['auth'],
+  middleware: ['auth'],
   key: 'admin/videos',
 });
 

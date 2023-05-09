@@ -54,7 +54,7 @@ body {
   }
 
   table thead tr {
-    @apply bg-slate-300 text-slate-600 uppercase text-sm leading-normal;
+    @apply bg-slate-300 text-slate-500 uppercase text-xs leading-normal;
   }
 
   table thead tr th {

@@ -3,7 +3,7 @@ import { format, parseISO } from 'date-fns';
 
 definePageMeta({
   middleware: ['auth'],
-  key: 'admin/manage-news',
+  key: 'admin/news',
 });
 
 const columns = {
@@ -34,14 +34,17 @@ const columns = {
   },
 };
 
+const { locales } = useI18n();
+const localePath = useLocalePath();
+
 const limit = 12;
 const page = ref(0);
+const localeFilter = ref(null);
 
-const localePath = useLocalePath();
 const { from, to } = usePagination(page, limit);
 
 const { data: posts } = await useFetch('/api/admin/posts', {
-  query: { from: from, to: to },
+  query: { from, to, locale: localeFilter },
   transform: ({ posts, count }) => {
     return {
       posts: posts.map((post) => ({
@@ -54,18 +57,50 @@ const { data: posts } = await useFetch('/api/admin/posts', {
   },
 });
 
+const maxPage = computed(() => {
+  const count = posts.value?.count ?? 0;
+  return Math.floor(count / limit);
+});
+
+const pageRange = computed(() => {
+  const count = posts.value?.count ?? 0;
+  return [page.value * limit + 1, Math.min((page.value + 1) * limit, count)];
+});
+
 function onDelete({ id }) {
   console.log('DELETE:', id);
+}
+
+function onPrev() {
+  page.value--;
+}
+function onNext() {
+  page.value++;
+}
+
+function onChangeFilter(value) {
+  localeFilter.value = value;
 }
 </script>
 
 <template>
   <div class="py-8">
-    <div class="flex items-center justify-between mb-4">
-      <h1 class="text-xl text-slate-700 font-bold uppercase">
+    <div class="flex items-center justify-between gap-4 mb-4">
+      <h1 class="flex-1 text-xl text-slate-700 font-bold uppercase">
         {{ $t('admin.title.news') }}
       </h1>
 
+      <div class="flex gap-2 text-xs text-slate-400 font-bold">
+        <button :class="{ 'text-slate-900': localeFilter === null }" @click="onChangeFilter(null)">ALL</button>
+        <button
+          v-for="locale in locales"
+          :key="locale.code"
+          :class="['uppercase', { 'text-slate-900': localeFilter === locale.code }]"
+          @click="onChangeFilter(locale.code)"
+        >
+          {{ locale.code }}
+        </button>
+      </div>
       <NuxtLink :to="localePath('/admin/manage-post/new')" v-slot="{ navigate }" custom>
         <FormButton variant="secondary" size="sm" @click="navigate">
           {{ $t('admin.common.new') }}
@@ -84,10 +119,17 @@ function onDelete({ id }) {
           </template>
 
           <template #cell-published_at="{ row }">
-            <span v-if="row.published_at" class="bg-red-500 rounded-full text-xs text-white text-center py-0.5 px-3 uppercase font-semibold">
+            <span
+              v-if="row.published_at"
+              class="bg-red-500 rounded-full text-xs text-white text-center py-0.5 px-3 uppercase font-semibold"
+            >
               Published
             </span>
-            <span v-else class="bg-slate-300 rounded-full text-xs text-slate-500 text-center py-0.5 px-3 uppercase font-semibold">Not Published</span>
+            <span
+              v-else
+              class="bg-slate-300 rounded-full text-xs text-slate-500 text-center py-0.5 px-3 uppercase font-semibold"
+              >Not Published</span
+            >
           </template>
 
           <template #cell-locale="{ row }">
@@ -96,7 +138,10 @@ function onDelete({ id }) {
           </template>
 
           <template #cell-is_active="{ row }">
-            <Icon name="ic:twotone-check-circle" :class="['text-xl', row.is_active ? 'text-green-500' : 'text-slate-300']" />
+            <Icon
+              name="ic:twotone-check-circle"
+              :class="['text-xl', row.is_active ? 'text-green-500' : 'text-slate-300']"
+            />
           </template>
 
           <template #cell-action="{ row }">
@@ -115,6 +160,18 @@ function onDelete({ id }) {
             </div>
           </template>
         </DataTable>
+      </div>
+
+      <div class="flex items-center py-2 px-4 bg-slate-300 text-slate-500 font-bold">
+        <div class="flex-1">
+          {{ $t('admin.common.pageRange', [pageRange[0], pageRange[1], posts?.count]) }}
+        </div>
+        <div>
+          <button type="button" class="p-2 disabled:text-slate-400" :disabled="page === 0" @click="onPrev">Prev</button>
+          <button type="button" class="p-2 disabled:text-slate-400" :disabled="page === maxPage" @click="onNext">
+            Next
+          </button>
+        </div>
       </div>
     </div>
   </div>

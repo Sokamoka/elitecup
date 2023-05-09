@@ -1,15 +1,24 @@
 import { serverSupabaseClient } from '#supabase/server';
 
 export default defineEventHandler(async (event) => {
-  const { from, to }: any = getQuery(event);
+  const { from, to, locale = null }: any = getQuery(event);
 
   const client = serverSupabaseClient(event);
 
-  const { data, count, error } = await client
+  let query = client
     .from('posts')
-    .select('*', { count: 'exact' })
-    .order('created_at', { ascending: false })
-    .range(from, to);
+    .select('id, created_at, published_at, title, is_active, locale, slug', { count: 'exact' });
+
+  if (locale) query = query.eq('locale', locale);
+  query = query.order('created_at', { ascending: false }).range(from, to);
+
+  // const { data, count, error } = await client
+  //   .from('posts')
+  //   .select('id, created_at, published_at, title, is_active, locale, slug', { count: 'exact' })
+  //   .eq('locale', locale)
+  //   .order('created_at', { ascending: false })
+  //   .range(from, to);
+  const { data, count, error } = await query;
 
   if (error) {
     throw createError({
