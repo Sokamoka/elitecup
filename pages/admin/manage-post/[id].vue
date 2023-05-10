@@ -14,6 +14,7 @@ definePageMeta({
 });
 
 const isSlugOpen = ref<boolean>(false);
+const previewImage = ref<string>('');
 const route = useRoute();
 const { t } = useI18n();
 const client = useSupabaseClient<Database>();
@@ -109,6 +110,28 @@ async function onActivate(value: boolean) {
   }
   ToastPromise.start('Activation changed!');
 }
+
+async function onImageSelect(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  console.log(file);
+  previewImage.value = URL.createObjectURL(file);
+  // const url = await uploadImage(file);
+  // console.log(url.publicUrl);
+}
+
+async function uploadImage(file) {
+  let uuid = self.crypto.randomUUID();
+  let fileExtension = file.name.split('.').pop();
+  const fileName = `public/post/${uuid}.${fileExtension}`;
+  const { error } = await client.storage.from('posts').upload(fileName, file, {
+    cacheControl: '3600',
+    upsert: false,
+  });
+
+  const { data: publicUrl } = client.storage.from('posts').getPublicUrl(fileName);
+  return publicUrl;
+}
 </script>
 <template>
   <div class="py-8">
@@ -147,7 +170,7 @@ async function onActivate(value: boolean) {
             <template v-if="state.createdAt">
               {{ formatDateTime(state.createdAt) }}
             </template>
-            <template v-else> New post </template>
+            <template v-else> This is New post </template>
           </p>
         </fieldset>
 
@@ -166,6 +189,24 @@ async function onActivate(value: boolean) {
           <FormInput id="locale" v-model="state.locale" :has-error="false" />
         </fieldset>
       </div>
+
+      <hr />
+
+      <fieldset>
+        <label class="text-xs font-semibold uppercase" for="locale">Main image</label>
+
+        <div v-if="!state.id || !id" class="p-4 text-amber-600 text-sm bg-amber-100 border border-amber-300 rounded-lg">
+          <p class="font-bold uppercase text-amber-700"> Warning</p>
+          <p> Lorem ipsum</p>
+        </div>
+
+        <div v-else class="flex flex-col sm:flex-row gap-4">
+          <div class="bg-slate-200 rounded-lg overflow-hidden w-full max-w-xs">
+            <img :src="previewImage" class="object-cover aspect-video" />
+          </div>
+          <input type="file" @change="onImageSelect" />
+        </div>
+      </fieldset>
 
       <hr />
 

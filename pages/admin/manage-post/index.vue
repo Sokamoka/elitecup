@@ -85,7 +85,7 @@ function onChangeFilter(value) {
 
 <template>
   <div class="py-8">
-    <div class="flex items-center justify-between gap-4 mb-4">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
       <h1 class="flex-1 text-xl text-slate-700 font-bold uppercase">
         {{ $t('admin.title.news') }}
       </h1>
@@ -162,7 +162,7 @@ function onChangeFilter(value) {
         </DataTable>
       </div>
 
-      <div class="flex items-center py-2 px-4 bg-slate-300 text-slate-500 font-bold">
+      <div class="flex items-center py-2 px-4 bg-slate-300 text-slate-500 font-bold text-xs uppercase">
         <div class="flex-1">
           {{ $t('admin.common.pageRange', [pageRange[0], pageRange[1], posts?.count]) }}
         </div>

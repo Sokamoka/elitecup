@@ -22,7 +22,8 @@ const { data, error } = await useFetch('/api/news', {
       <template v-if="data">
         <Title>{{ data?.title }}</Title>
 
-        <img class="w-full rounded-lg" :src="data?.mainImage" :alt="data?.title" />
+        <img v-if="data?.image" class="w-full rounded-lg" :src="data?.image" :alt="data?.title" />
+        <img v-else src="~/assets/images/elitecup_default_image.svg" class="object-cover aspect-[16/10] bg-slate-100 border border-slate-200 rounded-lg" />
         <time class="block text-slate-400 mt-6 mb-4">{{ toDate(data?.published_at) }}</time>
         <h1>{{ data?.title }}</h1>
         <h2 v-html="data?.lead" />

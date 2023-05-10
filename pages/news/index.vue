@@ -56,7 +56,12 @@ const toDate = (date: string) => toDefaultDate(new Date(date));
     <div class="flex flex-col space-y-8">
       <div v-for="item in data?.posts" :key="item.id" class="flex flex-col sm:flex-row space-x-4 w-full">
         <div class="flex-shrink-0">
-          <img class="h-auto sm:h-36 aspect-[16/10] rounded-lg" :src="item.image" :alt="item.title" />
+          <img v-if="item.image" class="h-auto sm:h-36 aspect-[16/10] rounded-lg" :src="item.image" :alt="item.title" />
+          <img
+            v-else
+            src="~/assets/images/elitecup_default_image.svg"
+            class="object-cover h-auto sm:h-36 aspect-[16/10] bg-slate-100 border border-slate-200 rounded-lg"
+          />
         </div>
         <div class="flex-1 flex flex-col items-stretch min-w-0">
           <time v-if="item.published_at" class="text-slate-400 my-2 text-sm">{{ toDate(item.published_at) }}</time>

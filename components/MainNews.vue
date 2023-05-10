@@ -5,11 +5,11 @@ const { data: news } = await useFetch('/api/news-list', {
   query: {
     locale: locale.value,
     from: 0,
-    to: 3,
+    to: 4,
   },
 });
 
-const moreNews = computed(() => [...news.value.posts].slice(1, 4));
+const moreNews = computed(() => [...news.value.posts].slice(1, 5));
 </script>
 
 <template>
@@ -19,8 +19,9 @@ const moreNews = computed(() => [...news.value.posts].slice(1, 4));
         :main-image="news.posts[0].image"
         :title="news.posts[0].title"
         :lead="news.posts[0].lead"
-        :id="news.posts[0].slug"
+        :id="`/news/${news.posts[0].slug}`"
         :created-at="news.posts[0].published_at"
+        is-main-news-card
       />
     </div>
     <div class="w-full sm:w-1/3">
