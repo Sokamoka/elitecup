@@ -37,7 +37,7 @@ const localePath = useLocalePath();
 const toDate = (date: string) => toDefaultDate(new Date(date), locale.value);
 </script>
 <template>
-  <div class="bg-white border border-slate-200 rounded-lg mb-4 overflow-hidden">
+  <div class="bg-white border border-slate-200 rounded-lg overflow-hidden">
     <img v-if="isMainNewsCard && mainImage" :src="mainImage" class="object-cover aspect-video" />
     <img v-else-if="isMainNewsCard" src="~/assets/images/elitecup_default_image.svg" class="object-cover bg-slate-100 aspect-[16/10]" />
     <div class="p-4">
