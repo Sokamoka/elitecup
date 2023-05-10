@@ -1,5 +1,8 @@
 <script setup>
 import { format, parseISO } from 'date-fns';
+import { ConfirmPromise } from '~/components/Form/Confirm.vue';
+import { ToastPromise } from '~/components/Form/Toast.vue';
+// import { Database } from '~/types/Database';
 
 definePageMeta({
   middleware: ['auth'],
@@ -34,8 +37,9 @@ const columns = {
   },
 };
 
-const { locales } = useI18n();
+const { locales, t } = useI18n();
 const localePath = useLocalePath();
+const client = useSupabaseClient();
 
 const limit = 12;
 const page = ref(0);
@@ -43,7 +47,7 @@ const localeFilter = ref(null);
 
 const { from, to } = usePagination(page, limit);
 
-const { data: posts } = await useFetch('/api/admin/posts', {
+const { data: posts, refresh } = await useFetch('/api/admin/posts', {
   query: { from, to, locale: localeFilter },
   transform: ({ posts, count }) => {
     return {
@@ -67,8 +71,17 @@ const pageRange = computed(() => {
   return [page.value * limit + 1, Math.min((page.value + 1) * limit, count)];
 });
 
-function onDelete({ id }) {
+async function onDelete({ id, title }) {
   console.log('DELETE:', id);
+  const result = await ConfirmPromise.start();
+  if (!result) return;
+  const { error } = await client.from('posts').delete().eq('id', id);
+  if (error) {
+    ToastPromise.start(error?.message, 'error');
+    return;
+  }
+  refresh();
+  ToastPromise.start(`${t('admin.messages.delete')} (${title})`);
 }
 
 function onPrev() {

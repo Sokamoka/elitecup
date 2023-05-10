@@ -51,6 +51,7 @@ watch(data, (response) => {
   convertPostResponse(response, state);
 });
 watch(error, (error) => {
+  if(!error) return;
   ToastPromise.start(error, 'error');
 });
 
@@ -114,10 +115,18 @@ async function onActivate(value: boolean) {
 async function onImageSelect(event) {
   const file = event.target.files[0];
   if (!file) return;
-  console.log(file);
+  // console.log(file);
   previewImage.value = URL.createObjectURL(file);
-  // const url = await uploadImage(file);
-  // console.log(url.publicUrl);
+  try {
+    const { publicUrl } = await uploadImage(file);
+    // console.log(url.publicUrl);
+    // TODO: delete old img
+    await client.from('posts').update({ image: publicUrl }).eq('id', state.id);
+    ToastPromise.start('Image added!');
+  } catch (error) {
+    console.log(error);
+    ToastPromise.start(useDBError(error, 'post', t), 'error');
+  }
 }
 
 async function uploadImage(file) {
@@ -196,8 +205,8 @@ async function uploadImage(file) {
         <label class="text-xs font-semibold uppercase" for="locale">Main image</label>
 
         <div v-if="!state.id || !id" class="p-4 text-amber-600 text-sm bg-amber-100 border border-amber-300 rounded-lg">
-          <p class="font-bold uppercase text-amber-700"> Warning</p>
-          <p> Lorem ipsum</p>
+          <p class="font-bold uppercase text-amber-700">Warning</p>
+          <p>Lorem ipsum</p>
         </div>
 
         <div v-else class="flex flex-col sm:flex-row gap-4">

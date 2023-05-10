@@ -38,8 +38,12 @@ const toDate = (date: string) => toDefaultDate(new Date(date), locale.value);
 </script>
 <template>
   <div class="bg-white border border-slate-200 rounded-lg overflow-hidden">
-    <img v-if="isMainNewsCard && mainImage" :src="mainImage" class="object-cover aspect-video" />
-    <img v-else-if="isMainNewsCard" src="~/assets/images/elitecup_default_image.svg" class="object-cover bg-slate-100 aspect-[16/10]" />
+    <img v-if="isMainNewsCard && mainImage" :src="mainImage" class="w-full object-cover aspect-video" />
+    <img
+      v-else-if="isMainNewsCard"
+      src="~/assets/images/elitecup_default_image.svg"
+      class="w-full object-cover bg-slate-100 aspect-[16/10]"
+    />
     <div class="p-4">
       <time :class="['block text-slate-400 font-medium', isMainNewsCard ? 'text-base mb-3' : 'text-sm mb-2']">
         {{ toDate(createdAt) }}

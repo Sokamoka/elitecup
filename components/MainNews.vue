@@ -13,9 +13,10 @@ const moreNews = computed(() => [...news.value.posts].slice(1, 5));
 </script>
 
 <template>
-  <div class="grid grid-cols-1 sm:grid-cols-[1fr_33%] grid-rows-4 items-stretch gap-4 mb-4">
-    <div class="row-span-4">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_33%] sm:grid-rows-2 lg:grid-rows-4 grid-flow-row gap-4 mb-4">
+    <div class="sm:row-span-2 lg:row-span-4">
       <NewsCard
+        class="lg:h-full"
         :main-image="news.posts[0].image"
         :title="news.posts[0].title"
         :lead="news.posts[0].lead"

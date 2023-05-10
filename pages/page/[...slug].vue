@@ -10,7 +10,7 @@ useContentHead(data)
 
 <template>
   <h1 class="text-2xl text-slate-900 font-bold mt-8 mb-4">{{ data.title }}</h1>
-  <main class="prose mb-8 text-slate-700">
+  <main class="prose max-w-none mb-8 text-slate-700">
     <ContentRenderer v-if="data" :value="data" />
   </main>
 </template>
