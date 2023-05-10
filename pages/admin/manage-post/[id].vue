@@ -4,9 +4,9 @@ import { required } from '@vuelidate/validators';
 import { snakeKeys, toSnakeCase } from 'js-convert-case';
 import { omit } from 'ramda';
 import { ConfirmPromise } from '~/components/Form/Confirm.vue';
-import { Database } from '~/types/Database';
 import { ToastPromise } from '~/components/Form/Toast.vue';
 import { convertPostResponse } from '~/utils/posts';
+import { Database } from '~/types/Database';
 
 definePageMeta({
   middleware: ['auth'],
@@ -15,7 +15,7 @@ definePageMeta({
 
 const isSlugOpen = ref<boolean>(false);
 const route = useRoute();
-const { t } = useI18n();
+const { t, locales } = useI18n();
 const localePath = useLocalePath();
 const client = useSupabaseClient<Database>();
 
@@ -27,7 +27,7 @@ const state = reactive({
   slug: '',
   lead: '',
   content: '',
-  locale: 'hu',
+  locale: 'en',
   isActive: false,
   createdAt: null,
   publishedAt: null,
@@ -46,6 +46,10 @@ const rules = {
 };
 
 const v$ = useVuelidate(rules, state);
+
+const localeItems = computed(() =>
+  locales.value.map((locale) => ({ value: locale.code, name: locale.code.toUpperCase() }))
+);
 
 watch(data, (response) => {
   convertPostResponse(response, state);
@@ -142,6 +146,10 @@ async function uploadImage(file) {
   const { data: publicUrl } = client.storage.from('posts').getPublicUrl(fileName);
   return publicUrl;
 }
+
+function displayLocale(value: string) {
+  return localeItems.value.find((locale) => locale.value === value)?.name ?? '';
+}
 </script>
 <template>
   <div class="py-8">
@@ -199,7 +207,7 @@ async function uploadImage(file) {
 
         <fieldset>
           <label class="text-xs font-semibold uppercase" for="locale">Locale</label>
-          <FormInput id="locale" v-model="state.locale" :has-error="false" />
+          <FormSelect id="locale" v-model="state.locale" :display-value="displayLocale" :items="localeItems" />
         </fieldset>
       </div>
 
