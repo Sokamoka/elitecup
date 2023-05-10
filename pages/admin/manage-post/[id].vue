@@ -14,9 +14,9 @@ definePageMeta({
 });
 
 const isSlugOpen = ref<boolean>(false);
-const previewImage = ref<string>('');
 const route = useRoute();
 const { t } = useI18n();
+const localePath = useLocalePath();
 const client = useSupabaseClient<Database>();
 
 const id = route.params.id;
@@ -51,7 +51,7 @@ watch(data, (response) => {
   convertPostResponse(response, state);
 });
 watch(error, (error) => {
-  if(!error) return;
+  if (!error) return;
   ToastPromise.start(error, 'error');
 });
 
@@ -59,7 +59,10 @@ async function save() {
   const isValid = await v$.value.$validate();
   if (!isValid) return;
 
-  const payload = snakeKeys({ ...omit(['createdAt', 'publishedAt', 'id'], state), ...(id !== 'new' && { id }) });
+  const payload = snakeKeys({
+    ...omit(['createdAt', 'publishedAt', 'id', 'image'], state),
+    ...(Boolean(state.id) && { id: state.id }),
+  });
   const { error, data } = await client.from('posts').upsert(payload).select().single();
   if (error) {
     ToastPromise.start(useDBError(error, 'post', t), 'error');
@@ -115,11 +118,9 @@ async function onActivate(value: boolean) {
 async function onImageSelect(event) {
   const file = event.target.files[0];
   if (!file) return;
-  // console.log(file);
-  previewImage.value = URL.createObjectURL(file);
+  state.image = URL.createObjectURL(file);
   try {
     const { publicUrl } = await uploadImage(file);
-    // console.log(url.publicUrl);
     // TODO: delete old img
     await client.from('posts').update({ image: publicUrl }).eq('id', state.id);
     ToastPromise.start('Image added!');
@@ -145,6 +146,9 @@ async function uploadImage(file) {
 <template>
   <div class="py-8">
     <div class="flex flex-col sm:flex-row gap-2 items-center mb-4">
+      <NuxtLink :to="localePath('/admin/manage-post')" class="text-slate-500 hover:text-slate-900">
+        <Icon name="ic:round-arrow-back-ios" class="text-lg -mt-0.5" />
+      </NuxtLink>
       <h1 class="flex-1 text-xl text-slate-700 font-bold uppercase">
         {{ $t('admin.title.news') }}
       </h1>
@@ -204,14 +208,17 @@ async function uploadImage(file) {
       <fieldset>
         <label class="text-xs font-semibold uppercase" for="locale">Main image</label>
 
-        <div v-if="!state.id || !id" class="p-4 text-amber-600 text-sm bg-amber-100 border border-amber-300 rounded-lg">
+        <div
+          v-if="id === 'new' && !state.id"
+          class="p-4 text-amber-600 text-sm bg-amber-100 border border-amber-300 rounded-lg"
+        >
           <p class="font-bold uppercase text-amber-700">Warning</p>
           <p>Lorem ipsum</p>
         </div>
 
         <div v-else class="flex flex-col sm:flex-row gap-4">
           <div class="bg-slate-200 rounded-lg overflow-hidden w-full max-w-xs">
-            <img :src="previewImage" class="object-cover aspect-video" />
+            <img :src="state.image" class="object-cover aspect-video" />
           </div>
           <input type="file" @change="onImageSelect" />
         </div>

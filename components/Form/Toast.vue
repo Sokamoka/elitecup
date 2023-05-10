@@ -30,7 +30,7 @@ export default {
 
 <template>
   <ToastPromise v-slot="{ resolve, args }">
-    <div class="max-w-xs">
+    <div class="w-72">
       <div
         :class="[
           'flex items-center justify-start p-4 gap-4 text-white font-bold rounded-lg shadow-lg',
@@ -47,7 +47,7 @@ export default {
           class="text-2xl shrink-0"
         />
 
-        <span class="leading-5">{{ args[0] }}</span>
+        <span class="flex-1 leading-5">{{ args[0] }}</span>
 
         <a
           href="#"
