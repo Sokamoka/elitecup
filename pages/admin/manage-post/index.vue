@@ -1,4 +1,5 @@
 <script setup>
+import { refDefault, useStorage } from '@vueuse/core';
 import { format, parseISO } from 'date-fns';
 import { ConfirmPromise } from '~/components/Form/Confirm.vue';
 import { ToastPromise } from '~/components/Form/Toast.vue';
@@ -43,7 +44,10 @@ const client = useSupabaseClient();
 
 const limit = 12;
 const page = ref(0);
-const localeFilter = ref(null);
+// const localeFilter = ref(null);
+
+const raw = useStorage('elitecup:admin:news');
+const localeFilter = refDefault(raw, 'en');
 
 const { from, to } = usePagination(page, limit);
 
@@ -72,9 +76,9 @@ const pageRange = computed(() => {
 });
 
 async function onDelete({ id, title }) {
-  console.log('DELETE:', id);
   const result = await ConfirmPromise.start();
   if (!result) return;
+
   const { error } = await client.from('posts').delete().eq('id', id);
   if (error) {
     ToastPromise.start(error?.message, 'error');
@@ -92,7 +96,7 @@ function onNext() {
 }
 
 function onChangeFilter(value) {
-  localeFilter.value = value;
+  raw.value = value;
 }
 </script>
 
@@ -104,7 +108,7 @@ function onChangeFilter(value) {
       </h1>
 
       <div class="flex gap-2 text-xs text-slate-400 font-bold">
-        <button :class="{ 'text-slate-900': localeFilter === null }" @click="onChangeFilter(null)">ALL</button>
+        <button :class="{ 'text-slate-900': localeFilter === 'all' }" @click="onChangeFilter('all')">ALL</button>
         <button
           v-for="locale in locales"
           :key="locale.code"

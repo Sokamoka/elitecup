@@ -9,15 +9,9 @@ export default defineEventHandler(async (event) => {
     .from('posts')
     .select('id, created_at, published_at, title, is_active, locale, slug', { count: 'exact' });
 
-  if (locale) query = query.eq('locale', locale);
+  if (locale !== 'all') query = query.eq('locale', locale);
   query = query.order('created_at', { ascending: false }).range(from, to);
 
-  // const { data, count, error } = await client
-  //   .from('posts')
-  //   .select('id, created_at, published_at, title, is_active, locale, slug', { count: 'exact' })
-  //   .eq('locale', locale)
-  //   .order('created_at', { ascending: false })
-  //   .range(from, to);
   const { data, count, error } = await query;
 
   if (error) {
