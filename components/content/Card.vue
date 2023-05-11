@@ -15,7 +15,7 @@ const props = defineProps({
   <div class="border border-slate-200 rounded-lg hover:border-slate-400">
     <div class="flex flex-col gap-4">
       <div
-        class="flex justify-center p-4 image aspect-video bg-white border-b border-slate-200 rounded-t-lg overflow-hidden"
+        class="flex justify-center p-4 image not-prose aspect-video bg-white border-b border-slate-200 rounded-t-lg overflow-hidden"
       >
         <ContentSlot :use="$slots.default" unwrap="p" />
       </div>
