@@ -7,6 +7,7 @@ import { ConfirmPromise } from '~/components/Form/Confirm.vue';
 import { ToastPromise } from '~/components/Form/Toast.vue';
 import { convertPostResponse } from '~/utils/posts';
 import { Database } from '~/types/Database';
+import { getFileName } from '~/utils/storage';
 
 definePageMeta({
   middleware: ['auth'],
@@ -127,6 +128,7 @@ async function onImageSelect(event) {
     const { publicUrl } = await uploadImage(file);
     // TODO: delete old img
     await client.from('posts').update({ image: publicUrl }).eq('id', state.id);
+    state.image = publicUrl;
     ToastPromise.start('Image added!');
   } catch (error) {
     console.log(error);
@@ -142,9 +144,43 @@ async function uploadImage(file) {
     cacheControl: '3600',
     upsert: false,
   });
+  if (error) {
+    throw new Error(error);
+  }
 
   const { data: publicUrl } = client.storage.from('posts').getPublicUrl(fileName);
   return publicUrl;
+}
+
+async function onDeleteImage() {
+  const result = await ConfirmPromise.start('Are you sure you want to delete this image?');
+  if (!result) return;
+
+  try {
+    await deleteImageFile([state.image]);
+    await deleteImageFromDb('');
+    state.image = '';
+    ToastPromise.start('Image Deleted!');
+  } catch (error) {
+    ToastPromise.start(useDBError(error, 'post', t), 'error');
+  }
+}
+
+async function deleteImageFile(files: [string]) {
+  const fileNames = files.map((file) => getFileName(file));
+  const { data, error } = await client.storage.from('posts').remove(fileNames);
+  if (error) {
+    throw new Error(error);
+  }
+  return data;
+}
+
+async function deleteImageFromDb(url: string) {
+  const { data, error } = await client.from('posts').update({ image: url }).eq('id', state.id);
+  if (error) {
+    throw new Error(error);
+  }
+  return data;
 }
 
 function displayLocale(value: string) {
@@ -228,7 +264,10 @@ function displayLocale(value: string) {
           <div class="bg-slate-200 rounded-lg overflow-hidden w-full max-w-xs">
             <img :src="state.image" class="object-cover aspect-video" />
           </div>
-          <input type="file" @change="onImageSelect" />
+          <div class="flex flex-col gap-4">
+            <input type="file" accept=".jpg, .jpeg, .png, .webp" class="button" @change="onImageSelect" />
+            <FormButton @click="onDeleteImage" :disabled="!state.image">Delete image</FormButton>
+          </div>
         </div>
       </fieldset>
 

@@ -5,7 +5,6 @@ export function useDBError(
   key: string,
   t: ComposerTranslation
 ) {
-  // const { t } = useI18n();
 
   switch (error.code) {
     case '23505':

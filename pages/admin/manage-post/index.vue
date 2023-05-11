@@ -46,7 +46,7 @@ const limit = 12;
 const page = ref(0);
 // const localeFilter = ref(null);
 
-const raw = useStorage('elitecup:admin:news');
+const raw = useStorage('elitecup:admin:news', 'en');
 const localeFilter = refDefault(raw, 'en');
 
 const { from, to } = usePagination(page, limit);
