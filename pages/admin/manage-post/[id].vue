@@ -123,6 +123,9 @@ async function onActivate(value: boolean) {
 async function onImageSelect(event) {
   const file = event.target.files[0];
   if (!file) return;
+  if (state.image) {
+    await deleteImageFile([state.image]);
+  }
   state.image = URL.createObjectURL(file);
   try {
     const { publicUrl } = await uploadImage(file);
