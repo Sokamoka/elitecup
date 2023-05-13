@@ -269,8 +269,11 @@ function displayLocale(value: string) {
         </div>
 
         <div v-else class="flex flex-col sm:flex-row gap-4">
-          <div class="bg-slate-200 rounded-lg overflow-hidden w-full max-w-xs">
-            <img :src="state.image" class="object-cover aspect-video" />
+          <div
+            class="flex items-center justify-center bg-slate-200 border border-dashed border-slate-400 rounded-lg overflow-hidden w-full max-w-xs aspect-video"
+          >
+            <img v-if="state.image" :src="state.image" class="object-cover aspect-video" />
+            <Icon v-else name="ic:twotone-photo-size-select-actual" class="opacity-30 text-6xl text-slate-400" />
           </div>
           <div class="flex flex-col gap-4">
             <input type="file" accept=".jpg, .jpeg, .png, .webp" class="button" @change="onImageSelect" />
