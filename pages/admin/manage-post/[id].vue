@@ -8,6 +8,11 @@ import { ToastPromise } from '~/components/Form/Toast.vue';
 import { convertPostResponse } from '~/utils/posts';
 import { Database } from '~/types/Database';
 import { getFileName } from '~/utils/storage';
+import { News } from '~/types/News';
+
+type HTMLElementEvent<T extends HTMLElement> = Event & {
+  target: T;
+};
 
 definePageMeta({
   middleware: ['auth'],
@@ -29,12 +34,13 @@ const state = reactive({
   lead: '',
   content: '',
   locale: 'en',
+  image: '',
   isActive: false,
   createdAt: null,
   publishedAt: null,
 });
 
-const { data, error, execute } = await useFetch('/api/admin/post', {
+const { data, error, execute } = await useFetch<News>('/api/admin/post', {
   query: { id },
   immediate: false,
 });
@@ -49,13 +55,13 @@ const rules = {
 const v$ = useVuelidate(rules, state);
 
 const localeItems = computed(() =>
-  locales.value.map((locale) => ({ value: locale.code, name: locale.code.toUpperCase() }))
+  locales.value.map((locale: { code: string }) => ({ value: locale.code, name: locale.code.toUpperCase() }))
 );
 
-watch(data, (response) => {
-  convertPostResponse(response, state);
+watch(data, (data) => {
+  convertPostResponse(data || {}, state);
 });
-watch(error, (error) => {
+watch(error, (error: any) => {
   if (!error) return;
   ToastPromise.start(error, 'error');
 });
@@ -120,26 +126,25 @@ async function onActivate(value: boolean) {
   ToastPromise.start('Activation changed!');
 }
 
-async function onImageSelect(event) {
-  const file = event.target.files[0];
-  if (!file) return;
+async function onImageSelect(event?: HTMLElementEvent<HTMLInputElement>): Promise<void> {
+  let files = event?.target?.files;
+  if (!files) return;
+  let file = files[0];
   if (state.image) {
     await deleteImageFile([state.image]);
   }
   state.image = URL.createObjectURL(file);
   try {
     const { publicUrl } = await uploadImage(file);
-    // TODO: delete old img
     await client.from('posts').update({ image: publicUrl }).eq('id', state.id);
     state.image = publicUrl;
     ToastPromise.start('Image added!');
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
     ToastPromise.start(useDBError(error, 'post', t), 'error');
   }
 }
 
-async function uploadImage(file) {
+async function uploadImage(file: File) {
   let uuid = self.crypto.randomUUID();
   let fileExtension = file.name.split('.').pop();
   const fileName = `public/post/${uuid}.${fileExtension}`;
@@ -148,7 +153,7 @@ async function uploadImage(file) {
     upsert: false,
   });
   if (error) {
-    throw new Error(error);
+    throw new Error(error.message);
   }
 
   const { data: publicUrl } = client.storage.from('posts').getPublicUrl(fileName);
@@ -164,7 +169,7 @@ async function onDeleteImage() {
     await deleteImageFromDb('');
     state.image = '';
     ToastPromise.start('Image Deleted!');
-  } catch (error) {
+  } catch (error: any) {
     ToastPromise.start(useDBError(error, 'post', t), 'error');
   }
 }
@@ -173,7 +178,7 @@ async function deleteImageFile(files: [string]) {
   const fileNames = files.map((file) => getFileName(file));
   const { data, error } = await client.storage.from('posts').remove(fileNames);
   if (error) {
-    throw new Error(error);
+    throw new Error(error.message);
   }
   return data;
 }
@@ -181,13 +186,13 @@ async function deleteImageFile(files: [string]) {
 async function deleteImageFromDb(url: string) {
   const { data, error } = await client.from('posts').update({ image: url }).eq('id', state.id);
   if (error) {
-    throw new Error(error);
+    throw new Error(error.message);
   }
   return data;
 }
 
 function displayLocale(value: string) {
-  return localeItems.value.find((locale) => locale.value === value)?.name ?? '';
+  return localeItems.value.find((locale: Ref<string>) => locale.value === value)?.name ?? '';
 }
 </script>
 <template>
@@ -321,7 +326,7 @@ function displayLocale(value: string) {
 
       <fieldset>
         <label class="text-xs font-semibold uppercase">Content</label>
-        <FormEditor v-model="state.content" :height="400" />
+        <FormEditor v-model="state.content" :height="250" />
       </fieldset>
     </div>
 

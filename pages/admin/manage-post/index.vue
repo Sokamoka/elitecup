@@ -1,8 +1,9 @@
-<script setup>
+<script setup lang="ts">
 import { refDefault, useStorage } from '@vueuse/core';
 import { format, parseISO } from 'date-fns';
 import { ConfirmPromise } from '~/components/Form/Confirm.vue';
 import { ToastPromise } from '~/components/Form/Toast.vue';
+import { News } from '~/types/News';
 // import { Database } from '~/types/Database';
 
 definePageMeta({
@@ -44,14 +45,13 @@ const client = useSupabaseClient();
 
 const limit = 12;
 const page = ref(0);
-// const localeFilter = ref(null);
 
 const raw = useStorage('elitecup:admin:news', 'en');
 const localeFilter = refDefault(raw, 'en');
 
 const { from, to } = usePagination(page, limit);
 
-const { data: posts, refresh } = await useFetch('/api/admin/posts', {
+const { data: posts, refresh } = await useFetch<{ posts: News[]; count: number }>('/api/admin/posts', {
   query: { from, to, locale: localeFilter },
   transform: ({ posts, count }) => {
     return {
@@ -75,17 +75,35 @@ const pageRange = computed(() => {
   return [page.value * limit + 1, Math.min((page.value + 1) * limit, count)];
 });
 
-async function onDelete({ id, title }) {
+async function onDelete({ id, title, image }: News) {
   const result = await ConfirmPromise.start();
   if (!result) return;
 
-  const { error } = await client.from('posts').delete().eq('id', id);
-  if (error) {
-    ToastPromise.start(error?.message, 'error');
-    return;
+  try {
+    await deletePost(id.toString());
+    await deletePostImage([image]);
+    refresh();
+    ToastPromise.start(`${t('admin.messages.delete')} (${title})`);
+  } catch (error: any) {
+    ToastPromise.start(error.message, 'error');
   }
-  refresh();
-  ToastPromise.start(`${t('admin.messages.delete')} (${title})`);
+}
+
+async function deletePost(id: string) {
+  const { data, error } = await client.from('posts').delete().eq('id', id);
+  if (error) {
+    throw new Error(error.message);
+  }
+  return data;
+}
+
+async function deletePostImage(files: string[]) {
+  const fileNames = files.map((file) => getFileName(file));
+  const { data, error } = await client.storage.from('posts').remove(fileNames);
+  if (error) {
+    throw new Error(error.message);
+  }
+  return data;
 }
 
 function onPrev() {
@@ -95,7 +113,7 @@ function onNext() {
   page.value++;
 }
 
-function onChangeFilter(value) {
+function onChangeFilter(value: string) {
   raw.value = value;
 }
 </script>
@@ -127,12 +145,22 @@ function onChangeFilter(value) {
 
     <div class="rounded-lg bg-white shadow-sm w-full overflow-hidden">
       <div class="w-full overflow-x-auto">
-        <DataTable :rows="posts.posts || []" :columns="columns">
+        <DataTable :rows="posts?.posts || []" :columns="columns">
           <template #cell-title="{ row }">
-            <NuxtLink :to="localePath(`/admin/manage-post/${row.id}`)">
-              {{ row.title }}
+            <NuxtLink :to="localePath(`/admin/manage-post/${row.id}`)" class="grid grid-cols-[3rem_1fr] grid-rows-2">
+              <div class="row-span-2">
+                <div
+                  class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-200 overflow-hidden shadow-inner"
+                >
+                  <img v-if="row.image" :src="row.image" class="object-cover aspect-square" />
+                  <Icon v-else name="ic:twotone-photo-size-select-actual" class="opacity-30 text-lg" />
+                </div>
+              </div>
+              <div>
+                {{ row.title }}
+              </div>
+              <p class="text-slate-400 text-sm font-normal">{{ row.created_at }}</p>
             </NuxtLink>
-            <p class="text-slate-400 text-sm font-normal">{{ row.created_at }}</p>
           </template>
 
           <template #cell-published_at="{ row }">
@@ -184,8 +212,15 @@ function onChangeFilter(value) {
           {{ $t('admin.common.pageRange', [pageRange[0], pageRange[1], posts?.count]) }}
         </div>
         <div>
-          <button type="button" class="p-2 disabled:text-slate-400" :disabled="page === 0" @click="onPrev">Prev</button>
-          <button type="button" class="p-2 disabled:text-slate-400" :disabled="page === maxPage" @click="onNext">
+          <button type="button" class="p-2 disabled:text-slate-400 uppercase" :disabled="page === 0" @click="onPrev">
+            Prev
+          </button>
+          <button
+            type="button"
+            class="p-2 disabled:text-slate-400 uppercase"
+            :disabled="page === maxPage"
+            @click="onNext"
+          >
             Next
           </button>
         </div>

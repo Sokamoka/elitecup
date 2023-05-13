@@ -4,14 +4,6 @@ import { News } from '~/types/News';
 const page = ref(0);
 const limit = 5;
 
-// interface ApiResponse {
-//   mainImage: string;
-//   title: string;
-//   lead: string;
-//   publishedAt: string;
-//   _path: string;
-// }
-
 definePageMeta({
   layout: false,
 });

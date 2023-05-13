@@ -4,11 +4,18 @@ import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
 import TextAlign from '@tiptap/extension-text-align';
 
+interface TextActions {
+  slug: string;
+  icon: string;
+  option?: string;
+  active: string | { textAlign: string };
+}
+
 const props = defineProps<{ modelValue: string; height?: number }>();
 
 const emit = defineEmits(['update:modelValue']);
 
-const textActions = [
+const textActions: Array<TextActions[]> = [
   [
     { slug: 'bold', icon: 'ic:twotone-format-bold', active: 'bold' },
     { slug: 'italic', icon: 'ic:twotone-format-italic', active: 'italic' },
@@ -60,9 +67,8 @@ const editor = useEditor({
   onUpdate,
   editorProps: {
     attributes: {
-      class: `prose max-w-none prose-sm sm:prose sm:max-w-none p-4 bg-slate-100 rounded-b-lg focus:outline-none ${
-        props.height ? `min-h-[${props.height}px]` : ''
-      }`,
+      class: 'prose max-w-none prose-sm sm:prose sm:max-w-none p-4 bg-slate-100 rounded-b-lg focus:outline-none',
+      style: `min-height: ${props.height}px;`,
     },
   },
 });
@@ -70,12 +76,9 @@ const editor = useEditor({
 watch(
   () => props.modelValue,
   (value) => {
-    // console.log('WATCH');
     if (editor.value?.getHTML() === value) return;
-
     // JSON
     // const isSame = JSON.stringify(this.editor.getJSON()) === JSON.stringify(value)
-
     editor.value?.commands.setContent(value, false);
   }
 );
@@ -84,25 +87,25 @@ function onUpdate() {
   emit('update:modelValue', editor.value?.getHTML());
 }
 
-function onActionClick(slug: string, option: string) {
+function onActionClick(slug: TextActions['slug'], option: TextActions['option']) {
   const vm = editor.value?.chain().focus();
-  const actionTriggers = {
-    bold: () => vm.toggleBold().run(),
-    italic: () => vm.toggleItalic().run(),
-    underline: () => vm.toggleUnderline().run(),
-    strike: () => vm.toggleStrike().run(),
-    align: () => vm.setTextAlign(option).run(),
-    bulletList: () => vm.toggleBulletList().run(),
-    orderedList: () => vm.toggleOrderedList().run(),
+  const actionTriggers: any = {
+    bold: () => vm?.toggleBold().run(),
+    italic: () => vm?.toggleItalic().run(),
+    underline: () => vm?.toggleUnderline().run(),
+    strike: () => vm?.toggleStrike().run(),
+    align: () => vm?.setTextAlign(option || '').run(),
+    bulletList: () => vm?.toggleBulletList().run(),
+    orderedList: () => vm?.toggleOrderedList().run(),
     clear: () => {
-      vm.clearNodes().run();
-      vm.unsetAllMarks().run();
+      vm?.clearNodes().run();
+      vm?.unsetAllMarks().run();
     },
   };
   actionTriggers[slug]();
 }
 
-function isActive(option: {}) {
+function isActive(option: TextActions['active']) {
   return editor.value?.isActive(option);
 }
 </script>
