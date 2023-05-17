@@ -7,3 +7,4 @@ export const SORT_STATE_DESCEND = 'descend';
 export const SORT_STATE_ASCEND = 'ascend';
 
 export const VIDEO_PAGE_LIMIT_PER_PAGE = 24;
+export const NEWS_PAGE_LIMIT_PER_PAGE = 12;

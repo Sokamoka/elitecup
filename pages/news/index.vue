@@ -1,8 +1,9 @@
 <script lang="ts" setup>
+import { NEWS_PAGE_LIMIT_PER_PAGE } from '~/constants';
 import { News } from '~/types/News';
 
 const page = ref(0);
-const limit = 5;
+const limit = NEWS_PAGE_LIMIT_PER_PAGE;
 
 definePageMeta({
   layout: false,
@@ -48,7 +49,7 @@ const toDate = (date: string) => toDefaultDate(new Date(date));
     <div class="flex flex-col space-y-8">
       <div v-for="item in data?.posts" :key="item.id" class="flex flex-col sm:flex-row space-x-4 w-full">
         <div class="flex-shrink-0">
-          <img v-if="item.image" class="h-auto sm:h-36 aspect-[16/10] rounded-lg" :src="item.image" :alt="item.title" />
+          <img v-if="item.image" class="h-auto sm:h-36 aspect-[16/10] object-cover rounded-lg" :src="item.image" :alt="item.title" />
           <img
             v-else
             src="~/assets/images/elitecup_default_image.svg"
