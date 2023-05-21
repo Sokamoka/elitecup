@@ -1,6 +1,6 @@
 <script setup>
 definePageMeta({
-  key: 'admin/dashboard'
+  key: 'admin/dashboard',
 });
 </script>
 
@@ -14,7 +14,16 @@ definePageMeta({
         {{ $t('admin.common.new') }}
       </FormButton> -->
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 grid-flow-row w-full">
+    <div class="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4 w-full">
+      <MainBox title="Manage Videos" class="bg-slate-50 border-slate-300 shadow-sm">
+        <template #header-append>
+          <NuxtLink :to="localePath('/admin/manage-post')" v-slot="{ navigate }" custom>
+            <FormButton variant="link" class="text-sm -mr-4" @click="navigate">{{ $t('common.edit') }}</FormButton>
+          </NuxtLink>
+        </template>
+        Posts
+      </MainBox>
+
       <MainBox title="Manage Videos" class="bg-slate-50 border-slate-300 shadow-sm">
         <template #header-append>
           <NuxtLink :to="localePath('/admin/videos')" v-slot="{ navigate }" custom>
