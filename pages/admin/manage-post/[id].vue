@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import useVuelidate from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
-import { snakeKeys, toSnakeCase } from 'js-convert-case';
+import { snakeKeys, toKebabCase } from 'js-convert-case';
 import { omit } from 'ramda';
 import { ConfirmPromise } from '~/components/Form/Confirm.vue';
 import { ToastPromise } from '~/components/Form/Toast.vue';
@@ -81,12 +81,12 @@ async function save() {
   }
   state.createdAt = data.created_at;
   state.id = data.id;
-  ToastPromise.start('Save success!');
+  ToastPromise.start(t('admin.messages.save'));
   return;
 }
 
 function onTitleChange() {
-  state.slug = toSnakeCase(state.title);
+  state.slug = toKebabCase(state.title);
 }
 
 function formatDateTime(date: string | null) {
@@ -97,7 +97,7 @@ function formatDateTime(date: string | null) {
 async function onPublishPost() {
   const isValid = await v$.value.$validate();
   if (!isValid) return;
-  const result = await ConfirmPromise.start('Are you sure you want to publish this post?');
+  const result = await ConfirmPromise.start(t('admin.messages.publishDialog'));
   if (!result) return;
   if (!state.id) {
     await save();
@@ -114,7 +114,7 @@ async function onPublishPost() {
   }
   state.publishedAt = data.published_at;
   state.isActive = data.is_active;
-  ToastPromise.start('Publish success!');
+  ToastPromise.start(t('admin.messages.publish'));
 }
 
 async function onActivate(value: boolean) {
@@ -123,7 +123,7 @@ async function onActivate(value: boolean) {
     ToastPromise.start(useDBError(error, 'post', t), 'error');
     return;
   }
-  ToastPromise.start('Activation changed!');
+  ToastPromise.start(t('admin.messages.activation'));
 }
 
 async function onImageSelect(event?: HTMLElementEvent<HTMLInputElement>): Promise<void> {
@@ -161,14 +161,14 @@ async function uploadImage(file: File) {
 }
 
 async function onDeleteImage() {
-  const result = await ConfirmPromise.start('Are you sure you want to delete this image?');
+  const result = await ConfirmPromise.start(t('admin.messages.deleteImageDialog'));
   if (!result) return;
 
   try {
     await deleteImageFile([state.image]);
     await deleteImageFromDb('');
     state.image = '';
-    ToastPromise.start('Image Deleted!');
+    ToastPromise.start(t('admin.messages.deleteImage'));
   } catch (error: any) {
     ToastPromise.start(useDBError(error, 'post', t), 'error');
   }
@@ -205,7 +205,7 @@ function displayLocale(value: string) {
         {{ $t('admin.title.news') }}
       </h1>
       <div v-if="state.publishedAt">
-        <FormToggle v-model="state.isActive" label="Active" @update:model-value="onActivate" />
+        <FormToggle v-model="state.isActive" :label="t('admin.managePosts.active')" @update:model-value="onActivate" />
       </div>
       <FormButton v-else variant="primary" size="sm" @click="onPublishPost">
         {{ $t('admin.common.publish') }}
@@ -230,27 +230,27 @@ function displayLocale(value: string) {
     <div class="flex flex-col gap-4 rounded-lg bg-white shadow-sm p-4 w-full">
       <div class="grid grid-cols-1 md:grid-cols-3 items-start gap-4">
         <fieldset>
-          <label class="text-xs font-semibold uppercase" for="locale">Created At</label>
+          <label class="text-xs font-semibold uppercase" for="locale">{{ t('admin.managePosts.createdAt') }}</label>
           <p class="text-sm text-slate-500 bg-slate-100 p-3 rounded-md">
             <template v-if="state.createdAt">
               {{ formatDateTime(state.createdAt) }}
             </template>
-            <template v-else> This is New post </template>
+            <template v-else> {{ t('admin.managePosts.newPost') }} </template>
           </p>
         </fieldset>
 
         <fieldset>
-          <label class="text-xs font-semibold uppercase" for="locale">Published At</label>
+          <label class="text-xs font-semibold uppercase" for="locale">{{ t('admin.managePosts.publishedAt') }}</label>
           <p class="text-sm text-slate-500 bg-slate-100 p-3 rounded-md">
             <template v-if="state.publishedAt">
               {{ formatDateTime(state.publishedAt) }}
             </template>
-            <template v-else> Not published </template>
+            <template v-else> {{ t('admin.managePosts.notPublished') }} </template>
           </p>
         </fieldset>
 
         <fieldset>
-          <label class="text-xs font-semibold uppercase" for="locale">Locale</label>
+          <label class="text-xs font-semibold uppercase" for="locale">{{ t('admin.managePosts.locale') }}</label>
           <FormSelect id="locale" v-model="state.locale" :display-value="displayLocale" :items="localeItems" />
         </fieldset>
       </div>
@@ -258,14 +258,14 @@ function displayLocale(value: string) {
       <hr />
 
       <fieldset>
-        <label class="text-xs font-semibold uppercase" for="locale">Main image</label>
+        <label class="text-xs font-semibold uppercase" for="locale">{{ t('admin.managePosts.mainImage') }}</label>
 
         <div
           v-if="id === 'new' && !state.id"
           class="p-4 text-amber-600 text-sm bg-amber-100 border border-amber-300 rounded-lg"
         >
-          <p class="font-bold uppercase text-amber-700">Warning</p>
-          <p>Lorem ipsum</p>
+          <p class="font-bold uppercase text-amber-700">{{ t('admin.common.warning') }}</p>
+          <p>{{ t('admin.messages.saveFirst') }}</p>
         </div>
 
         <div v-else class="flex flex-col sm:flex-row gap-4">
@@ -277,7 +277,9 @@ function displayLocale(value: string) {
           </div>
           <div class="flex flex-col gap-4">
             <input type="file" accept=".jpg, .jpeg, .png, .webp" class="button" @change="onImageSelect" />
-            <FormButton @click="onDeleteImage" :disabled="!state.image">Delete image</FormButton>
+            <FormButton @click="onDeleteImage" :disabled="!state.image">
+              {{ t('admin.managePosts.deleteImage') }}
+            </FormButton>
           </div>
         </div>
       </fieldset>
@@ -285,7 +287,7 @@ function displayLocale(value: string) {
       <hr />
 
       <fieldset>
-        <label class="text-xs font-semibold uppercase" for="title">Title</label>
+        <label class="text-xs font-semibold uppercase" for="title">{{ t('admin.managePosts.title') }}</label>
         <FormInput id="title" v-model="state.title" :has-error="v$.title.$error" @change="onTitleChange" />
         <p v-if="v$.title.$error" class="form-error">
           {{ v$.title.$errors[0].$message }}
@@ -293,10 +295,10 @@ function displayLocale(value: string) {
         <div>
           <div class="flex items-center">
             <div class="flex-1 text-slate-500 text-sm font-medium truncate">
-              Slug: https://elitecup.eu/news/{{ state.slug }}
+              {{ t('admin.managePosts.slugHint') }}{{ state.slug }}
             </div>
             <FormButton variant="link" size="xs" @click="isSlugOpen ? (isSlugOpen = false) : (isSlugOpen = true)">
-              Edit
+              {{ t('common.edit') }}
             </FormButton>
           </div>
           <div
@@ -306,7 +308,7 @@ function displayLocale(value: string) {
             ]"
           >
             <div class="overflow-hidden">
-              <label class="text-xs font-semibold uppercase" for="slug">Slug</label>
+              <label class="text-xs font-semibold uppercase" for="slug">{{ t('admin.managePosts.slug') }}</label>
               <FormInput
                 id="slug"
                 v-model="state.slug"
@@ -323,12 +325,12 @@ function displayLocale(value: string) {
       </fieldset>
 
       <fieldset>
-        <label class="text-xs font-semibold uppercase" for="lead">Lead</label>
+        <label class="text-xs font-semibold uppercase" for="lead">{{ t('admin.managePosts.lead') }}</label>
         <FormEditor v-model="state.lead" />
       </fieldset>
 
       <fieldset>
-        <label class="text-xs font-semibold uppercase">Content</label>
+        <label class="text-xs font-semibold uppercase">{{ t('admin.managePosts.content') }}</label>
         <FormEditor v-model="state.content" :height="250" />
       </fieldset>
     </div>

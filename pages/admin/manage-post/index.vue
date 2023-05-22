@@ -126,7 +126,9 @@ function onChangeFilter(value: string) {
       </h1>
 
       <div class="flex gap-2 text-xs text-slate-400 font-bold">
-        <button :class="{ 'text-slate-900': localeFilter === 'all' }" @click="onChangeFilter('all')">ALL</button>
+        <button :class="{ 'text-slate-900': localeFilter === 'all' }" @click="onChangeFilter('all')">
+          {{ t('common.all') }}
+        </button>
         <button
           v-for="locale in locales"
           :key="locale.code"

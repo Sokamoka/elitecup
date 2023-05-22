@@ -5,7 +5,8 @@
     "moreGames": "More games",
     "readMore": "Read more",
     "profile": "Profile",
-    "edit": "Edit"
+    "edit": "Edit",
+    "all": "All"
   },
   "menu": {
     "news": "News",
@@ -84,7 +85,8 @@
       "pageRange": "{0} - {1} of {2} videos",
       "save": "Save",
       "publish": "Publish",
-      "preview": "Preview"
+      "preview": "Preview",
+      "warning": "Warning"
     },
     "manageVideo": {
       "game": "Game",
@@ -96,16 +98,41 @@
         "addVideo": "Add new video"
       }
     },
+    "managePosts": {
+      "createdAt": "Created At",
+      "publishedAt": "Published At",
+      "locale": "Locale",
+      "newPost": "This is New post",
+      "notPublished": "Not published",
+      "mainImage": "Main image",
+      "title": "Title",
+      "lead": "Lead",
+      "content": "Content",
+      "slug": "Slug",
+      "slugHint": "Slug: https://elitecup.eu/news/",
+      "deleteImage": "Delete image",
+      "active": "Active"
+    },
     "messages": {
       "delete": "Delete success",
       "update": "Update success",
+      "save": "Save success",
       "sure": "Are you sure?",
+      "publish": "Publish success",
+      "activation": "Activation changed",
+      "publishDialog": "Are you sure you want to publish this post?",
+      "deleteImage": "Image Deleted!",
+      "deleteImageDialog": "Are you sure you want to delete this image?",
       "yes": "Yes",
-      "no": "No"
+      "no": "No",
+      "saveFirst": "To upload the main image, first save the news. You can then add a main image to the news."
     },
     "error": {
       "video": {
         "unique_violation": "This game already has a video"
+      },
+      "post": {
+        "unique_violation": "The slug must be unique!"
       }
     }
   }

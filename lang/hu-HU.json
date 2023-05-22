@@ -5,7 +5,8 @@
     "moreGames": "Mégtöbb mérkőzés",
     "readMore": "Tovább",
     "profile": "Profil",
-    "edit": "Szerkesztés"
+    "edit": "Szerkesztés",
+    "all": "Mind"
   },
   "menu": {
     "news": "Hírek",
@@ -84,7 +85,8 @@
       "pageRange": "Mutatva {0} - {1} a {2} videóból",
       "save": "Mentés",
       "publish": "Publikálás",
-      "preview": "Előnézet"
+      "preview": "Előnézet",
+      "warning": "Figyelmeztetés"
     },
     "manageVideo": {
       "game": "Mérkőzés",
@@ -96,16 +98,41 @@
         "addVideo": "Új videó hozzáadása"
       }
     },
+    "managePosts": {
+      "createdAt": "Létrehozva",
+      "publishedAt": "Publikálva",
+      "locale": "Nyelv",
+      "newPost": "Ez egy új hír",
+      "notPublished": "Nincs publikálva",
+      "mainImage": "Fő kép",
+      "title": "Cím",
+      "lead": "Alcím",
+      "content": "Tartalom",
+      "slug": "Beszédes URL",
+      "slugHint": "Beszédes URL: https://elitecup.eu/news/",
+      "deleteImage": "Kép törlése",
+      "active": "Aktív"
+    },
     "messages": {
       "delete": "Sikeres törlés",
       "update": "Sikeres módosítás",
+      "save": "Sikeres mentés",
       "sure": "Biztos hogy törlöd?",
+      "publish": "Sikeres publikálás",
+      "activation": "Aktív állapot megváltozott",
+      "publishDialog": "Biztos vagy benne hogy publikálod a hírt?",
+      "deleteImage": "A kép törlése sikeres!",
+      "deleteImageDialog": "Biztos vagy benne, hogy törlöd a képet?",
       "yes": "Igen",
-      "no": "Nem"
+      "no": "Nem",
+      "saveFirst": "A fő kép feltöltéséhez először mentsd el a hírt. Utána tudsz a hírhez fő képet hozzáadni."
     },
     "error": {
       "video": {
         "unique_violation": "Ehhez a mérkőzéshez már tartozik videó"
+      },
+      "post": {
+        "unique_violation": "Az URL-nek egyedinek kell lennie!"
       }
     }
   }

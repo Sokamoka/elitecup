@@ -15,7 +15,7 @@ definePageMeta({
       </FormButton> -->
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4 w-full">
-      <MainBox title="Manage Videos" class="bg-slate-50 border-slate-300 shadow-sm">
+      <MainBox title="Manage News" class="bg-slate-50 border-slate-300 shadow-sm">
         <template #header-append>
           <NuxtLink :to="localePath('/admin/manage-post')" v-slot="{ navigate }" custom>
             <FormButton variant="link" class="text-sm -mr-4" @click="navigate">{{ $t('common.edit') }}</FormButton>
