@@ -1,5 +1,5 @@
 <script setup>
-import { createConfig } from '~/assets/js/mjsz-vbr-bundle.esm-browser.js';
+import { createConfig } from '~/assets/js/mjsz-vbr-bundle.esm.js';
 const config = useRuntimeConfig();
 
 createConfig({
