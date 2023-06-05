@@ -30,5 +30,77 @@ const { locale } = useI18n();
         <mjsz-vbr-standings :locale="locale" championship-id="3311" division="Preliminary Round - C" />
       </ClientOnly>
     </div>
+
+    <div>
+      <h2 class="font-bold text-xl leading-10">Budapest, Miskolc</h2>
+      <ClientOnly>
+        <mjsz-vbr-schedule :locale="locale" championship-id="3311" division="Preliminary Round - D" />
+        <mjsz-vbr-standings :locale="locale" championship-id="3311" division="Preliminary Round - D" />
+      </ClientOnly>
+    </div>
+
+    <div>
+      <h2 class="font-bold text-xl leading-10">Budapest</h2>
+      <ClientOnly>
+        <mjsz-vbr-schedule :locale="locale" championship-id="3311" division="Preliminary Round - E" />
+        <mjsz-vbr-standings :locale="locale" championship-id="3311" division="Preliminary Round - E" />
+      </ClientOnly>
+    </div>
+
+    <div>
+      <h2 class="font-bold text-xl leading-10">Zvolen</h2>
+      <ClientOnly>
+        <mjsz-vbr-schedule :locale="locale" championship-id="3311" division="Preliminary Round - F" />
+        <mjsz-vbr-standings :locale="locale" championship-id="3311" division="Preliminary Round - F" />
+      </ClientOnly>
+    </div>
+
+    <div>
+      <h2 class="font-bold text-xl leading-10">Banska Bystrica</h2>
+      <ClientOnly>
+        <mjsz-vbr-schedule :locale="locale" championship-id="3311" division="Preliminary Round - G" />
+        <mjsz-vbr-standings :locale="locale" championship-id="3311" division="Preliminary Round - G" />
+      </ClientOnly>
+    </div>
+
+    <div>
+      <h2 class="font-bold text-xl leading-10">Klagenfurt</h2>
+      <ClientOnly>
+        <mjsz-vbr-schedule :locale="locale" championship-id="3311" division="Preliminary Round - H" />
+        <mjsz-vbr-standings :locale="locale" championship-id="3311" division="Preliminary Round - H" />
+      </ClientOnly>
+    </div>
+
+    <div>
+      <h2 class="font-bold text-xl leading-10">Nitra</h2>
+      <ClientOnly>
+        <mjsz-vbr-schedule :locale="locale" championship-id="3311" division="Preliminary Round - I" />
+        <mjsz-vbr-standings :locale="locale" championship-id="3311" division="Preliminary Round - I" />
+      </ClientOnly>
+    </div>
+
+    <div>
+      <h2 class="font-bold text-xl leading-10">Budapest</h2>
+      <ClientOnly>
+        <mjsz-vbr-schedule :locale="locale" championship-id="3311" division="Preliminary Round - J" />
+        <mjsz-vbr-standings :locale="locale" championship-id="3311" division="Preliminary Round - J" />
+      </ClientOnly>
+    </div>
+
+    <div>
+      <h2 class="font-bold text-xl leading-10">Graz</h2>
+      <ClientOnly>
+        <mjsz-vbr-schedule :locale="locale" championship-id="3311" division="Preliminary Round - K" />
+        <mjsz-vbr-standings :locale="locale" championship-id="3311" division="Preliminary Round - K" />
+      </ClientOnly>
+    </div>
+
+    <div>
+      <h2 class="font-bold text-xl leading-10">Székesfehérvár</h2>
+      <ClientOnly>
+        <mjsz-vbr-schedule :locale="locale" championship-id="3311" division="Preliminary Round - L" />
+        <mjsz-vbr-standings :locale="locale" championship-id="3311" division="Preliminary Round - L" />
+      </ClientOnly>
+    </div>
   </div>
 </template>
