@@ -1,4 +1,5 @@
-import tailwindTypography from '@tailwindcss/typography'
+import tailwindTypography from '@tailwindcss/typography';
+import { fileURLToPath } from 'url';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -16,6 +17,10 @@ export default defineNuxtConfig({
     compilerOptions: {
       isCustomElement: (tag) => tag.includes('mjsz-vbr-'),
     },
+  },
+
+  alias: {
+    '@mjsz-vbr-elements/core': fileURLToPath(new URL('./assets/js/mjsz-vbr-elements-core.esm.js', import.meta.url)),
   },
 
   app: {
@@ -52,8 +57,8 @@ export default defineNuxtConfig({
     cssPath: '~/assets/css/tailwind.css',
     config: {
       content: [],
-      plugins: [tailwindTypography]
-    }
+      plugins: [tailwindTypography],
+    },
   },
 
   googleFonts: {
