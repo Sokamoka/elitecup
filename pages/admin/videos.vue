@@ -108,7 +108,7 @@ const { data: videos, refresh } = await useFetch<VideoResponse>('/api/admin/vide
 
 const maxPage = computed(() => {
   const count = videos.value?.count ?? 0;
-  return Math.floor(count / limit);
+  return Math.ceil(count / limit) || 1;
 });
 
 const pageRange = computed(() => {
@@ -201,6 +201,12 @@ const onNext = () => {
               </button>
             </div>
           </template>
+
+          <template v-slot:empty>
+            <div class="text-center p-3 text-slate-500">
+              {{ $t('common.noData') }}
+            </div>
+          </template>
         </DataTable>
       </div>
 
@@ -210,7 +216,7 @@ const onNext = () => {
         </div>
         <div>
           <button type="button" class="p-2 disabled:text-slate-400" :disabled="page === 0" @click="onPrev">Prev</button>
-          <button type="button" class="p-2 disabled:text-slate-400" :disabled="page === maxPage" @click="onNext">
+          <button type="button" class="p-2 disabled:text-slate-400" :disabled="page === maxPage - 1" @click="onNext">
             Next
           </button>
         </div>

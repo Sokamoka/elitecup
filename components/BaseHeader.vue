@@ -7,7 +7,7 @@ const localePath = useLocalePath();
   <div>
     <div class="flex items-center border-b border-slate-300 px-4 py-2 text-xs uppercase text-slate-400">
       <div class="flex-1">
-        Elite Cup |
+        Elite Cup
         <!-- <NuxtLink
           v-for="locale in locales"
           :key="locale.code"
@@ -24,6 +24,9 @@ const localePath = useLocalePath();
         </NuxtLink>
         <NuxtLink to="https://www.facebook.com/elitecup" target="_blank">
           <Icon name="cib:facebook" />
+        </NuxtLink>
+        <NuxtLink to="https://www.youtube.com/@elitecup2514" target="_blank">
+          <Icon name="cib:youtube" />
         </NuxtLink>
       </div>
     </div>
