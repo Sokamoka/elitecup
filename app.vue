@@ -3,9 +3,11 @@ import { createConfig } from '~/assets/js/mjsz-vbr-elements-core.esm.js';
 import MjszVbrElements from '~/assets/js/mjsz-vbr-elements.esm.js';
 import MjszVbrElementsExtended from '~/assets/js/mjsz-vbr-elements-extended.esm.js';
 
+const config = useRuntimeConfig();
+
 createConfig({
   modules: [MjszVbrElements, MjszVbrElementsExtended],
-  apiKey: 'dd8adf5fdb738b3741fa579b5ede5ce69b681f62',
+  apiKey: config.public.vbrApiKey,
 });
 </script>
 <template>
