@@ -45,7 +45,7 @@ watch(isMiddleScreen, (isMiddleScreen) => {
                 </NuxtLink>
               </HeadlessMenuItem>
 
-              <HeadlessMenuItem v-slot="{ active }">
+              <!-- <HeadlessMenuItem v-slot="{ active }">
                 <NuxtLink
                   :to="localePath('/u18/standings')"
                   :class="[
@@ -55,7 +55,7 @@ watch(isMiddleScreen, (isMiddleScreen) => {
                 >
                   {{ $t('menu.standings') }}
                 </NuxtLink>
-              </HeadlessMenuItem>
+              </HeadlessMenuItem> -->
 
               <HeadlessMenuItem v-slot="{ active }">
                 <NuxtLink
