@@ -51,6 +51,7 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     'nuxt-headlessui',
     'nuxt-icon',
+    '@zadigetvoltaire/nuxt-gtm',
   ],
 
   tailwindcss: {
@@ -95,5 +96,9 @@ export default defineNuxtConfig({
     navigation: {
       fields: ['publishedAt', 'lead', 'mainImage'],
     },
+  },
+
+  gtm: {
+    id: 'GTM-KK3DG5VV',
   },
 });
