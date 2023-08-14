@@ -34,10 +34,10 @@ const localePath = useLocalePath();
       <NuxtLink :to="localePath('/')">
         <img src="~/assets/images/elite_cup_logo.svg" alt="Elite Cup" class="h-16" />
       </NuxtLink>
-      <!-- <div class="flex items-center px-4 gap-8">
+      <div class="flex items-center px-4 gap-8">
         <img src="~/assets/images/Bauer-logo-black.svg" alt="Marczi Skate" class="h-10 sm:h-16 object-contain" />
         <img src="~/assets/images/MS_logo.webp" alt="Marczi Skate" class="h-10 sm:h-16 object-contain" />
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
