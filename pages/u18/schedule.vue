@@ -8,7 +8,7 @@ const { locale } = useI18n();
   </h1>
   <div class="py-8 space-y-8">
     <div>
-      <h2 class="font-bold text-xl leading-10">Katowice</h2>
+      <h2 class="font-bold text-xl leading-10">Sosnowiec</h2>
       <ClientOnly>
         <mjsz-vbr-schedule :locale="locale" championship-id="3447" division="Preliminary Round - A" />
         <mjsz-vbr-standings :locale="locale" championship-id="3447" division="Preliminary Round - A" />
@@ -16,7 +16,7 @@ const { locale } = useI18n();
     </div>
 
     <div>
-      <h2 class="font-bold text-xl leading-10">Budapest</h2>
+      <h2 class="font-bold text-xl leading-10">Nitra</h2>
       <ClientOnly>
         <mjsz-vbr-schedule :locale="locale" championship-id="3447" division="Preliminary Round - B" />
         <mjsz-vbr-standings :locale="locale" championship-id="3447" division="Preliminary Round - B" />
