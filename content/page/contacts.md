@@ -59,7 +59,7 @@ title: 'Contacts'
     ![DVTK](https://api.icehockey.hu/static/api/team-logo/21093.png)
   :::
 
-  :::card{email="office@stehv.at" phone="+43 664 2005505"}
+  :::card{email="office@stehv.at" phone="+43 664 2142294"}
     ![DVTK](https://api.icehockey.hu/static/api/team-logo/21074.png)
   :::
 
