@@ -45,9 +45,5 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 ### Instagram
 Auth (böngészőben megnyitni):
 ```bash
-  https://api.instagram.com/oauth/authorize
-  ?client_id=2008533396165058
-  &redirect_uri=https://elitecup.netlify.app/api/instagram/token
-  &scope=user_profile,user_media
-  &response_type=code
+  https://api.instagram.com/oauth/authorize?client_id=2008533396165058&redirect_uri=https://elitecup.eu/api/instagram/token&scope=user_profile,user_media&response_type=code
 ```
