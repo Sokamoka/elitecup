@@ -3,6 +3,8 @@ title: 'Project'
 description: 'meta description of the page'
 ---
 
+[Elite Cup Competition Rules](/files/Elite_Cup_Competition_Rules_final_ENG_v2.pdf)
+
 The Bauer Elite Cup will see top junior teams from Austria, Hungary and Slovakia go head to head with each other at U16 and U18 level across the 2022/23 season, culminating with final tournaments to crown Elite Cup champions in each age group. Action begins this weekend in Nitra and Košice.
 
 In U16 hockey, teams will compete in a series of two-day tournaments across the season; while at U18 level, teams will compete in two groups of six for progression to the season-ending final event.
