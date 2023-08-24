@@ -1,12 +1,14 @@
 {
   "name": "elitecup-app",
   "private": true,
+  "packageManager": "pnpm@8.6.12",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "netlify:dev": "netlify dev"
   },
   "devDependencies": {
     "@nuxt/content": "^2.5.2",
@@ -30,6 +32,7 @@
     "ramda": "^0.29.0"
   },
   "dependencies": {
+    "@netlify/functions": "^2.0.1",
     "@tiptap/extension-text-align": "^2.0.3",
     "@tiptap/extension-underline": "^2.0.3",
     "@tiptap/pm": "^2.0.3",
