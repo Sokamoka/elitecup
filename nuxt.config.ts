@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     routeRules: {
       '/api/videos': { headers: { 'cache-control': 'public, max-age=300' } },
       '/api/videos-main': { headers: { 'cache-control': 'public, max-age=60' } },
+      '/api/instagram/media': { headers: { 'cache-control': 'public, max-age=3600' } },
     },
   },
 
