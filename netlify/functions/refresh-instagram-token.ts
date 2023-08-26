@@ -18,7 +18,7 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 
   const response = await ofetch('https://graph.instagram.com/refresh_access_token', {
     method: 'GET',
-    body: {
+    query: {
       grant_type: 'ig_refresh_token',
       access_token: data?.access_token,
     },
