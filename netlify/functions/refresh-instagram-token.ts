@@ -1,13 +1,14 @@
 import { ofetch } from 'ofetch';
 import type { Handler, HandlerEvent, HandlerContext } from '@netlify/functions';
-import { schedule } from '@netlify/functions';
+// import { schedule } from '@netlify/functions';
 import { createClient } from '@supabase/supabase-js';
 
 const { SUPABASE_URL, SUPABASE_KEY } = process.env;
 
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-const refreshAccessTokenHandler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
+// refreshAccessTokenHandler
+const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
   const { data } = await supabaseClient
     .from('instagram')
     .select('access_token')
@@ -31,6 +32,6 @@ const refreshAccessTokenHandler: Handler = async (event: HandlerEvent, context: 
 };
 
 // @monthly
-const handler = schedule('@hourly', refreshAccessTokenHandler);
+// const handler = schedule('@hourly', refreshAccessTokenHandler);
 
 export { handler };
