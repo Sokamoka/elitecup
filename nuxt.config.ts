@@ -35,7 +35,6 @@ export default defineNuxtConfig({
     instagramClientSecret: process.env.INSTAGRAM_CLIENT_SECRET,
     instagramClientRedirectUri: process.env.NUXT_INSTAGRAM_REDIRECT_URI,
     public: {
-      instagramAccessToken: process.env.NUXT_INSTAGRAM_ACCESS_TOKEN,
       facebookAppId: process.env.NUXT_FACEBOOK_APP_ID,
       vbrApiKey: process.env.NUXT_VBR_API_KEY,
     },
