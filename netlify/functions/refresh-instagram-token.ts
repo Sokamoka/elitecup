@@ -27,7 +27,6 @@ const refreshAccessTokenHandler: Handler = async (event: HandlerEvent, context: 
 
   return {
     statusCode: 200,
-    body: JSON.stringify(response),
   };
 };
 
