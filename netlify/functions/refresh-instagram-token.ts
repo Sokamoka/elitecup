@@ -30,6 +30,7 @@ const refreshAccessTokenHandler: Handler = async (event: HandlerEvent, context: 
   };
 };
 
-const handler = schedule('@monthly', refreshAccessTokenHandler);
+// @monthly
+const handler = schedule('@hourly', refreshAccessTokenHandler);
 
 export { handler };
