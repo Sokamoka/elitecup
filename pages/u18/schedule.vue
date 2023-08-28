@@ -72,7 +72,7 @@ const { locale } = useI18n();
     </div>
 
     <div>
-      <h2 class="font-bold text-xl leading-10">Zlin</h2>
+      <h2 class="font-bold text-xl leading-10">Zlín</h2>
       <ClientOnly>
         <mjsz-vbr-schedule :locale="locale" championship-id="3447" division="Preliminary Round - I" />
         <mjsz-vbr-standings :locale="locale" championship-id="3447" division="Preliminary Round - I" />
