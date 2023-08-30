@@ -9,8 +9,11 @@ const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY);
 // autoPublishHandler
 const handler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
   try {
-    // .eq('is_active', false)
-    const { data } = await supabaseClient.from('posts').select('id').lte('published_at', new Date().toISOString());
+    const { data } = await supabaseClient
+      .from('posts')
+      .select('id')
+      .lte('scheduled_at', new Date().toISOString())
+      .is('published_at', null);
 
     return {
       statusCode: 200,

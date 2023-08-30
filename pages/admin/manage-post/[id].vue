@@ -3,8 +3,10 @@ import useVuelidate from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import { snakeKeys, toKebabCase } from 'js-convert-case';
 import { omit } from 'ramda';
+import { addHours, getHours, isBefore, isToday } from 'date-fns';
 import { ConfirmPromise } from '~/components/Form/Confirm.vue';
 import { ToastPromise } from '~/components/Form/Toast.vue';
+import { ModalPromise } from '~/components/Form/Modal.vue';
 import { convertPostResponse } from '~/utils/posts';
 import { Database } from '~/types/Database';
 import { getFileName } from '~/utils/storage';
@@ -52,6 +54,19 @@ const rules = {
   slug: { required },
 };
 
+const calendarTimeRules = ref({
+  // hours: (hour: number, { date }) => {
+  //   if (isToday(date)) {
+  //     if (hour < getHours(addHours(new Date(), 1))) return false;
+  //   }
+  //   return true;
+  // },
+  minutes: 0,
+  seconds: 0,
+});
+
+const scheduledPublishDateTime = ref(initialScheduledPublishDate());
+
 const v$ = useVuelidate(rules, state);
 
 const localeItems = computed(() =>
@@ -94,7 +109,11 @@ function formatDateTime(date: string | null) {
   return toDefaultDateTime(new Date(date), 'hu-HU');
 }
 
-async function onPublishPost() {
+async function onOpenScheduleModal() {
+  ModalPromise.start('Title');
+}
+
+async function onPublishPostImmediate() {
   const isValid = await v$.value.$validate();
   if (!isValid) return;
   const result = await ConfirmPromise.start(t('admin.messages.publishDialog'));
@@ -191,6 +210,12 @@ async function deleteImageFromDb(url: string) {
   return data;
 }
 
+async function onPublishPostScheduled(resolve: (v: boolean) => void) {
+  // if(isBefore(scheduledPublishDateTime.value, new Date())) return;
+  await client.from('posts').update({ scheduled_at: scheduledPublishDateTime.value }).eq('id', state.id);
+  resolve(true);
+}
+
 function displayLocale(value: string) {
   return localeItems.value.find((locale: Ref<string>) => locale.value === value)?.name ?? '';
 }
@@ -207,7 +232,12 @@ function displayLocale(value: string) {
       <div v-if="state.publishedAt">
         <FormToggle v-model="state.isActive" :label="t('admin.managePosts.active')" @update:model-value="onActivate" />
       </div>
-      <FormButton v-else variant="primary" size="sm" @click="onPublishPost">
+
+      <FormButton v-else variant="primary" size="sm" @click="onPublishPostImmediate">
+        {{ $t('admin.common.publish') }}
+      </FormButton>
+
+      <FormButton variant="primary" size="sm" @click="onOpenScheduleModal">
         {{ $t('admin.common.publish') }}
       </FormButton>
 
@@ -226,6 +256,22 @@ function displayLocale(value: string) {
         {{ $t('admin.common.save') }}
       </FormButton>
     </div>
+
+    <FormModal #default="{ resolve }">
+      <FormDatePicker
+        v-model="scheduledPublishDateTime"
+        mode="dateTime"
+        :time-accuracy="1"
+        :min-date="new Date()"
+        :rules="calendarTimeRules"
+        is-required
+      ></FormDatePicker>
+      <div class="p-3 text-right border-t border-slate-300">
+        <FormButton variant="primary" size="sm" @click="onPublishPostScheduled(resolve)">
+          {{ $t('admin.common.publish') }}
+        </FormButton>
+      </div>
+    </FormModal>
 
     <div class="flex flex-col gap-4 rounded-lg bg-white shadow-sm p-4 w-full">
       <div class="grid grid-cols-1 md:grid-cols-3 items-start gap-4">
@@ -339,7 +385,7 @@ function displayLocale(value: string) {
       <div v-if="state.publishedAt">
         <FormToggle v-model="state.isActive" label="Active" @update:model-value="onActivate" />
       </div>
-      <FormButton v-else variant="primary" size="sm" @click="onPublishPost">
+      <FormButton v-else variant="primary" size="sm" @click="onPublishPostImmediate">
         {{ $t('admin.common.publish') }}
       </FormButton>
 

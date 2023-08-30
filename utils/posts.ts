@@ -7,3 +7,16 @@ export function convertPostResponse(response: {}, state: {}) {
   }, {});
   Object.assign(state, convertedResponse);
 }
+
+
+export function initialScheduledPublishDate() {
+  const now = new Date();
+  return new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate(),
+    now.getHours() + 1,
+    0,
+    0
+  )
+}
