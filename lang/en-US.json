@@ -114,6 +114,8 @@
       "notPublished": "Not published",
       "publishImmediate": "Publish immediate",
       "publishScheduled": "Publish scheduled",
+      "schedulePublish": "Setting a schedule",
+      "clearSchedulePublish": "Clear schedule",
       "mainImage": "Main image",
       "title": "Title",
       "lead": "Lead",

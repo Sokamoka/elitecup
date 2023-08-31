@@ -1,5 +1,11 @@
 <script setup lang="ts">
-const props = defineProps<{ direction: string }>();
+export interface Props {
+  direction?: string;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  direction: 'bottom',
+});
 </script>
 
 <template>

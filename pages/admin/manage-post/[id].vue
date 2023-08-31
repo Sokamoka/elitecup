@@ -65,7 +65,7 @@ const calendarTimeRules = ref({
   seconds: 0,
 });
 
-const scheduledPublishDateTime = ref(initialScheduledPublishDate());
+const scheduledPublishDateTime = useScheduleInitialDate(computed(() => data.value?.scheduled_at ?? null));
 
 const v$ = useVuelidate(rules, state);
 
@@ -216,6 +216,13 @@ async function onOpenScheduleModal() {
 async function onPublishPostScheduled(resolve: (v: boolean) => void) {
   if (isBefore(scheduledPublishDateTime.value, new Date())) return;
   await client.from('posts').update({ scheduled_at: scheduledPublishDateTime.value }).eq('id', state.id);
+  execute();
+  resolve(true);
+}
+
+async function onClearPublishPostScheduleDate(resolve: (v: boolean) => void) {
+  await client.from('posts').update({ scheduled_at: null }).eq('id', state.id);
+  execute();
   resolve(true);
 }
 
@@ -276,13 +283,24 @@ function displayLocale(value: string) {
         v-model="scheduledPublishDateTime"
         mode="dateTime"
         :time-accuracy="1"
-        :min-date="scheduledPublishDateTime"
+        :min-date="new Date()"
         :rules="calendarTimeRules"
         is-required
       ></FormDatePicker>
-      <div class="p-3 text-right border-t border-slate-300">
-        <FormButton variant="primary" size="sm" @click="onPublishPostScheduled(resolve)">
-          {{ $t('admin.common.publish') }}
+      <div class="flex p-3 text-right border-t border-slate-300">
+        <div class="flex-1 text-left">
+          <FormButton
+            v-if="data?.scheduled_at"
+            variant="primary"
+            size="sm"
+            @click="onClearPublishPostScheduleDate(resolve)"
+          >
+            {{ $t('admin.managePosts.clearSchedulePublish') }}
+          </FormButton>
+        </div>
+
+        <FormButton variant="secondary" size="sm" @click="onPublishPostScheduled(resolve)">
+          {{ $t('admin.managePosts.schedulePublish') }}
         </FormButton>
       </div>
     </FormModal>
@@ -300,12 +318,23 @@ function displayLocale(value: string) {
         </fieldset>
 
         <fieldset>
-          <label class="text-xs font-semibold uppercase" for="locale">{{ t('admin.managePosts.publishedAt') }}</label>
-          <p class="text-sm text-slate-500 bg-slate-100 p-3 rounded-md">
+          <label class="text-xs font-semibold uppercase" for="locale">
+            <template v-if="data?.scheduled_at && !state.publishedAt">
+              {{ t('admin.managePosts.publishScheduled') }}
+            </template>
+            <template v-else>
+              {{ t('admin.managePosts.publishedAt') }}
+            </template>
+          </label>
+          <p class="flex items-center text-sm text-slate-500 bg-slate-100 p-3 rounded-md">
             <template v-if="state.publishedAt">
               {{ formatDateTime(state.publishedAt) }}
             </template>
-            <template v-else> {{ t('admin.managePosts.notPublished') }} </template>
+            <template v-else-if="!data?.scheduled_at"> {{ t('admin.managePosts.notPublished') }} </template>
+            <template v-else>
+              <Icon name="ic:twotone-alarm" class="w-4 h-4 mr-2 shrink-0" />
+              {{ data?.scheduled_at ? formatDateTime(data?.scheduled_at?.toString()) : '' }}
+            </template>
           </p>
         </fieldset>
 

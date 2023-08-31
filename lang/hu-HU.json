@@ -114,6 +114,8 @@
       "notPublished": "Nincs publikálva",
       "publishImmediate": "Publikálás azonnal",
       "publishScheduled": "Időzített publikálás",
+      "schedulePublish": "Időzítés beállítása",
+      "clearSchedulePublish": "Időzítés törlése",
       "mainImage": "Fő kép",
       "title": "Cím",
       "lead": "Alcím",
