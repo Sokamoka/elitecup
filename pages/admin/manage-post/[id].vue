@@ -236,13 +236,24 @@ function displayLocale(value: string) {
         <FormToggle v-model="state.isActive" :label="t('admin.managePosts.active')" @update:model-value="onActivate" />
       </div>
 
-      <FormButton v-else variant="primary" size="sm" @click="onPublishPostImmediate">
-        {{ $t('admin.common.publish') }}
-      </FormButton>
-
-      <FormButton variant="primary" size="sm" @click="onOpenScheduleModal">
-        {{ $t('admin.common.publish') }}
-      </FormButton>
+      <FormDropdown v-else>
+        <FormButton variant="primary" size="sm">
+          {{ $t('admin.common.publish') }}
+          <template #icon-after>
+            <Icon name="ic:baseline-keyboard-arrow-down" />
+          </template>
+        </FormButton>
+        <template #items>
+          <FormDropdownItem @click="onPublishPostImmediate">
+            <Icon name="ic:twotone-flash-on" class="w-4 h-4" />
+            {{ $t('admin.managePosts.publishImmediate') }}
+          </FormDropdownItem>
+          <FormDropdownItem @click="onOpenScheduleModal">
+            <Icon name="ic:twotone-alarm" class="w-4 h-4" />
+            {{ $t('admin.managePosts.publishScheduled') }}
+          </FormDropdownItem>
+        </template>
+      </FormDropdown>
 
       <FormButton
         tag="a"
@@ -388,9 +399,25 @@ function displayLocale(value: string) {
       <div v-if="state.publishedAt">
         <FormToggle v-model="state.isActive" label="Active" @update:model-value="onActivate" />
       </div>
-      <FormButton v-else variant="primary" size="sm" @click="onPublishPostImmediate">
-        {{ $t('admin.common.publish') }}
-      </FormButton>
+
+      <FormDropdown v-else direction="top">
+        <FormButton variant="primary" size="sm">
+          {{ $t('admin.common.publish') }}
+          <template #icon-after>
+            <Icon name="ic:baseline-keyboard-arrow-up" />
+          </template>
+        </FormButton>
+        <template #items>
+          <FormDropdownItem @click="onPublishPostImmediate">
+            <Icon name="ic:twotone-flash-on" class="w-4 h-4" />
+            {{ $t('admin.managePosts.publishImmediate') }}
+          </FormDropdownItem>
+          <FormDropdownItem @click="onOpenScheduleModal">
+            <Icon name="ic:twotone-alarm" class="w-4 h-4" />
+            {{ $t('admin.managePosts.publishScheduled') }}
+          </FormDropdownItem>
+        </template>
+      </FormDropdown>
 
       <FormButton tag="a" :href="`/news/${state.slug}?preview=true`" target="_blank" variant="outlined" size="sm">
         {{ $t('admin.common.preview') }}

@@ -112,6 +112,8 @@
       "newPost": "Ez egy új hír",
       "published": "Publikálva",
       "notPublished": "Nincs publikálva",
+      "publishImmediate": "Publikálás azonnal",
+      "publishScheduled": "Időzített publikálás",
       "mainImage": "Fő kép",
       "title": "Cím",
       "lead": "Alcím",

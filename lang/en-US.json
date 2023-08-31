@@ -112,6 +112,8 @@
       "newPost": "This is New post",
       "published": "Published",
       "notPublished": "Not published",
+      "publishImmediate": "Publish immediate",
+      "publishScheduled": "Publish scheduled",
       "mainImage": "Main image",
       "title": "Title",
       "lead": "Lead",
