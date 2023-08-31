@@ -20,4 +20,5 @@ export interface News {
   created_at: string;
   published_at: string;
   is_active: boolean;
+  scheduled_at: string;
 }

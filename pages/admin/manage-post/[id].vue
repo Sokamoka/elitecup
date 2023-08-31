@@ -55,12 +55,12 @@ const rules = {
 };
 
 const calendarTimeRules = ref({
-  // hours: (hour: number, { date }) => {
-  //   if (isToday(date)) {
-  //     if (hour < getHours(addHours(new Date(), 1))) return false;
-  //   }
-  //   return true;
-  // },
+  hours: (hour: number, { date }) => {
+    if (isToday(date)) {
+      if (hour < getHours(addHours(new Date(), 1))) return false;
+    }
+    return true;
+  },
   minutes: 0,
   seconds: 0,
 });
@@ -211,7 +211,7 @@ async function deleteImageFromDb(url: string) {
 }
 
 async function onPublishPostScheduled(resolve: (v: boolean) => void) {
-  // if(isBefore(scheduledPublishDateTime.value, new Date())) return;
+  if(isBefore(scheduledPublishDateTime.value, new Date())) return;
   await client.from('posts').update({ scheduled_at: scheduledPublishDateTime.value }).eq('id', state.id);
   resolve(true);
 }

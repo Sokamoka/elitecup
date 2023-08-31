@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { refDefault, useStorage } from '@vueuse/core';
-import { format, parseISO } from 'date-fns';
+import { format, isValid, parseISO } from 'date-fns';
 import { ConfirmPromise } from '~/components/Form/Confirm.vue';
 import { ToastPromise } from '~/components/Form/Toast.vue';
 import { News } from '~/types/News';
@@ -32,6 +32,11 @@ const columns = {
     tooltip: 'admin.table.active.tooltip',
     class: 'w-[100px] text-center',
   },
+  scheduled_at: {
+    label: 'admin.table.active.short',
+    tooltip: 'admin.table.active.tooltip',
+    class: 'w-[140px] text-center',
+  },
   action: {
     label: 'admin.table.action.short',
     tooltip: 'admin.table.action.tooltip',
@@ -55,11 +60,15 @@ const { data: posts, refresh } = await useFetch<{ posts: News[]; count: number }
   query: { from, to, locale: localeFilter },
   transform: ({ posts, count }) => {
     return {
-      posts: posts.map((post) => ({
-        ...post,
-        created_at: format(parseISO(post.created_at), 'yyyy, LLLL dd. HH:mm'),
-        // created_at: toDefaultDateTime(parseISO(post.created_at)),
-      })),
+      posts: posts.map((post) => {
+        return {
+          ...post,
+          created_at: format(parseISO(post.created_at), 'yyyy, LLLL dd. HH:mm'),
+          scheduled_at: isValid(parseISO(post.scheduled_at))
+            ? format(parseISO(post.scheduled_at), 'yyyy, LLLL dd. HH:mm')
+            : '',
+        };
+      }),
       count,
     };
   },
@@ -179,6 +188,19 @@ function onChangeFilter(value: string) {
             >
           </template>
 
+          <template #cell-scheduled_at="{ row }">
+            <span
+              v-if="row.scheduled_at"
+              :title="row.scheduled_at"
+              :class="[
+                'rounded-full text-xs text-center py-0.5 px-3 uppercase font-semibold',
+                row.scheduled_at && !row.published_at ? 'bg-amber-500 text-white ' : 'bg-slate-200 text-slate-400',
+              ]"
+            >
+              Scheduled
+            </span>
+          </template>
+
           <template #cell-locale="{ row }">
             <Icon v-if="row.locale === 'en'" name="flagpack:us" />
             <Icon v-if="row.locale === 'hu'" name="flagpack:hu" />
@@ -211,7 +233,7 @@ function onChangeFilter(value: string) {
 
       <div class="flex items-center py-2 px-4 bg-slate-300 text-slate-500 font-bold text-xs uppercase">
         <div class="flex-1">
-          {{ $t('admin.common.pageRange', [pageRange[0], pageRange[1], posts?.count]) }}
+          {{ $t('admin.common.pageRangeNews', [pageRange[0], pageRange[1], posts?.count]) }}
         </div>
         <div>
           <button type="button" class="p-2 disabled:text-slate-400 uppercase" :disabled="page === 0" @click="onPrev">

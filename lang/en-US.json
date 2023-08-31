@@ -83,6 +83,7 @@
     },
     "common": {
       "new": "New",
+      "pageRangeNews": "{0} - {1} of {2} news",
       "pageRange": "{0} - {1} of {2} videos",
       "save": "Save",
       "publish": "Publish",
