@@ -34,6 +34,8 @@ const mainClasses = computed(() => [
 <template>
   <component :is="tag" :type="tag === 'button' ? 'button' : null" :class="mainClasses">
     <slot />
-    <Icon name="ic:baseline-keyboard-arrow-right" />
+    <slot name="after">
+      <Icon name="ic:baseline-keyboard-arrow-right" />
+    </slot>
   </component>
 </template>

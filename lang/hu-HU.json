@@ -79,6 +79,10 @@
       "active": {
         "short": "Aktív",
         "tooltip": "Aktív"
+      },
+      "scheduledAt": {
+        "short": "Időzítve",
+        "tooltip": "Időzítve"
       }
     },
     "common": {
@@ -103,8 +107,10 @@
     "managePosts": {
       "createdAt": "Létrehozva",
       "publishedAt": "Publikálva",
+      "scheduledAt": "Időzítve",
       "locale": "Nyelv",
       "newPost": "Ez egy új hír",
+      "published": "Publikálva",
       "notPublished": "Nincs publikálva",
       "mainImage": "Fő kép",
       "title": "Cím",

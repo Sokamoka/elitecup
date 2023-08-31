@@ -109,10 +109,6 @@ function formatDateTime(date: string | null) {
   return toDefaultDateTime(new Date(date), 'hu-HU');
 }
 
-async function onOpenScheduleModal() {
-  ModalPromise.start('Title');
-}
-
 async function onPublishPostImmediate() {
   const isValid = await v$.value.$validate();
   if (!isValid) return;
@@ -210,8 +206,15 @@ async function deleteImageFromDb(url: string) {
   return data;
 }
 
+async function onOpenScheduleModal() {
+  const isValid = await v$.value.$validate();
+  if (!isValid) return;
+  if (!state.id) return;
+  ModalPromise.start('Select scheduled date and time');
+}
+
 async function onPublishPostScheduled(resolve: (v: boolean) => void) {
-  if(isBefore(scheduledPublishDateTime.value, new Date())) return;
+  if (isBefore(scheduledPublishDateTime.value, new Date())) return;
   await client.from('posts').update({ scheduled_at: scheduledPublishDateTime.value }).eq('id', state.id);
   resolve(true);
 }
@@ -262,7 +265,7 @@ function displayLocale(value: string) {
         v-model="scheduledPublishDateTime"
         mode="dateTime"
         :time-accuracy="1"
-        :min-date="new Date()"
+        :min-date="scheduledPublishDateTime"
         :rules="calendarTimeRules"
         is-required
       ></FormDatePicker>

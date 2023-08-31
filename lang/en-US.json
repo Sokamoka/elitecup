@@ -79,6 +79,10 @@
       "active": {
         "short": "Active",
         "tooltip": "Active"
+      },
+      "scheduledAt": {
+        "short": "Scheduled at",
+        "tooltip": "Scheduled at"
       }
     },
     "common": {
@@ -103,8 +107,10 @@
     "managePosts": {
       "createdAt": "Created At",
       "publishedAt": "Published At",
+      "scheduledAt": "Scheduled",
       "locale": "Locale",
       "newPost": "This is New post",
+      "published": "Published",
       "notPublished": "Not published",
       "mainImage": "Main image",
       "title": "Title",

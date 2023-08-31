@@ -33,8 +33,8 @@ const columns = {
     class: 'w-[100px] text-center',
   },
   scheduled_at: {
-    label: 'admin.table.active.short',
-    tooltip: 'admin.table.active.tooltip',
+    label: 'admin.table.scheduledAt.short',
+    tooltip: 'admin.table.scheduledAt.tooltip',
     class: 'w-[140px] text-center',
   },
   action: {
@@ -179,12 +179,12 @@ function onChangeFilter(value: string) {
               v-if="row.published_at"
               class="bg-red-500 rounded-full text-xs text-white text-center py-0.5 px-3 uppercase font-semibold"
             >
-              Published
+              {{ $t('admin.managePosts.published') }}
             </span>
             <span
               v-else
               class="bg-slate-300 rounded-full text-xs text-slate-500 text-center py-0.5 px-3 uppercase font-semibold"
-              >Not Published</span
+              >{{ $t('admin.managePosts.notPublished') }}</span
             >
           </template>
 
@@ -197,7 +197,7 @@ function onChangeFilter(value: string) {
                 row.scheduled_at && !row.published_at ? 'bg-amber-500 text-white ' : 'bg-slate-200 text-slate-400',
               ]"
             >
-              Scheduled
+              {{ $t('admin.managePosts.scheduledAt') }}
             </span>
           </template>
 
