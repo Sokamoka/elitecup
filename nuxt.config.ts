@@ -11,6 +11,8 @@ export default defineNuxtConfig({
       '/api/videos': { headers: { 'cache-control': 'public, max-age=300' } },
       '/api/videos-main': { headers: { 'cache-control': 'public, max-age=60' } },
       '/api/instagram/media': { headers: { 'cache-control': 'public, max-age=3600' } },
+      '/api/news-list': { headers: { 'cache-control': 'public, max-age=60' } },
+      '/api/news': { headers: { 'cache-control': 'public, max-age=300' } },
     },
   },
 
