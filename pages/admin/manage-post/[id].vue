@@ -209,8 +209,8 @@ async function deleteImageFromDb(url: string) {
 async function onOpenScheduleModal() {
   const isValid = await v$.value.$validate();
   if (!isValid) return;
-  if (!state.id) return;
-  ModalPromise.start('Select scheduled date and time');
+  if (!state.id) return ToastPromise.start(t('admin.messages.saveFirstPublish'), 'error');
+  ModalPromise.start(t('admin.managePosts.scheduleModalTitle'));
 }
 
 async function onPublishPostScheduled(resolve: (v: boolean) => void) {

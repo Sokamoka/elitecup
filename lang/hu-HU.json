@@ -116,6 +116,7 @@
       "publishScheduled": "Időzített publikálás",
       "schedulePublish": "Időzítés beállítása",
       "clearSchedulePublish": "Időzítés törlése",
+      "scheduleModalTitle": "Válassz dátumot és időt",
       "mainImage": "Fő kép",
       "title": "Cím",
       "lead": "Alcím",
@@ -137,7 +138,8 @@
       "deleteImageDialog": "Biztos vagy benne, hogy törlöd a képet?",
       "yes": "Igen",
       "no": "Nem",
-      "saveFirst": "A fő kép feltöltéséhez először mentsd el a hírt. Utána tudsz a hírhez fő képet hozzáadni."
+      "saveFirst": "A fő kép feltöltéséhez először mentsd el a hírt. Utána tudsz a hírhez fő képet hozzáadni.",
+      "saveFirstPublish": "Az időzített publikáláshoz először mentsd el a hírt. Utána tudod az időzítést beállítani."
     },
     "error": {
       "video": {

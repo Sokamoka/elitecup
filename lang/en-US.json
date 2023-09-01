@@ -116,6 +116,7 @@
       "publishScheduled": "Publish scheduled",
       "schedulePublish": "Setting a schedule",
       "clearSchedulePublish": "Clear schedule",
+      "scheduleModalTitle": "Select Date and Time",
       "mainImage": "Main image",
       "title": "Title",
       "lead": "Lead",
@@ -137,7 +138,8 @@
       "deleteImageDialog": "Are you sure you want to delete this image?",
       "yes": "Yes",
       "no": "No",
-      "saveFirst": "To upload the main image, first save the news. You can then add a main image to the news."
+      "saveFirst": "To upload the main image, first save the news. You can then add a main image to the news.",
+      "saveFirstPublish": "To publish on a schedule, save the news first. Then you can set the timing."
     },
     "error": {
       "video": {
