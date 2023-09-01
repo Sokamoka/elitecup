@@ -35,34 +35,36 @@ const value = useVModel(props, 'modelValue', emit);
         <HeadlessListboxOptions
           class="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
         >
-          <HeadlessListboxOption
-            v-for="item in items"
-            as="template"
-            :key="item.value"
-            :value="item.value"
-            v-slot="{ selected, active }"
-          >
-            <li
-              class="relative cursor-default select-none py-2 pl-10 pr-4"
-              :class="{
-                'bg-slate-500 text-white': active,
-                'text-slate-900': !active,
-              }"
+          <div class="px-1 py-1">
+            <HeadlessListboxOption
+              v-for="item in items"
+              as="template"
+              :key="item.value"
+              :value="item.value"
+              v-slot="{ selected, active }"
             >
-              <slot :item="item" :selected="selected" :active="active">
-                <span class="block truncate" :class="{ 'font-medium': selected, 'font-normal': !selected }">
-                  {{ item.name }}
-                </span>
-              </slot>
-              <span
-                v-if="selected"
-                class="absolute inset-y-0 left-0 flex items-center pl-3"
-                :class="{ 'text-white': active, 'text-green-500': !active }"
+              <li
+                class="relative cursor-default select-none py-2 pl-10 pr-4 rounded-md"
+                :class="{
+                  'bg-slate-500 text-white': active,
+                  'text-slate-900': !active,
+                }"
               >
-                <Icon name="ic:twotone-check" class="h-5 w-5" aria-hidden="true" />
-              </span>
-            </li>
-          </HeadlessListboxOption>
+                <slot :item="item" :selected="selected" :active="active">
+                  <span class="block truncate" :class="{ 'font-medium': selected, 'font-normal': !selected }">
+                    {{ item.name }}
+                  </span>
+                </slot>
+                <span
+                  v-if="selected"
+                  class="absolute inset-y-0 left-0 flex items-center pl-3"
+                  :class="{ 'text-white': active, 'text-green-500': !active }"
+                >
+                  <Icon name="ic:twotone-check" class="h-5 w-5" aria-hidden="true" />
+                </span>
+              </li>
+            </HeadlessListboxOption>
+          </div>
         </HeadlessListboxOptions>
       </HeadlessTransitionRoot>
     </div>
