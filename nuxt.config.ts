@@ -13,6 +13,7 @@ export default defineNuxtConfig({
       '/api/instagram/media': { headers: { 'cache-control': 'public, max-age=3600' } },
       '/api/news-list': { headers: { 'cache-control': 'public, max-age=60' } },
       '/api/news': { headers: { 'cache-control': 'public, max-age=300' } },
+      '/api/schedule': { headers: { 'cache-control': 'public, max-age=300' } },
     },
   },
 
