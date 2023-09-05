@@ -35,8 +35,12 @@ const localePath = useLocalePath();
         <img src="~/assets/images/elite_cup_logo.svg" alt="Elite Cup" class="h-16" />
       </NuxtLink>
       <div class="flex items-center px-4 gap-8">
-        <img src="~/assets/images/Bauer-logo-black.svg" alt="Marczi Skate" class="h-10 sm:h-16 object-contain" />
-        <img src="~/assets/images/MS_logo.webp" alt="Marczi Skate" class="h-10 sm:h-16 object-contain" />
+        <a href="https://www.marcziskate.hu/" target="_blank"
+          ><img src="~/assets/images/Bauer-logo-black.svg" alt="Marczi Skate" class="h-10 sm:h-16 object-contain"
+        /></a>
+        <a href="https://www.marcziskate.hu/" target="_blank"
+          ><img src="~/assets/images/MS_logo.webp" alt="Marczi Skate" class="h-10 sm:h-16 object-contain"
+        /></a>
       </div>
     </div>
   </div>
