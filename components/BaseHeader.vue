@@ -30,9 +30,9 @@ const localePath = useLocalePath();
         </NuxtLink>
       </div>
     </div>
-    <div class="flex justify-between py-8">
+    <div class="flex justify-between py-5">
       <NuxtLink :to="localePath('/')">
-        <img src="~/assets/images/elite_cup_logo.svg" alt="Elite Cup" class="h-16" />
+        <img src="~/assets/images/elite_cup_logo.svg" alt="Elite Cup" class="h-20" />
       </NuxtLink>
       <div class="flex items-center px-4 gap-8">
         <a href="https://www.marcziskate.hu/" target="_blank"
