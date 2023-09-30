@@ -63,21 +63,21 @@ const { locale } = useI18n();
       </ClientOnly>
     </div>
 
-    <div>
+    <!-- <div>
       <h2 class="font-bold text-xl leading-10">-</h2>
       <ClientOnly>
         <mjsz-vbr-schedule :locale="locale" championship-id="3446" division="Preliminary Round - H" />
         <mjsz-vbr-standings :locale="locale" championship-id="3446" division="Preliminary Round - H" />
       </ClientOnly>
-    </div>
-
-    <!-- <div>
-      <h2 class="font-bold text-xl leading-10">Nitra</h2>
-      <ClientOnly>
-        <mjsz-vbr-schedule :locale="locale" championship-id="3311" division="Preliminary Round - I" />
-        <mjsz-vbr-standings :locale="locale" championship-id="3311" division="Preliminary Round - I" />
-      </ClientOnly>
     </div> -->
+
+    <div>
+      <h2 class="font-bold text-xl leading-10">Different locations</h2>
+      <ClientOnly>
+        <mjsz-vbr-schedule :locale="locale" championship-id="3446" division="Preliminary Round - 1." />
+        <mjsz-vbr-standings :locale="locale" championship-id="3446" division="Preliminary Round - 1." />
+      </ClientOnly>
+    </div>
 
     <!-- <div>
       <h2 class="font-bold text-xl leading-10">Budapest</h2>
