@@ -4,9 +4,9 @@ const { locale } = useI18n();
 
 <template>
   <h1 class="text-2xl text-slate-900 font-bold mt-8">
-    {{ $t('title.standings-u18') }}
+    {{ $t('title.standings-u16') }}
   </h1>
   <div class="py-8">
-    <mjsz-vbr-standings :locale="locale" championship-id="3447" division="Preliminary Round" />
+    <mjsz-vbr-standings :locale="locale" championship-id="3446" division="Preliminary Round" />
   </div>
 </template>

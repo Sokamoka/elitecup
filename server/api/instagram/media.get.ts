@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   const { data, error } = await client
     .from('instagram')
     .select('access_token')
-    .order('id', { ascending: true })
+    .order('id', { ascending: false })
     .limit(1)
     .single();
 

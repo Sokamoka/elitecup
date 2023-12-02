@@ -30,7 +30,7 @@ watch(isMiddleScreen, (isMiddleScreen) => {
             <Icon name="ic:baseline-arrow-drop-down" />
           </HeadlessMenuButton>
           <HeadlessMenuItems
-            class="relative sm:absolute sm:-left-2 w-full sm:w-56 origin-top-right divide-y divide-slate-100 bg-slate-700 shadow-lg rounded-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+            class="relative sm:absolute sm:-left-2 w-full sm:w-56 origin-top-right divide-y divide-slate-100 bg-slate-700 shadow-lg rounded-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
           >
             <div class="px-1 py-1">
               <HeadlessMenuItem v-slot="{ active }">
@@ -45,7 +45,7 @@ watch(isMiddleScreen, (isMiddleScreen) => {
                 </NuxtLink>
               </HeadlessMenuItem>
 
-              <!-- <HeadlessMenuItem v-slot="{ active }">
+              <HeadlessMenuItem v-slot="{ active }">
                 <NuxtLink
                   :to="localePath('/u18/standings')"
                   :class="[
@@ -55,7 +55,7 @@ watch(isMiddleScreen, (isMiddleScreen) => {
                 >
                   {{ $t('menu.standings') }}
                 </NuxtLink>
-              </HeadlessMenuItem> -->
+              </HeadlessMenuItem>
 
               <HeadlessMenuItem v-slot="{ active }">
                 <NuxtLink
@@ -97,7 +97,7 @@ watch(isMiddleScreen, (isMiddleScreen) => {
             <Icon name="ic:baseline-arrow-drop-down" />
           </HeadlessMenuButton>
           <HeadlessMenuItems
-            class="relative sm:absolute sm:-left-2 w-full sm:w-56 origin-top-right divide-y divide-slate-100 bg-slate-700 shadow-lg rounded-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+            class="relative sm:absolute sm:-left-2 w-full sm:w-56 origin-top-right divide-y divide-slate-100 bg-slate-700 shadow-lg rounded-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-10"
           >
             <div class="px-1 py-1">
               <HeadlessMenuItem v-slot="{ active }">
@@ -114,6 +114,18 @@ watch(isMiddleScreen, (isMiddleScreen) => {
 
               <HeadlessMenuItem v-slot="{ active }">
                 <NuxtLink
+                  :to="localePath('/u16/standings')"
+                  :class="[
+                    active ? 'text-red-500' : 'text-white-900',
+                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                  ]"
+                >
+                  Standings
+                </NuxtLink>
+              </HeadlessMenuItem>
+
+              <HeadlessMenuItem v-slot="{ active }">
+                <NuxtLink
                   :to="localePath('/u16/statistics')"
                   :class="[
                     active ? 'text-red-500' : 'text-white-900',
@@ -123,18 +135,6 @@ watch(isMiddleScreen, (isMiddleScreen) => {
                   {{ $t('menu.statistics') }}
                 </NuxtLink>
               </HeadlessMenuItem>
-
-              <!-- <HeadlessMenuItem v-slot="{ active }">
-                <NuxtLink
-                  :to="localePath('/u18/standings')"
-                  :class="[
-                    active ? 'text-red-500' : 'text-white-900',
-                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                  ]"
-                >
-                  Standings
-                </NuxtLink>
-              </HeadlessMenuItem> -->
 
               <HeadlessMenuItem v-slot="{ active }">
                 <NuxtLink
