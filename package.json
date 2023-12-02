@@ -32,12 +32,16 @@
     "ramda": "^0.29.0"
   },
   "dependencies": {
+    "@mjsz-vbr-elements/core": "2.1.2",
+    "@mjsz-vbr-elements/elements": "2.1.2",
     "@netlify/functions": "^2.0.1",
     "@tiptap/extension-text-align": "^2.0.3",
     "@tiptap/extension-underline": "^2.0.3",
     "@tiptap/pm": "^2.0.3",
     "@tiptap/starter-kit": "^2.0.3",
     "@tiptap/vue-3": "^2.0.3",
+    "i": "^0.3.7",
+    "npm": "^10.1.0",
     "v-calendar": "^3.0.3"
   }
 }
