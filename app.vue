@@ -1,12 +1,12 @@
 <script setup>
 import { createConfig } from '@mjsz-vbr-elements/core';
 import MjszVbrElements from '@mjsz-vbr-elements/elements';
-import MjszVbrElementsExtended from '@mjsz-vbr-elements/extended';
+// import MjszVbrElementsExtended from '@mjsz-vbr-elements/extended';
 
 const config = useRuntimeConfig();
 
 createConfig({
-  modules: [MjszVbrElements, MjszVbrElementsExtended],
+  modules: [MjszVbrElements],
   apiKey: config.public.vbrApiKey,
 });
 </script>

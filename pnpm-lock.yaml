@@ -6,11 +6,11 @@ settings:
 
 dependencies:
   '@mjsz-vbr-elements/core':
-    specifier: 2.1.0-beta.6
-    version: 2.1.0-beta.6
+    specifier: 2.1.2
+    version: 2.1.2
   '@mjsz-vbr-elements/elements':
-    specifier: 2.1.0-beta.6
-    version: 2.1.0-beta.6
+    specifier: 2.1.2
+    version: 2.1.2
   '@netlify/functions':
     specifier: ^2.0.1
     version: 2.0.1
@@ -1000,11 +1000,11 @@ packages:
       lines-and-columns: 1.2.4
     dev: true
 
-  /@mjsz-vbr-elements/core@2.1.0-beta.6:
-    resolution: {integrity: sha512-x5sLgStjfYpdriYLRvhgKNj1X6rEmSv1wp0ixKCbonvbJ7eBb6FSRKjRSPkwcz24S2Hwf7EHNdSyTesyb+H+lQ==}
+  /@mjsz-vbr-elements/core@2.1.2:
+    resolution: {integrity: sha512-Lphoon/19bH+XrTPYtQdsN2pEj5or3u4ye+dT64jLqWkDV8XHpKozzfZpyKoy50W27fUoiCvKNFsymUuDiF3nA==}
     dependencies:
       '@floating-ui/dom': 1.5.3
-      '@mjsz-vbr-elements/shared': 2.1.0-beta.6
+      '@mjsz-vbr-elements/shared': 2.1.2
       '@vueuse/core': 10.1.2(vue@3.3.4)
       '@xstate/fsm': 2.1.0
       dayjs: 1.11.9
@@ -1014,19 +1014,20 @@ packages:
       - '@vue/composition-api'
     dev: false
 
-  /@mjsz-vbr-elements/elements@2.1.0-beta.6:
-    resolution: {integrity: sha512-7qVrkLUBRYm6DaX/BuU3AQYUXRnP8BxrrcaO457fV3e70Th0vK2Y+/lH54bvnTwQq/jykJVKDTImTkpKqKANRg==}
+  /@mjsz-vbr-elements/elements@2.1.2:
+    resolution: {integrity: sha512-U8ZPOG3MGF/wt3MKr3yDc6xffekG+rq32c6m5UfvM/LnXOm2dQ1H9vUuQvGEyTAsINthnOafHdUFQB0PSiYm4w==}
     dependencies:
-      '@mjsz-vbr-elements/core': 2.1.0-beta.6
-      '@mjsz-vbr-elements/shared': 2.1.0-beta.6
+      '@mjsz-vbr-elements/core': 2.1.2
+      '@mjsz-vbr-elements/shared': 2.1.2
       '@vueuse/core': 10.1.2(vue@3.3.4)
+      ramda: 0.29.0
       vue: 3.3.4
     transitivePeerDependencies:
       - '@vue/composition-api'
     dev: false
 
-  /@mjsz-vbr-elements/shared@2.1.0-beta.6:
-    resolution: {integrity: sha512-MH5dIvv6eueR0jrm9kMDv/cxRGOvW539rjnEePNS2r/t5fRJ//YB5HbcQ3PQJrOw9gOK9cSNPrZrqPMFdSN+MA==}
+  /@mjsz-vbr-elements/shared@2.1.2:
+    resolution: {integrity: sha512-m63T82l0XCP92u7DGObIheZnVbD0JbqDGfUg3xIymEKpPihdMbPpm9hY/o9IutqKJm5JU22wtSHUXg2i8+MGTQ==}
     dev: false
 
   /@netlify/functions@1.6.0:

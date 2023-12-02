@@ -24,7 +24,7 @@ export default defineNuxtConfig({
   },
 
   alias: {
-    '@mjsz-vbr-elements/core': fileURLToPath(new URL('./assets/js/mjsz-vbr-elements-core.esm.js', import.meta.url)),
+    // '@mjsz-vbr-elements/core': fileURLToPath(new URL('./assets/js/mjsz-vbr-elements-core.esm.js', import.meta.url)),
   },
 
   app: {
