@@ -1,4 +1,4 @@
-import { VideosResponse } from '~/types/Videos';
+import type { VideosResponse } from '~/types/Videos';
 
 export interface UseVideoListOptions {
   from: Ref<number>;

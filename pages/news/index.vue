@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { NEWS_PAGE_LIMIT_PER_PAGE } from '~/constants';
-import { News } from '~/types/News';
+import type { News } from '~/types/News';
 
 const page = ref(0);
 const limit = NEWS_PAGE_LIMIT_PER_PAGE;

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { News } from '~/types/News';
+import type { News } from '~/types/News';
 
 definePageMeta({
   layout: false,

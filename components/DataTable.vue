@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { SORT_STATE_ASCEND, SORT_STATE_DESCEND, SORT_STATE_ORIGINAL } from '~/constants';
-import { DataTableColumn } from '~/types/DataTable';
+import type { DataTableColumn } from '~/types/DataTable';
 
 interface Props {
   columns: Record<string, DataTableColumn>;

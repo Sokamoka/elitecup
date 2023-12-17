@@ -1,5 +1,5 @@
 import { groupBy, head, map, prop, sortBy, keys, curry } from 'ramda';
-import { VBRSchedule } from '~/types/Videos';
+import type { VBRSchedule } from '~/types/Videos';
 
 export function useTeams() {
   const schedule: Ref<VBRSchedule[]> = useSchedule();

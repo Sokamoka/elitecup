@@ -3,7 +3,7 @@ import { refDefault, useStorage } from '@vueuse/core';
 import { format, isValid, parseISO } from 'date-fns';
 import { ConfirmPromise } from '~/components/Form/Confirm.vue';
 import { ToastPromise } from '~/components/Form/Toast.vue';
-import { News } from '~/types/News';
+import type { News } from '~/types/News';
 // import { Database } from '~/types/Database';
 
 definePageMeta({

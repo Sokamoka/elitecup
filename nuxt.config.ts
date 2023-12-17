@@ -80,11 +80,11 @@ export default defineNuxtConfig({
         iso: 'en-US',
         file: 'en-US.json',
       },
-      {
-        code: 'hu',
-        iso: 'hu-HU',
-        file: 'hu-HU.json',
-      },
+      // {
+      //   code: 'hu',
+      //   iso: 'hu-HU',
+      //   file: 'hu-HU.json',
+      // },
     ],
     lazy: true,
     langDir: 'lang',

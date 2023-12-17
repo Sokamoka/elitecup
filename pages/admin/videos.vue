@@ -3,9 +3,9 @@ import { format, parseISO } from 'date-fns';
 import { ModalPromise } from '~/components/Form/Modal.vue';
 import { ToastPromise } from '~/components/Form/Toast.vue';
 import { ConfirmPromise } from '~/components/Form/Confirm.vue';
-import { Games } from '~/types/Games';
-import { DataTableColumns } from '~/types/DataTable';
-import { Database } from '~/types/Database';
+import type { Games } from '~/types/Games';
+import type  { DataTableColumns } from '~/types/DataTable';
+import type { Database } from '~/types/Database';
 
 type VideoItem = {
   id?: number | null | undefined;

@@ -8,9 +8,9 @@ import { ConfirmPromise } from '~/components/Form/Confirm.vue';
 import { ToastPromise } from '~/components/Form/Toast.vue';
 import { ModalPromise } from '~/components/Form/Modal.vue';
 import { convertPostResponse } from '~/utils/posts';
-import { Database } from '~/types/Database';
 import { getFileName } from '~/utils/storage';
-import { News } from '~/types/News';
+import type { Database } from '~/types/Database';
+import type { News } from '~/types/News';
 
 type HTMLElementEvent<T extends HTMLElement> = Event & {
   target: T;

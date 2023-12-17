@@ -1,6 +1,6 @@
 import { addDays, isAfter, isBefore, subDays } from 'date-fns';
 import { compose, map, slice } from 'ramda';
-import { ScheduleItem } from '~/types/Videos';
+import type { ScheduleItem } from '~/types/Videos';
 
 export function useScheduleMain() {
   const schedule: Ref<ScheduleItem[]> = useSchedule();
