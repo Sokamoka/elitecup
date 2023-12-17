@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PlayerStats } from '~/types/PlayerStats';
+import type { PlayerStats } from '~/types/PlayerStats';
 
 interface Props {
   title: string;
