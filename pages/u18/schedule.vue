@@ -86,5 +86,37 @@ const { locale } = useI18n();
         <mjsz-vbr-standings :locale="locale" championship-id="3445" phase-id="45381" />
       </ClientOnly>
     </div>
+
+    <div>
+      <h2 class="font-bold text-xl leading-10">Bratislava</h2>
+      <ClientOnly>
+        <mjsz-vbr-schedule :locale="locale" championship-id="3445" phase-id="45394" hide-columns="broadcast,more" />
+        <mjsz-vbr-standings :locale="locale" championship-id="3445" phase-id="45394" />
+      </ClientOnly>
+    </div>
+
+    <div>
+      <h2 class="font-bold text-xl leading-10">Budapest</h2>
+      <ClientOnly>
+        <mjsz-vbr-schedule :locale="locale" championship-id="3445" phase-id="45395" hide-columns="broadcast,more" />
+        <mjsz-vbr-standings :locale="locale" championship-id="3445" phase-id="45395" />
+      </ClientOnly>
+    </div>
+    
+    <div>
+      <h2 class="font-bold text-xl leading-10">Budapest</h2>
+      <ClientOnly>
+        <mjsz-vbr-schedule :locale="locale" championship-id="3445" phase-id="45396" hide-columns="broadcast,more" />
+        <mjsz-vbr-standings :locale="locale" championship-id="3445" phase-id="45396" />
+      </ClientOnly>
+    </div>
+
+    <div>
+      <h2 class="font-bold text-xl leading-10">Miskolc</h2>
+      <ClientOnly>
+        <mjsz-vbr-schedule :locale="locale" championship-id="3445" phase-id="45397" hide-columns="broadcast,more" />
+        <mjsz-vbr-standings :locale="locale" championship-id="3445" phase-id="45397" />
+      </ClientOnly>
+    </div>
   </div>
 </template>
