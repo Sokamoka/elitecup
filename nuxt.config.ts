@@ -55,6 +55,7 @@ export default defineNuxtConfig({
     'nuxt-headlessui',
     'nuxt-icon',
     '@zadigetvoltaire/nuxt-gtm',
+    '@mjsz-vbr-elements/nuxt',
   ],
 
   tailwindcss: {
@@ -103,5 +104,9 @@ export default defineNuxtConfig({
 
   gtm: {
     id: 'GTM-KK3DG5VV',
+  },
+
+  mjszVbrElements: {
+    apiKey: process.env.NUXT_VBR_API_KEY,
   },
 });

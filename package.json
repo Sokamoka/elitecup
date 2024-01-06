@@ -32,8 +32,9 @@
     "ramda": "^0.29.1"
   },
   "dependencies": {
-    "@mjsz-vbr-elements/core": "2.1.5",
-    "@mjsz-vbr-elements/elements": "2.1.5",
+    "@mjsz-vbr-elements/core": "2.2.1",
+    "@mjsz-vbr-elements/elements": "2.2.1",
+    "@mjsz-vbr-elements/nuxt": "^0.0.3",
     "@netlify/functions": "^2.4.1",
     "@tiptap/extension-text-align": "^2.1.13",
     "@tiptap/extension-underline": "^2.1.13",
