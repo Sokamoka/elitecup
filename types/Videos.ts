@@ -18,7 +18,7 @@ export interface VideosResponse {
 }
 
 export interface VBRSchedule {
-  homeTeamName: string;
+  homeTeam: { longName: string };
 }
 
 export interface ScheduleItem {

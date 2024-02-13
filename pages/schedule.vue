@@ -25,7 +25,7 @@ const { grouped, formatGameDate, formatGameDateTime } = useGroupSchedule(range, 
         <table class="table-fixed w-full mb-8">
           <tr v-for="game in group" :key="game.id">
             <td class="text-slate-500 w-20">
-              {{ game.name }}
+              {{ game.gameName }}
             </td>
             <td class="text-slate-500 w-12">
               {{ formatGameDateTime(game.gameDate) }}
@@ -34,10 +34,10 @@ const { grouped, formatGameDate, formatGameDateTime } = useGroupSchedule(range, 
               {{ game.divisionName }}
             </td>
             <td class="text-right text-slate-800 font-semibold text-lg whitespace-nowrap px-2 truncate">
-              {{ game.homeTeamName }}
+              {{ game.homeTeam.longName }}
             </td>
             <td class="w-8">
-              <img :src="game.homeTeamLogo" class="w-5" />
+              <img :src="game.homeTeam.logo" class="w-5" />
             </td>
             <td class="text-lg font-bold text-slate-900 whitespace-nowrap w-8">
               <template v-if="game.gameStatus === 0">-:-</template>
@@ -48,13 +48,13 @@ const { grouped, formatGameDate, formatGameDateTime } = useGroupSchedule(range, 
               <span v-if="game.isShootout" class="text-xs bg-slate-200 p-1 text-slate-400 rounded font-bold">SO</span>
             </td>
             <td class="w-8 text-center">
-              <img :src="game.awayTeamLogo" class="w-5" />
+              <img :src="game.awayTeam.logo" class="w-5" />
             </td>
             <td class="text-slate-800 font-semibold text-lg whitespace-nowrap px-2 truncate">
-              {{ game.awayTeamName }}
+              {{ game.awayTeam.longName }}
             </td>
             <td class="text-slate-500">
-              {{ game.location }}
+              {{ game.location?.locationName }}
             </td>
           </tr>
         </table>

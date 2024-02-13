@@ -1,6 +1,6 @@
 export function useGetStat(type: string, id: string, store: Ref) {
   const config = useRuntimeConfig();
-  const url = `https://api.icehockey.hu/vbr/v1/${type}?championshipId=${id}`;
+  const url = `https://api.icehockey.hu/vbr/v2/${type}?championshipId=${id}`;
 
   const { execute } = useAsyncState(
     () =>

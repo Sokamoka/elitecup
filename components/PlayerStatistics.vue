@@ -11,32 +11,24 @@ const playerStatsU16 = usePlayerStatsU16();
 const goalieStatsU16 = useGoalieStatsU16();
 const penaltiesStatsU16 = usePenaltiesStatsU16();
 
-const { data: playerStatsU18Data } = useGetStat('playersStatsChampionship', VBR_CHAMPIONSHIP_ID_U18, playerStatsU18);
-const { data: goalieStatsU18Data } = useGetStat('playersGoalieChampionship', VBR_CHAMPIONSHIP_ID_U18, goalieStatsU18);
-const { data: penaltiesStatsU18Data } = useGetStat(
-  'playersPenaltyChampionship',
-  VBR_CHAMPIONSHIP_ID_U18,
-  penaltiesStatsU18
-);
+const { data: playerStatsU18Data } = useGetStat('players-stats', VBR_CHAMPIONSHIP_ID_U18, playerStatsU18);
+const { data: goalieStatsU18Data } = useGetStat('players-goalie', VBR_CHAMPIONSHIP_ID_U18, goalieStatsU18);
+const { data: penaltiesStatsU18Data } = useGetStat('players-penalty', VBR_CHAMPIONSHIP_ID_U18, penaltiesStatsU18);
 
-const { data: playerStatsU16Data } = useGetStat('playersStatsChampionship', VBR_CHAMPIONSHIP_ID_U16, playerStatsU16);
-const { data: goalieStatsU16Data } = useGetStat('playersGoalieChampionship', VBR_CHAMPIONSHIP_ID_U16, goalieStatsU16);
-const { data: penaltiesStatsU16Data } = useGetStat(
-  'playersPenaltyChampionship',
-  VBR_CHAMPIONSHIP_ID_U16,
-  penaltiesStatsU16
-);
+const { data: playerStatsU16Data } = useGetStat('players-stats', VBR_CHAMPIONSHIP_ID_U16, playerStatsU16);
+const { data: goalieStatsU16Data } = useGetStat('players-goalie', VBR_CHAMPIONSHIP_ID_U16, goalieStatsU16);
+const { data: penaltiesStatsU16Data } = useGetStat('players-penalty', VBR_CHAMPIONSHIP_ID_U16, penaltiesStatsU16);
 
-const pointStat = usePlayerStatsByType(playerStatsU18Data, 'point');
-const goalStat = usePlayerStatsByType(playerStatsU18Data, 'g');
-const assistsStat = usePlayerStatsByType(playerStatsU18Data, 'a');
+const pointStat = usePlayerStatsByType(playerStatsU18Data, 'points');
+const goalStat = usePlayerStatsByType(playerStatsU18Data, 'goals');
+const assistsStat = usePlayerStatsByType(playerStatsU18Data, 'assists');
 const plusMinusStat = usePlayerStatsByType(playerStatsU18Data, 'plusMinus');
 const percentStat = usePlayerStatsByType(goalieStatsU18Data, 'svsPercent');
 const penaltyStat = usePlayerStatsByType(penaltiesStatsU18Data, 'pim');
 
 const pointStatU16 = usePlayerStatsByType(playerStatsU16Data, 'point');
 const goalStatU16 = usePlayerStatsByType(playerStatsU16Data, 'g');
-const assistsStatU16 = usePlayerStatsByType(playerStatsU16Data, 'a');
+const assistsStatU16 = usePlayerStatsByType(playerStatsU16Data, 'assists');
 const plusMinusStatU16 = usePlayerStatsByType(playerStatsU16Data, 'plusMinus');
 const percentStatU16 = usePlayerStatsByType(goalieStatsU16Data, 'svsPercent');
 const penaltyStatU16 = usePlayerStatsByType(penaltiesStatsU16Data, 'pim');
@@ -58,7 +50,7 @@ const penaltyStatU16 = usePlayerStatsByType(penaltiesStatsU16Data, 'pim');
         <PlayerStatisticCard
           :title="$t('statistics.points')"
           :data="pointStat"
-          data-key="point"
+          data-key="points"
           :external-link="localePath('/u18/statistics')"
           :external-params="'?report=points'"
         />
@@ -66,7 +58,7 @@ const penaltyStatU16 = usePlayerStatsByType(penaltiesStatsU16Data, 'pim');
         <PlayerStatisticCard
           :title="$t('statistics.goals')"
           :data="goalStat"
-          data-key="g"
+          data-key="goals"
           :external-link="localePath('/u18/statistics')"
           :external-params="'?report=goals'"
         />
@@ -74,7 +66,7 @@ const penaltyStatU16 = usePlayerStatsByType(penaltiesStatsU16Data, 'pim');
         <PlayerStatisticCard
           :title="$t('statistics.assists')"
           :data="assistsStat"
-          data-key="a"
+          data-key="assists"
           :external-link="localePath('/u18/statistics')"
           :external-params="'?report=assists'"
         />
@@ -108,7 +100,7 @@ const penaltyStatU16 = usePlayerStatsByType(penaltiesStatsU16Data, 'pim');
         <PlayerStatisticCard
           :title="$t('statistics.points')"
           :data="pointStatU16"
-          data-key="point"
+          data-key="points"
           :external-link="localePath('/u16/statistics')"
           :external-params="'?report=points'"
         />
@@ -116,7 +108,7 @@ const penaltyStatU16 = usePlayerStatsByType(penaltiesStatsU16Data, 'pim');
         <PlayerStatisticCard
           :title="$t('statistics.goals')"
           :data="goalStatU16"
-          data-key="g"
+          data-key="goals"
           :external-link="localePath('/u16/statistics')"
           :external-params="'?report=goals'"
         />
@@ -124,7 +116,7 @@ const penaltyStatU16 = usePlayerStatsByType(penaltiesStatsU16Data, 'pim');
         <PlayerStatisticCard
           :title="$t('statistics.assists')"
           :data="assistsStatU16"
-          data-key="a"
+          data-key="assists"
           :external-link="localePath('/u16/statistics')"
           :external-params="'?report=assists'"
         />

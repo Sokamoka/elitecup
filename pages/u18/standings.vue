@@ -7,6 +7,6 @@ const { locale } = useI18n();
     {{ $t('title.standings-u18') }}
   </h1>
   <div class="py-8">
-    <mjsz-vbr-standings :locale="locale" championship-id="3447" division="Preliminary Round" />
+    <mjsz-vbr-standings :locale="locale" championship-id="3445" />
   </div>
 </template>
