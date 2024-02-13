@@ -11,6 +11,9 @@ dependencies:
   '@mjsz-vbr-elements/elements':
     specifier: 2.2.5
     version: 2.2.5
+  '@mjsz-vbr-elements/liga':
+    specifier: ^2.2.5
+    version: 2.2.5
   '@mjsz-vbr-elements/nuxt':
     specifier: ^0.0.4
     version: 0.0.4(rollup@4.10.0)
@@ -1204,6 +1207,19 @@ packages:
 
   /@mjsz-vbr-elements/elements@2.2.5:
     resolution: {integrity: sha512-MvpV+zykd6ca0sjenECLUU8Z3c+8WvkfxuHZ+ekRm2U6Dn7thVWIBRXcgPiq7xxV7sTsogY63wBBslLNE9FVeg==}
+    dependencies:
+      '@mjsz-vbr-elements/core': 2.2.5
+      '@mjsz-vbr-elements/shared': 2.2.5
+      '@vueuse/core': 10.7.2(vue@3.4.19)
+      ramda: 0.29.1
+      vue: 3.4.19
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - typescript
+    dev: false
+
+  /@mjsz-vbr-elements/liga@2.2.5:
+    resolution: {integrity: sha512-SJ81bZK7upbr+WyDKCWk9W9mQIIijfLto/jFXUj5lkKawFnwt4hI9f0A9qUHHGbcHiHkfNgo1Eq8U47YITp7BA==}
     dependencies:
       '@mjsz-vbr-elements/core': 2.2.5
       '@mjsz-vbr-elements/shared': 2.2.5

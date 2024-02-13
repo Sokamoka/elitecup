@@ -34,6 +34,7 @@
   "dependencies": {
     "@mjsz-vbr-elements/core": "2.2.5",
     "@mjsz-vbr-elements/elements": "2.2.5",
+    "@mjsz-vbr-elements/liga": "^2.2.5",
     "@mjsz-vbr-elements/nuxt": "^0.0.4",
     "@netlify/functions": "^2.4.1",
     "@tiptap/extension-text-align": "^2.1.13",
