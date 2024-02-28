@@ -6,7 +6,7 @@ export async function scheduleService(championships: string[]) {
 
 async function fetchFromVBR(id: string) {
   const runtimeConfig = useRuntimeConfig();
-  const url = `https://api.icehockey.hu/vbr/v1/gamesList?division=&championshipId=${id}`;
+  const url = `https://api.icehockey.hu/vbr/v2/games-list?championshipId=${id}`;
 
   const response = await fetch(url, {
     method: 'GET',

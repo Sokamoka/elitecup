@@ -1,14 +1,14 @@
 <script setup>
-import { createConfig } from '@mjsz-vbr-elements/core';
-import MjszVbrElements from '@mjsz-vbr-elements/elements';
+// import { createConfig } from '@mjsz-vbr-elements/core';
+// import MjszVbrElements from '@mjsz-vbr-elements/elements';
 // import MjszVbrElementsExtended from '@mjsz-vbr-elements/extended';
 
-const config = useRuntimeConfig();
+// const config = useRuntimeConfig();
 
-createConfig({
-  modules: [MjszVbrElements],
-  apiKey: config.public.vbrApiKey,
-});
+// createConfig({
+//   modules: [MjszVbrElements],
+//   apiKey: config.public.vbrApiKey,
+// });
 </script>
 <template>
   <NuxtLayout>

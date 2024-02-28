@@ -28,9 +28,9 @@ export function useScheduleMain() {
   };
 }
 
-const transformGames = (game: { name: string }) => ({
+const transformGames = (game: { gameName: string }) => ({
   ...game,
-  name: game.name.includes('U16') ? 'U-16' : 'U-18',
+  name: game.gameName.includes('U16') ? 'U-16' : 'U-18',
 });
 
 const getDateRange = (data: ScheduleItem[]) => {

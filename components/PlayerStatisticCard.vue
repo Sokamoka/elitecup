@@ -4,7 +4,7 @@ import type { PlayerStats } from '~/types/PlayerStats';
 interface Props {
   title: string;
   data: PlayerStats[];
-  dataKey: 'point' | 'g' | 'a' | 'plusMinus' | 'svsPercent' | 'pim';
+  dataKey: 'points' | 'goals' | 'assists' | 'plusMinus' | 'svsPercent' | 'pim';
   externalLink: string;
   externalParams: string;
 }
@@ -29,8 +29,8 @@ const navigate = () => {
     </div>
     <div class="grid grid-cols-[20px_1fr_40px] grid-flow-row text-sm gap-2">
       <template v-for="player in data" :key="player.id">
-        <img :src="player.teamLogo" :title="player.teamName" class="w-4 h-4" />
-        <span class="text-white truncate">{{ player.lastName }} {{ player.firstName }}</span>
+        <img :src="player.team.logo" :title="player.team.longName" class="w-4 h-4" />
+        <span class="text-white truncate">{{ player.player.lastName }} {{ player.player.firstName }}</span>
         <span class="text-slate-400 text-right">{{ player[dataKey] }}</span>
       </template>
     </div>
