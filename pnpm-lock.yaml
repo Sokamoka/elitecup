@@ -20,20 +20,23 @@ dependencies:
   '@netlify/functions':
     specifier: ^2.6.0
     version: 2.6.0
+  '@tiptap/extension-link':
+    specifier: ^2.2.4
+    version: 2.2.4(@tiptap/core@2.2.4)(@tiptap/pm@2.2.4)
   '@tiptap/extension-text-align':
-    specifier: ^2.1.13
+    specifier: ^2.2.4
     version: 2.2.4(@tiptap/core@2.2.4)
   '@tiptap/extension-underline':
-    specifier: ^2.1.13
+    specifier: ^2.2.4
     version: 2.2.4(@tiptap/core@2.2.4)
   '@tiptap/pm':
-    specifier: ^2.1.13
+    specifier: ^2.2.4
     version: 2.2.4
   '@tiptap/starter-kit':
-    specifier: ^2.1.13
+    specifier: ^2.2.4
     version: 2.2.4(@tiptap/pm@2.2.4)
   '@tiptap/vue-3':
-    specifier: ^2.1.13
+    specifier: ^2.2.4
     version: 2.2.4(@tiptap/core@2.2.4)(@tiptap/pm@2.2.4)(vue@3.4.21)
   v-calendar:
     specifier: ^3.1.2
@@ -773,9 +776,6 @@ packages:
     resolution: {integrity: sha512-7nhBTRkTG0mD+7r7JvNalJz++YwszZk0oP1HIY6fCgz6wNKxT6LuiXCqdPrZmNPe/WbPIKuqxGZN5s+i6NZqow==}
     peerDependencies:
       vue: '>= 3.2.0 < 4.0.0'
-    peerDependenciesMeta:
-      vue-router:
-        optional: true
     dependencies:
       '@gtm-support/core': 2.3.0
       vue: 3.4.21
@@ -1767,6 +1767,7 @@ packages:
     dependencies:
       is-glob: 4.0.3
       micromatch: 4.0.5
+      napi-wasm: 1.1.0
     dev: true
     bundledDependencies:
       - napi-wasm
@@ -2369,6 +2370,17 @@ packages:
       '@tiptap/core': ^2.0.0
     dependencies:
       '@tiptap/core': 2.2.4(@tiptap/pm@2.2.4)
+    dev: false
+
+  /@tiptap/extension-link@2.2.4(@tiptap/core@2.2.4)(@tiptap/pm@2.2.4):
+    resolution: {integrity: sha512-Qsx0cFZm4dxbkToXs5TcXbSoUdicv8db1gV1DYIZdETqjBm4wFjlzCUP7hPHFlvNfeSy1BzAMRt+RpeuiwvxWQ==}
+    peerDependencies:
+      '@tiptap/core': ^2.0.0
+      '@tiptap/pm': ^2.0.0
+    dependencies:
+      '@tiptap/core': 2.2.4(@tiptap/pm@2.2.4)
+      '@tiptap/pm': 2.2.4
+      linkifyjs: 4.1.3
     dev: false
 
   /@tiptap/extension-list-item@2.2.4(@tiptap/core@2.2.4):
@@ -5586,6 +5598,10 @@ packages:
       uc.micro: 2.1.0
     dev: false
 
+  /linkifyjs@4.1.3:
+    resolution: {integrity: sha512-auMesunaJ8yfkHvK4gfg1K0SaKX/6Wn9g2Aac/NwX+l5VdmFZzo/hdPGxEOETj+ryRa4/fiOPjeeKURSAJx1sg==}
+    dev: false
+
   /listhen@1.7.2:
     resolution: {integrity: sha512-7/HamOm5YD9Wb7CFgAZkKgVPA96WwhcTQoqtm2VTZGVbVVn3IWKRBTgrU7cchA3Q8k9iCsG8Osoi9GX4JsGM9g==}
     hasBin: true
@@ -6364,6 +6380,10 @@ packages:
     resolution: {integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==}
     engines: {node: ^14 || ^16 || >=18}
     hasBin: true
+    dev: true
+
+  /napi-wasm@1.1.0:
+    resolution: {integrity: sha512-lHwIAJbmLSjF9VDRm9GoVOy9AGp3aIvkjv+Kvz9h16QR3uSVYH78PNQUnT2U4X53mhlnV2M7wrhibQ3GHicDmg==}
     dev: true
 
   /negotiator@0.6.3:
