@@ -5,7 +5,7 @@ import { scheduleService } from '~/utils/services';
 import { getYouTubeVideoId } from '~/utils/youtube';
 
 export default defineEventHandler(async (event) => {
-  const client = serverSupabaseClient(event);
+  const client = await serverSupabaseClient(event);
   const { from, to }: any = getQuery(event);
 
   const { data, count, error } = await client

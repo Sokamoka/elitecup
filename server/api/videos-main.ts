@@ -1,11 +1,11 @@
 import { serverSupabaseClient } from '#supabase/server';
 import { VBR_CHAMPIONSHIP_IDS } from '~/constants';
-import { ScheduleItem, VideosResponse, VideosSchema } from '~/types/Videos';
+import type { ScheduleItem, VideosResponse, VideosSchema } from '~/types/Videos';
 import { scheduleService } from '~/utils/services';
 import { getYouTubeVideoId } from '~/utils/youtube';
 
 export default defineEventHandler(async (event) => {
-  const client = serverSupabaseClient(event);
+  const client = await serverSupabaseClient(event);
 
   const { data, error } = await client
     .from('videos')

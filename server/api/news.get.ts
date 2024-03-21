@@ -3,7 +3,7 @@ import { serverSupabaseClient } from '#supabase/server';
 export default defineEventHandler(async (event) => {
   const { slug } = getQuery(event);
 
-  const client = serverSupabaseClient(event);
+  const client = await serverSupabaseClient(event);
 
   const { data, error } = await client.from('posts').select().eq('slug', slug).single();
 
