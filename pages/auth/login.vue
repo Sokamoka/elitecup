@@ -8,7 +8,7 @@ definePageMeta({
 
 const errorMessage = ref('');
 const user = useSupabaseUser();
-const { auth } = useSupabaseAuthClient();
+const { auth } = useSupabaseClient();
 
 const credentials = reactive({
   email: '',

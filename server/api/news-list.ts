@@ -3,7 +3,7 @@ import { serverSupabaseClient } from '#supabase/server';
 export default defineEventHandler(async (event) => {
   const { from, to, locale }: any = getQuery(event);
 
-  const client = serverSupabaseClient(event);
+  const client = await serverSupabaseClient(event);
 
   const { data, count, error } = await client
     .from('posts')

@@ -109,4 +109,8 @@ export default defineNuxtConfig({
   mjszVbrElements: {
     apiKey: process.env.NUXT_VBR_API_KEY,
   },
+
+  supabase: {
+    redirect: false,
+  },
 });

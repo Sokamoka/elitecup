@@ -2,7 +2,7 @@ import { serverSupabaseClient } from '#supabase/server';
 import { ofetch } from 'ofetch';
 
 export default defineEventHandler(async (event) => {
-  const client = serverSupabaseClient(event);
+  const client = await serverSupabaseClient(event);
 
   const { data, error } = await client
     .from('instagram')
