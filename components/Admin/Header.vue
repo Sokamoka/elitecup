@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useIntervalFn } from '@vueuse/core';
+
 const user = useSupabaseUser();
 const client = useSupabaseClient();
 
@@ -6,10 +8,20 @@ const { locale: currentLocale, locales } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
 const localePath = useLocalePath();
 
+const { pause } = useIntervalFn(() => {
+  // const user = useSupabaseUser();
+  if (!user.value) {
+    pause();
+    return navigateTo('/auth/login');
+  }
+}, 1000 * 60 * 15);
+
 const signOut = async () => {
   await client.auth.signOut();
   await navigateTo('/');
 };
+
+onBeforeUnmount(() => pause());
 </script>
 
 <template>
