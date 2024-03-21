@@ -14,7 +14,7 @@ const { pause } = useIntervalFn(() => {
     pause();
     return navigateTo('/auth/login');
   }
-}, 1000 * 60 * 5);
+}, 1000 * 60 * 15);
 
 const signOut = async () => {
   await client.auth.signOut();
