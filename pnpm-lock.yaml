@@ -24,19 +24,19 @@ dependencies:
     specifier: ^2.2.4
     version: 2.2.4(@tiptap/core@2.2.4)(@tiptap/pm@2.2.4)
   '@tiptap/extension-text-align':
-    specifier: ^2.1.13
+    specifier: ^2.2.4
     version: 2.2.4(@tiptap/core@2.2.4)
   '@tiptap/extension-underline':
-    specifier: ^2.1.13
+    specifier: ^2.2.4
     version: 2.2.4(@tiptap/core@2.2.4)
   '@tiptap/pm':
-    specifier: ^2.1.13
+    specifier: ^2.2.4
     version: 2.2.4
   '@tiptap/starter-kit':
-    specifier: ^2.1.13
+    specifier: ^2.2.4
     version: 2.2.4(@tiptap/pm@2.2.4)
   '@tiptap/vue-3':
-    specifier: ^2.1.13
+    specifier: ^2.2.4
     version: 2.2.4(@tiptap/core@2.2.4)(@tiptap/pm@2.2.4)(vue@3.4.21)
   v-calendar:
     specifier: ^3.1.2
@@ -776,9 +776,6 @@ packages:
     resolution: {integrity: sha512-7nhBTRkTG0mD+7r7JvNalJz++YwszZk0oP1HIY6fCgz6wNKxT6LuiXCqdPrZmNPe/WbPIKuqxGZN5s+i6NZqow==}
     peerDependencies:
       vue: '>= 3.2.0 < 4.0.0'
-    peerDependenciesMeta:
-      vue-router:
-        optional: true
     dependencies:
       '@gtm-support/core': 2.3.0
       vue: 3.4.21
