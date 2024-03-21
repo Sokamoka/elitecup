@@ -3,6 +3,7 @@ import { useEditor, EditorContent } from '@tiptap/vue-3';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
 import TextAlign from '@tiptap/extension-text-align';
+import Link from '@tiptap/extension-link';
 
 interface TextActions {
   slug: string;
@@ -53,6 +54,7 @@ const textActions: Array<TextActions[]> = [
     { slug: 'orderedList', icon: 'ic:twotone-format-list-numbered', active: 'orderedList' },
   ],
   [{ slug: 'clear', icon: 'ic:twotone-format-clear', active: 'clear' }],
+  [{ slug: 'link', icon: 'ic:baseline-insert-link', active: 'link' }],
 ];
 
 const editor = useEditor({
@@ -62,6 +64,9 @@ const editor = useEditor({
     Underline,
     TextAlign.configure({
       types: ['heading', 'paragraph'],
+    }),
+    Link.configure({
+      openOnClick: false,
     }),
   ],
   onUpdate,
@@ -101,12 +106,22 @@ function onActionClick(slug: TextActions['slug'], option: TextActions['option'])
       vm?.clearNodes().run();
       vm?.unsetAllMarks().run();
     },
+    link: () => setLink(),
   };
   actionTriggers[slug]();
 }
 
 function isActive(option: TextActions['active']) {
   return editor.value?.isActive(option);
+}
+
+function setLink() {
+  const previousUrl = editor.value?.getAttributes('link').href;
+  const url = window.prompt('URL', previousUrl);
+
+  if (url === null) return;
+  if (url === '') return editor.value?.chain().focus().extendMarkRange('link').unsetLink().run();
+  editor.value?.chain().focus().extendMarkRange('link').setLink({ href: url }).run();
 }
 </script>
 
