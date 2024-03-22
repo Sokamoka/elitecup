@@ -100,10 +100,20 @@ const { locale } = useI18n();
 
     <div>
       <h2 class="font-bold text-xl leading-10">Pilsen</h2>
-      <ClientOnly>
-        <mjsz-vbr-schedule :locale="locale" championship-id="3444" phase-id="45428" />
-        <mjsz-vbr-standings :locale="locale" championship-id="3444" phase-id="45428" />
-      </ClientOnly>
+      <mjsz-vbr-schedule :locale="locale" championship-id="3444" phase-id="45428" />
+      <mjsz-vbr-standings :locale="locale" championship-id="3444" phase-id="45428" />
+    </div>
+
+    <div>
+      <h2 class="font-bold text-xl leading-10">Graz</h2>
+      <mjsz-vbr-schedule :locale="locale" championship-id="3444" phase-id="45489" />
+      <mjsz-vbr-standings :locale="locale" championship-id="3444" phase-id="45489" />
+    </div>
+
+    <div>
+      <h2 class="font-bold text-xl leading-10">Brunico</h2>
+      <mjsz-vbr-schedule :locale="locale" championship-id="3444" phase-id="45550" />
+      <mjsz-vbr-standings :locale="locale" championship-id="3444" phase-id="45550" />
     </div>
   </div>
 </template>
