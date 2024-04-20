@@ -138,6 +138,18 @@ watch(isMiddleScreen, (isMiddleScreen) => {
 
               <HeadlessMenuItem v-slot="{ active }">
                 <NuxtLink
+                  :to="localePath('/u16/archive')"
+                  :class="[
+                    active ? 'text-red-500' : 'text-white-900',
+                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                  ]"
+                >
+                  {{ $t('menu.archive') }}
+                </NuxtLink>
+              </HeadlessMenuItem>
+
+              <HeadlessMenuItem v-slot="{ active }">
+                <NuxtLink
                   to="/files/Cup_reg_U16_23_24.pdf"
                   :class="[
                     active ? 'text-red-500' : 'text-white-900',

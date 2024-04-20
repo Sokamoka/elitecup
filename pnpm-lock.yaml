@@ -43,6 +43,9 @@ dependencies:
     version: 3.1.2(@popperjs/core@2.11.8)(vue@3.4.21)
 
 devDependencies:
+  '@lostui/utils':
+    specifier: ^0.0.1
+    version: 0.0.1
   '@nuxt/content':
     specifier: ^2.12.1
     version: 2.12.1(nuxt@3.11.1)(rollup@4.13.0)(vue@3.4.21)
@@ -1030,6 +1033,14 @@ packages:
 
   /@kwsites/promise-deferred@1.1.1:
     resolution: {integrity: sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==}
+    dev: true
+
+  /@lostui/utils@0.0.1:
+    resolution: {integrity: sha512-0PMT4Mehxz3fqTLRbEEtuGXdhTJ2sBioVhPvJM7pI3zi5U9Ps4P6xeW8WUf5hfQcmcaGrVREdfHZZxqY+6YPcg==}
+    dependencies:
+      vue: 3.4.21
+    transitivePeerDependencies:
+      - typescript
     dev: true
 
   /@mapbox/node-pre-gyp@1.0.11:
