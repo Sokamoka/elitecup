@@ -13,7 +13,7 @@ const { columnModel, state } = useDataTable(omit(['best'], RESULT_TABLE_COLUMNS)
       {{ $t('menu.archive') }}
     </h1>
 
-    <h2 class="text-xl text-slate-900 font-bold my-4">2012-2013</h2>
+    <h2 class="text-xl text-slate-900 font-bold my-4">2022-2023</h2>
 
     <div class="w-full overflow-auto">
       <DataTablePublic :column-model="columnModel" :row-model="state"></DataTablePublic>
