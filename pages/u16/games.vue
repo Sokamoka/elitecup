@@ -115,5 +115,11 @@ const { locale } = useI18n();
       <mjsz-vbr-schedule :locale="locale" championship-id="3444" phase-id="45550" />
       <mjsz-vbr-standings :locale="locale" championship-id="3444" phase-id="45550" />
     </div>
+
+    <div>
+      <h2 class="font-bold text-xl leading-10">DVTK Ice Hockey Cup - Miskolc</h2>
+      <mjsz-vbr-schedule :locale="locale" championship-id="3649" />
+      <mjsz-vbr-standings :locale="locale" championship-id="3649" />
+    </div>
   </div>
 </template>
