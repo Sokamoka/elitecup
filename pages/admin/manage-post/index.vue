@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { refDefault, useStorage } from '@vueuse/core';
-import { format, isValid, parseISO } from 'date-fns';
+import { format, isValid } from 'date-fns';
 import { ConfirmPromise } from '~/components/Form/Confirm.vue';
 import { ToastPromise } from '~/components/Form/Toast.vue';
 import type { News } from '~/types/News';
@@ -63,9 +63,9 @@ const { data: posts, refresh } = await useFetch<{ posts: News[]; count: number }
       posts: posts.map((post) => {
         return {
           ...post,
-          created_at: format(parseISO(post.created_at), 'yyyy, LLLL dd. HH:mm'),
-          scheduled_at: isValid(parseISO(post.scheduled_at))
-            ? format(parseISO(post.scheduled_at), 'yyyy, LLLL dd. HH:mm')
+          created_at: format(new Date(post.created_at), 'yyyy, LLLL dd. HH:mm'),
+          scheduled_at: isValid(new Date(post.scheduled_at))
+            ? format(new Date(post.scheduled_at), 'yyyy, LLLL dd. HH:mm')
             : '',
         };
       }),
