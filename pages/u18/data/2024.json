@@ -1,105 +1,105 @@
 [
   {
     "pos": "1.",
-    "team": "TRE",
-    "tournaments": 3,
-    "best": "23.08.19, 23.09.01, 23.12.16.",
-    "gd": 28,
-    "points": 7
+    "team": "RBS",
+    "tournaments": 6,
+    "best": "24.01.07,24.03.31,24.05.05",
+    "gd": 29,
+    "points": 9
   },
   {
     "pos": "2.",
-    "team": "ITA",
-    "tournaments": 3,
-    "best": "23.09.01, 23.08.19, 24.01.06.",
-    "gd": 18,
-    "points": 7
-  },
-  {
-    "pos": "3.",
-    "team": "RBS",
-    "tournaments": 4,
-    "best": "23.08.19, 23.12.16, 24.01.06",
-    "gd": 17,
-    "points": 7
-  },
-  {
-    "pos": "4.",
     "team": "POL",
-    "tournaments": 3,
-    "best": "23.08.19, 23.09.01, 24.01.06.",
+    "tournaments": 4,
+    "best": "23.08.20,23.08.01,24.01.07",
     "gd": 16,
     "points": 7
   },
   {
+    "pos": "3.",
+    "team": "TRE",
+    "tournaments": 4,
+    "best": "23.08.20,23.09.01,23.12.17",
+    "gd": 28,
+    "points": 8
+  },
+  {
+    "pos": "4.",
+    "team": "ITA",
+    "tournaments": 5,
+    "best": "23.08.20,24.01.07,24.03.31",
+    "gd": 19,
+    "points": 7
+  },
+  {
     "pos": "5.",
-    "team": "HKN",
-    "tournaments": 2,
-    "best": "23.08.18, 23.09.01.",
-    "gd": 20,
-    "points": 6
+    "team": "NIT",
+    "tournaments": 3,
+    "best": "23.08.18,23.09.01,24.04.28",
+    "gd": 39,
+    "points": 9
   },
   {
     "pos": "6.",
-    "team": "SBR",
+    "team": "SBA",
     "tournaments": 3,
-    "best": "23.08.19, 23.09.02, 23.12.16.",
+    "best": "23.08.20,23.09.03,24.01.07",
     "gd": 17,
     "points": 6
   },
   {
     "pos": "7.",
-    "team": "ÚJA",
-    "tournaments": 4,
-    "best": "23.08.19, 23.09.01, 23.12.17.",
-    "gd": 1,
+    "team": "LJU",
+    "tournaments": 2,
+    "best": "23.08.01,23.12.17",
+    "gd": 6,
     "points": 6
   },
   {
     "pos": "8.",
-    "team": "LJS",
-    "tournaments": 3,
-    "best": "23.09.02, 23.09.01, 23.12.16.",
-    "gd": -6,
-    "points": 5
+    "team": "ÚJA",
+    "tournaments": 5,
+    "best": "23.09.20,23.09.01,24.01.07",
+    "gd": 6,
+    "points": 6
   },
   {
     "pos": "9.",
-    "team": "SEC",
-    "tournaments": 3,
-    "best": "23.09.02, 23.08.19, 23.12.16.",
-    "gd": -7,
+    "team": "GRA",
+    "tournaments": 4,
+    "best": "23.08.20,24.01.07,24.03.31",
+    "gd": 16,
     "points": 5
   },
   {
     "pos": "10.",
     "team": "THU",
-    "tournaments": 2,
-    "best": "23.09.02, 23.12.16.",
-    "gd": -1,
-    "points": 4
+    "tournaments": 3,
+    "best": "23.09.01,23.12.17,23.12.15",
+    "gd": 1,
+    "points": 5
   },
   {
     "pos": "11.",
-    "team": "EAS",
+    "team": "SEC",
     "tournaments": 3,
-    "best": "23.09.01, 23.08.19, 24.01.06.",
-    "gd": -1,
-    "points": 4
+    "best": "23.09.03,23.08.20,24.01.07",
+    "gd": -7,
+    "points": 5
   },
   {
     "pos": "12.",
     "team": "KYI",
-    "tournaments": 4,
-    "best": "23.09.01, 23.08.19, 23.12.16.",
-    "gd": -7,
+    "tournaments": 5,
+    "best": "23.09.01,23.08.20,23.12.17",
+    "gd": 6,
     "points": 4
   },
   {
     "pos": "13.",
     "team": "POR",
     "tournaments": 2,
-    "best": "23.08.18, 23.09.01.",
+    "best": "23.08.18,23.09.01",
     "gd": 4,
     "points": 3
   },
@@ -107,7 +107,7 @@
     "pos": "14.",
     "team": "ZLN",
     "tournaments": 1,
-    "best": "23.09.01-03.",
+    "best": "8/1/2023",
     "gd": 4,
     "points": 3
   },
@@ -115,56 +115,72 @@
     "pos": "15.",
     "team": "FEH",
     "tournaments": 3,
-    "best": "23.08.19, 23.09.01, 24.01.06.",
+    "best": "23.09.08,23.09.20,24.01.07",
     "gd": -19,
     "points": 3
   },
   {
     "pos": "16.",
-    "team": "MIS",
-    "tournaments": 3,
-    "best": "23.09.01, 23.08.19, 24.01.06.",
-    "gd": -16,
+    "team": "PIL",
+    "tournaments": 1,
+    "best": "8/1/2023",
+    "gd": 0,
     "points": 2
   },
   {
     "pos": "17.",
-    "team": "BJA",
-    "tournaments": 3,
-    "best": "23.08.19, 23.09.01, 24.01.06.",
-    "gd": -26,
+    "team": "MIS",
+    "tournaments": 4,
+    "best": "23.08.20,23.12.17,24.01.07",
+    "gd": -5,
     "points": 2
   },
   {
     "pos": "18.",
+    "team": "BJA",
+    "tournaments": 5,
+    "best": "23.08.18,23.09.01,23.12.17",
+    "gd": -13,
+    "points": 2
+  },
+  {
+    "pos": "19.",
+    "team": "VIC",
+    "tournaments": 5,
+    "best": "23.09.01,24.01.07,24.04.28",
+    "gd": -18,
+    "points": 2
+  },
+  {
+    "pos": "20.",
     "team": "KAC",
     "tournaments": 1,
-    "best": "23.08.18-20.",
+    "best": "8/20/2023",
     "gd": -5,
     "points": 1
   },
   {
-    "pos": "19.",
+    "pos": "21.",
     "team": "VAS",
     "tournaments": 1,
-    "best": "23.09.01-03.",
+    "best": "8/1/2023",
     "gd": -6,
     "points": 0
   },
   {
-    "pos": "20.",
-    "team": "KRA",
+    "pos": "22.",
+    "team": "CRO",
     "tournaments": 1,
-    "best": "23.09.01-03.",
-    "gd": -12,
+    "best": "3/31/2024",
+    "gd": -10,
     "points": 0
   },
   {
-    "pos": "21.",
-    "team": "VIC",
-    "tournaments": 4,
-    "best": "23.08.19, 23.09.02, 24.01.06.",
-    "gd": -31,
+    "pos": "23.",
+    "team": "KRA",
+    "tournaments": 1,
+    "best": "9/3/2023",
+    "gd": -12,
     "points": 0
   }
 ]
