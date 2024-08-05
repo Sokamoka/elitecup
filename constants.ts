@@ -1,7 +1,7 @@
 import { SortDirection } from '@lostui/utils';
 
-export const VBR_CHAMPIONSHIP_ID_U16 = '3444';
-export const VBR_CHAMPIONSHIP_ID_U18 = '3445';
+export const VBR_CHAMPIONSHIP_ID_U16 = '3782';
+export const VBR_CHAMPIONSHIP_ID_U18 = '3724';
 export const VBR_CHAMPIONSHIP_IDS = [VBR_CHAMPIONSHIP_ID_U16, VBR_CHAMPIONSHIP_ID_U18];
 
 export const SORT_STATE_ORIGINAL = 'original';
