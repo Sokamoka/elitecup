@@ -1,15 +1,23 @@
-import { groupBy, head, map, path, sortBy, keys, curry } from 'ramda';
+import { groupBy, head, map, path, sortBy, keys, curry, prop } from 'ramda';
 import type { VBRSchedule } from '~/types/Videos';
 
 export function useTeams() {
   const schedule: Ref<VBRSchedule[]> = useSchedule();
 
   const teams = computed(() => {
-    const grouped = groupBy(path(['homeTeam', 'longName']))(unref(schedule));
+    console.log(schedule.value);
+    const homeTeams = map(
+      (item) => ({ name: item.homeTeam.longName, id: item.homeTeam.id, logo: item.homeTeam.logo }),
+      unref(schedule)
+    );
+    const awayTeams = map(
+      (item) => ({ name: item.awayTeam.longName, id: item.awayTeam.id, logo: item.awayTeam.logo }),
+      unref(schedule)
+    );
+    
+    const grouped = groupBy(prop('name'))([...homeTeams, ...awayTeams]);
     const mapped = map(firstItem(grouped))(keys(grouped));
-    // const mapped = compose(redd(grouped), keys)(grouped);
-    // console.log(mapped);
-    return sortBy(path(['homeTeam', 'longName']))(mapped);
+    return sortBy(prop('name'))(mapped);
   });
 
   return teams;
