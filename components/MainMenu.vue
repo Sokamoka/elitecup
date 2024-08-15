@@ -83,7 +83,7 @@ watch(isMiddleScreen, (isMiddleScreen) => {
 
               <HeadlessMenuItem v-slot="{ active }">
                 <NuxtLink
-                  to="/files/Cup_reg_U18_23_24.pdf"
+                  to="/files/Cup_reg_U18_24_25.pdf"
                   :class="[
                     active ? 'text-red-500' : 'text-white-900',
                     'group flex w-full items-center rounded-md px-2 py-2 text-sm',
@@ -162,7 +162,7 @@ watch(isMiddleScreen, (isMiddleScreen) => {
 
               <HeadlessMenuItem v-slot="{ active }">
                 <NuxtLink
-                  to="/files/Cup_reg_U16_23_24.pdf"
+                  to="/files/Cup_reg_U16_24_25_v2.pdf"
                   :class="[
                     active ? 'text-red-500' : 'text-white-900',
                     'group flex w-full items-center rounded-md px-2 py-2 text-sm',
