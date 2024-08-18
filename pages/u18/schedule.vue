@@ -15,9 +15,14 @@ const { locale } = useI18n();
 
     <div>
       <h2 class="font-bold text-xl leading-10">Krynica</h2>
-
       <mjsz-vbr-schedule :locale="locale" championship-id="3724" phase-id="45654" hide-columns="broadcast,more" />
       <mjsz-vbr-standings :locale="locale" championship-id="3724" phase-id="45654" />
+    </div>
+
+    <div>
+      <h2 class="font-bold text-xl leading-10">Nitra</h2>
+      <mjsz-vbr-schedule :locale="locale" championship-id="3724" phase-id="45660" hide-columns="broadcast,more" />
+      <mjsz-vbr-standings :locale="locale" championship-id="3724" phase-id="45660" />
     </div>
   </div>
 </template>
