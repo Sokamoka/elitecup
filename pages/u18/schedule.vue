@@ -24,5 +24,11 @@ const { locale } = useI18n();
       <mjsz-vbr-schedule :locale="locale" championship-id="3724" phase-id="45660" hide-columns="broadcast,more" />
       <mjsz-vbr-standings :locale="locale" championship-id="3724" phase-id="45660" />
     </div>
+
+    <div>
+      <h2 class="font-bold text-xl leading-10">St. Pölten </h2>
+      <mjsz-vbr-schedule :locale="locale" championship-id="3724" phase-id="45662" hide-columns="broadcast,more" />
+      <mjsz-vbr-standings :locale="locale" championship-id="3724" phase-id="45662" />
+    </div>
   </div>
 </template>
