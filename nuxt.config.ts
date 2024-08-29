@@ -22,11 +22,7 @@ export default defineNuxtConfig({
       isCustomElement: (tag) => tag.includes('mjsz-vbr-'),
     },
   },
-
-  alias: {
-    // '@mjsz-vbr-elements/core': fileURLToPath(new URL('./assets/js/mjsz-vbr-elements-core.esm.js', import.meta.url)),
-  },
-
+  
   app: {
     head: {
       titleTemplate: 'EliteCup.eu - %s',
