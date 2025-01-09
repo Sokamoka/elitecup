@@ -69,5 +69,12 @@ const { locale } = useI18n();
       <mjsz-vbr-schedule :locale="locale" championship-id="3782" phase-id="45827" />
       <mjsz-vbr-standings :locale="locale" championship-id="3782" phase-id="45827" />
     </div>
+
+    <div>
+      <h2 class="font-bold text-xl leading-10">9. Budapest</h2>
+
+      <mjsz-vbr-schedule :locale="locale" championship-id="3782" phase-id="45828" />
+      <mjsz-vbr-standings :locale="locale" championship-id="3782" phase-id="45828" />
+    </div>
   </div>
 </template>
