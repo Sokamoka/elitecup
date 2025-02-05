@@ -1,0 +1,135 @@
+[
+  {
+    "pos": "1.",
+    "team": "AIA",
+    "tournaments": 4,
+    "points": 11,
+    "gd": 31
+  },
+  {
+    "pos": "2.",
+    "team": "ÚJA",
+    "tournaments": 3,
+    "points": 8,
+    "gd": 25
+  },
+  {
+    "pos": "3.",
+    "team": "ITA",
+    "tournaments": 2,
+    "points": 7,
+    "gd": 36
+  },
+  {
+    "pos": "4.",
+    "team": "BJA",
+    "tournaments": 4,
+    "points": 7,
+    "gd": 4
+  },
+  {
+    "pos": "5.",
+    "team": "MIS",
+    "tournaments": 4,
+    "points": 7,
+    "gd": -2
+  },
+  {
+    "pos": "6.",
+    "team": "LJU",
+    "tournaments": 2,
+    "points": 4,
+    "gd": 7
+  },
+  {
+    "pos": "7.",
+    "team": "CRO",
+    "tournaments": 2,
+    "points": 4,
+    "gd": 6
+  },
+  {
+    "pos": "8.",
+    "team": "TRE",
+    "tournaments": 3,
+    "points": 4,
+    "gd": -2
+  },
+  {
+    "pos": "9.",
+    "team": "HKN",
+    "tournaments": 2,
+    "points": 3,
+    "gd": 0
+  },
+  {
+    "pos": "10.",
+    "team": "GRA",
+    "tournaments": 1,
+    "points": 2,
+    "gd": 2
+  },
+  {
+    "pos": "11.",
+    "team": "TIC",
+    "tournaments": 1,
+    "points": 2,
+    "gd": 1
+  },
+  {
+    "pos": "12.",
+    "team": "MIH",
+    "tournaments": 1,
+    "points": 2,
+    "gd": 0
+  },
+  {
+    "pos": "13.",
+    "team": "KOS",
+    "tournaments": 1,
+    "points": 2,
+    "gd": 0
+  },
+  {
+    "pos": "14.",
+    "team": "PIL",
+    "tournaments": 1,
+    "points": 1,
+    "gd": -1
+  },
+  {
+    "pos": "15.",
+    "team": "FEH",
+    "tournaments": 2,
+    "points": 1,
+    "gd": -4
+  },
+  {
+    "pos": "16.",
+    "team": "VAS",
+    "tournaments": 2,
+    "points": 1,
+    "gd": -7
+  },
+  {
+    "pos": "17.",
+    "team": "KRE",
+    "tournaments": 2,
+    "points": 1,
+    "gd": -37
+  },
+  {
+    "pos": "18.",
+    "team": "SEC",
+    "tournaments": 1,
+    "points": 0,
+    "gd": -10
+  },
+  {
+    "pos": "19.",
+    "team": "VIE",
+    "tournaments": 2,
+    "points": 0,
+    "gd": -53
+  }
+]
