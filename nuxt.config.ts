@@ -22,7 +22,7 @@ export default defineNuxtConfig({
       isCustomElement: (tag) => tag.includes('mjsz-vbr-'),
     },
   },
-  
+
   app: {
     head: {
       titleTemplate: 'EliteCup.eu - %s',
@@ -83,8 +83,6 @@ export default defineNuxtConfig({
       //   file: 'hu-HU.json',
       // },
     ],
-    lazy: true,
-    langDir: 'lang',
     defaultLocale: 'en',
   },
 
