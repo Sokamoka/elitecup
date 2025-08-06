@@ -1,4 +1,4 @@
-import { VBRSchedule } from "~/types/Videos";
+import type { VBRSchedule } from '~/types/Videos';
 
 export function useScheduleRaw(options: { limit: number }) {
   const { limit = 12 } = options || {};
