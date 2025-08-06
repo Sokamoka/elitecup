@@ -27,7 +27,7 @@
     "@zadigetvoltaire/nuxt-gtm": "^0.0.13",
     "date-fns": "^3.6.0",
     "js-convert-case": "^4.2.0",
-    "nuxt": "^3.11.2",
+    "nuxt": "^4.0.3",
     "nuxt-headlessui": "^1.2.0",
     "nuxt-icon": "^0.6.10",
     "ramda": "^0.29.1"
