@@ -1,0 +1,39 @@
+diff --git a/dist/module.json b/dist/module.json
+index 5b76c6fcd17e67dadaf25509de5bd71b79b971fa..e2eb9cd56bad90172bcfbd5a913cd82454d47197 100644
+--- a/dist/module.json
++++ b/dist/module.json
+@@ -2,7 +2,7 @@
+   "name": "@zadigetvoltaire/nuxt-gtm",
+   "configKey": "gtm",
+   "compatibility": {
+-    "nuxt": "^3.0.0"
++    "nuxt": "^4.0.0"
+   },
+   "version": "0.0.13"
+ }
+diff --git a/dist/module.mjs b/dist/module.mjs
+index f42a83bd380524d80966376b1bc3f7e3b2cdc411..b75ffc4f9266afa71a16589f959b1eb500c4b05c 100644
+--- a/dist/module.mjs
++++ b/dist/module.mjs
+@@ -49,7 +49,7 @@ const module = defineNuxtModule({
+     name: "@zadigetvoltaire/nuxt-gtm",
+     configKey: "gtm",
+     compatibility: {
+-      nuxt: "^3.0.0"
++      nuxt: "^4.0.0"
+     }
+   },
+   // @ts-ignore
+diff --git a/package.json b/package.json
+index a9bd7c1f745d5b833bf3ee4e2af089b4f772cddf..a9d50d0aea02fb8bd1e057305ded9b986cfa93e9 100644
+--- a/package.json
++++ b/package.json
+@@ -23,7 +23,7 @@
+     "sirv": "^2.0.3"
+   },
+   "peerDependencies": {
+-    "nuxt": "^3.0.0"
++    "nuxt": "^4.0.0"
+   },
+   "devDependencies": {
+     "@iconify-json/carbon": "^1.1.15",

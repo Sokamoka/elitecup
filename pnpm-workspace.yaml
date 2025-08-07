@@ -1,2 +1,5 @@
 onlyBuiltDependencies:
   - better-sqlite3
+
+patchedDependencies:
+  '@zadigetvoltaire/nuxt-gtm@0.0.13': patches/@zadigetvoltaire__nuxt-gtm@0.0.13.patch
