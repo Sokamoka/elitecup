@@ -17,13 +17,13 @@ const props = defineProps({
       <div
         class="flex justify-center p-4 image not-prose aspect-video bg-white border-b border-slate-200 rounded-t-lg overflow-hidden"
       >
-        <ContentSlot :use="$slots.default" unwrap="p" />
+        <slot mdc-unwrap="p" />
       </div>
       <dl class="grid grid-cols-[26px_1fr] items-center gap-y-2 p-4 pt-0">
-          <Icon name="ic:outline-email" class="text-slate-400" />
-          <a :href="`mailto:${email}`" class="truncate">{{ email }}</a>
-          <Icon name="ic:outline-local-phone" class="text-slate-400" />
-          <a :href="`tel:${phone}`" class="truncate">{{ phone }}</a>
+        <Icon name="ic:outline-email" class="text-slate-400" />
+        <a :href="`mailto:${email}`" class="truncate">{{ email }}</a>
+        <Icon name="ic:outline-local-phone" class="text-slate-400" />
+        <a :href="`tel:${phone}`" class="truncate">{{ phone }}</a>
       </dl>
     </div>
   </div>

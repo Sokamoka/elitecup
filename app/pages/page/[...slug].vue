@@ -2,10 +2,13 @@
 const { path } = useRoute();
 
 const { data } = await useAsyncData(`content-${path}`, () => {
-  return queryContent().where({ _path: path }).findOne();
+  return queryCollection('content').path(path).first();
 });
 
-useContentHead(data)
+useSeoMeta({
+  title: data.value?.title,
+  description: data.value?.description,
+});
 </script>
 
 <template>

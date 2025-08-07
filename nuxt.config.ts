@@ -48,8 +48,8 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@nuxt/content',
     '@nuxtjs/supabase',
+    '@nuxt/icon',
     'nuxt-headlessui',
-    'nuxt-icon',
     '@zadigetvoltaire/nuxt-gtm',
     '@mjsz-vbr-elements/nuxt',
   ],
@@ -90,11 +90,11 @@ export default defineNuxtConfig({
     prefix: 'Headless',
   },
 
-  content: {
-    navigation: {
-      fields: ['publishedAt', 'lead', 'mainImage'],
-    },
-  },
+  // content: {
+  //   navigation: {
+  //     fields: ['publishedAt', 'lead', 'mainImage'],
+  //   },
+  // },
 
   gtm: {
     id: 'GTM-KK3DG5VV',

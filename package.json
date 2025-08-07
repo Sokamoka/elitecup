@@ -13,6 +13,7 @@
   "devDependencies": {
     "@lostui/utils": "^0.0.4",
     "@nuxt/content": "^3.6.3",
+    "@nuxt/icon": "^1.15.0",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/i18n": "10.0.3",
     "@nuxtjs/supabase": "^1.6.0",
@@ -29,7 +30,6 @@
     "js-convert-case": "^4.2.0",
     "nuxt": "^4.0.3",
     "nuxt-headlessui": "^1.2.1",
-    "nuxt-icon": "^0.6.10",
     "ramda": "^0.31.3"
   },
   "dependencies": {
