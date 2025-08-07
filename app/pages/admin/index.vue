@@ -1,6 +1,8 @@
 <script setup>
 import PostsDashboard from '~/components/Admin/PostsDashboard.vue';
 
+const localePath = useLocalePath();
+
 definePageMeta({
   key: 'admin/dashboard',
 });

@@ -1,5 +1,5 @@
 import tailwindTypography from '@tailwindcss/typography';
-import { fileURLToPath } from 'url';
+// import { fileURLToPath } from 'url';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -89,12 +89,6 @@ export default defineNuxtConfig({
   headlessui: {
     prefix: 'Headless',
   },
-
-  // content: {
-  //   navigation: {
-  //     fields: ['publishedAt', 'lead', 'mainImage'],
-  //   },
-  // },
 
   gtm: {
     id: 'GTM-KK3DG5VV',
