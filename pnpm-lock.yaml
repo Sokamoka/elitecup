@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
+  '@mjsz-vbr-elements/nuxt@0.0.4':
+    hash: c8a7988e41096724da73c7584bc2f3dd5d98241a0f1d8596b8c63c7101cc551b
+    path: patches/@mjsz-vbr-elements__nuxt@0.0.4.patch
   '@zadigetvoltaire/nuxt-gtm@0.0.13':
     hash: 5690e8449f7acad86259781a100e5c312040ed05f6c5730935bf3ebd5c42eaa9
     path: patches/@zadigetvoltaire__nuxt-gtm@0.0.13.patch
@@ -24,7 +27,7 @@ importers:
         version: 2.25.2(typescript@5.9.2)
       '@mjsz-vbr-elements/nuxt':
         specifier: ^0.0.4
-        version: 0.0.4(rollup@4.46.2)(typescript@5.9.2)
+        version: 0.0.4(patch_hash=c8a7988e41096724da73c7584bc2f3dd5d98241a0f1d8596b8c63c7101cc551b)(rollup@4.46.2)(typescript@5.9.2)
       '@netlify/functions':
         specifier: ^4.2.1
         version: 4.2.1(encoding@0.1.13)(rollup@4.46.2)
@@ -7484,7 +7487,7 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@mjsz-vbr-elements/nuxt@0.0.4(rollup@4.46.2)(typescript@5.9.2)':
+  '@mjsz-vbr-elements/nuxt@0.0.4(patch_hash=c8a7988e41096724da73c7584bc2f3dd5d98241a0f1d8596b8c63c7101cc551b)(rollup@4.46.2)(typescript@5.9.2)':
     dependencies:
       '@mjsz-vbr-elements/core': 2.2.5(typescript@5.9.2)
       '@nuxt/kit': 3.11.1(rollup@4.46.2)

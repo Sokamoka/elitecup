@@ -1,0 +1,26 @@
+diff --git a/dist/module.json b/dist/module.json
+index 7016dd0b2768d0ae98deb9101f1180dfc771266f..e88a6372fb5547ad590119451a026793ea7192ef 100644
+--- a/dist/module.json
++++ b/dist/module.json
+@@ -2,7 +2,7 @@
+   "name": "@mjsz-vbr-elements/nuxt",
+   "configKey": "mjszVbrElements",
+   "compatibility": {
+-    "nuxt": "^3"
++    "nuxt": "^4"
+   },
+   "version": "0.0.4"
+ }
+diff --git a/dist/module.mjs b/dist/module.mjs
+index ec86c4d68ebe3c78220e8415c0f384002011c1c6..541913ffc54a2df2dc9684cb6d5042da6916f2dd 100644
+--- a/dist/module.mjs
++++ b/dist/module.mjs
+@@ -7,7 +7,7 @@ const module = defineNuxtModule({
+     name: "@mjsz-vbr-elements/nuxt",
+     configKey: "mjszVbrElements",
+     compatibility: {
+-      nuxt: "^3"
++      nuxt: "^4"
+     }
+   },
+   defaults: {
