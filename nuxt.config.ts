@@ -1,8 +1,10 @@
 import tailwindTypography from '@tailwindcss/typography';
-import { fileURLToPath } from 'url';
+// import { fileURLToPath } from 'url';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  compatibilityDate: '2025-08-07',
+
   ssr: false,
 
   nitro: {
@@ -22,7 +24,7 @@ export default defineNuxtConfig({
       isCustomElement: (tag) => tag.includes('mjsz-vbr-'),
     },
   },
-  
+
   app: {
     head: {
       titleTemplate: 'EliteCup.eu - %s',
@@ -48,8 +50,8 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@nuxt/content',
     '@nuxtjs/supabase',
+    '@nuxt/icon',
     'nuxt-headlessui',
-    'nuxt-icon',
     '@zadigetvoltaire/nuxt-gtm',
     '@mjsz-vbr-elements/nuxt',
   ],
@@ -83,19 +85,11 @@ export default defineNuxtConfig({
       //   file: 'hu-HU.json',
       // },
     ],
-    lazy: true,
-    langDir: 'lang',
     defaultLocale: 'en',
   },
 
   headlessui: {
     prefix: 'Headless',
-  },
-
-  content: {
-    navigation: {
-      fields: ['publishedAt', 'lead', 'mainImage'],
-    },
   },
 
   gtm: {
