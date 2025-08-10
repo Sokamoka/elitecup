@@ -13,6 +13,8 @@
 <template>
   <NuxtLayout>
     <NuxtLoadingIndicator />
-    <NuxtPage />
+    <UApp>
+      <NuxtPage />
+    </UApp>
   </NuxtLayout>
 </template>

@@ -52,6 +52,8 @@ useHead({
 </template>
 
 <style scoped>
+@reference "~/assets/css/main.css";
+
 .prose :deep(p) {
   @apply leading-normal mb-4 text-slate-700;
 }

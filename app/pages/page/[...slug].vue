@@ -19,6 +19,8 @@ useSeoMeta({
 </template>
 
 <style>
+@reference "~/assets/css/main.css";
+
 .prose p {
   @apply mb-4;
 }
