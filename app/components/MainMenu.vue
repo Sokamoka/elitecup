@@ -16,7 +16,6 @@ watch(isMiddleScreen, (isMiddleScreen) => {
 const ui = {
   link: 'text-white text-base uppercase hover:before:bg-red-500 hover:text-white data-[state=open]:text-white data-[state=open]:before:bg-red-500 data-[active]:before:bg-red-500',
   childLink: 'text-base',
-  // content: 'bg-gray-900 border-gray-900',
 };
 
 const items = ref<NavigationMenuItem[]>([
