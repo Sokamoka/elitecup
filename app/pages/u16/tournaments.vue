@@ -5,9 +5,7 @@ const { locale } = useI18n();
 </script>
 
 <template>
-  <h1 class="text-2xl text-slate-900 font-bold my-8">
-    {{ $t('menu.games') }}
-  </h1>
+  <h1 class="text-2xl text-slate-900 font-bold my-8">{{ $t('title.tournaments') }} U-16</h1>
 
   <SeasonProvider class="space-y-8" :championship-id="4037" #default="{ championshipId, data }">
     <div v-for="(tournament, index) in data">

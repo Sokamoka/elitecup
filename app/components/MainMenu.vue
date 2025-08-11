@@ -14,7 +14,7 @@ watch(isMiddleScreen, (isMiddleScreen) => {
 });
 
 const ui = {
-  link: 'text-white text-base uppercase',
+  link: 'text-white text-base uppercase hover:before:bg-red-500 hover:text-white data-[state=open]:text-white data-[state=open]:before:bg-red-500 data-[active]:before:bg-red-500',
   childLink: 'text-base',
   // content: 'bg-gray-900 border-gray-900',
 };
@@ -80,6 +80,14 @@ const items = ref<NavigationMenuItem[]>([
         label: 'Season 2024-2025',
         to: localePath('/u16/archive/season-2024-2025'),
       },
+      {
+        label: 'Season 2023-2024',
+        to: localePath('/u16/archive/season-2023-2024'),
+      },
+      {
+        label: 'Season 2022-2023',
+        to: localePath('/u16/archive/season-2022-2023'),
+      },
     ],
   },
   {
@@ -102,7 +110,7 @@ const items = ref<NavigationMenuItem[]>([
 </script>
 
 <template>
-  <div class="bg-slate-900 px-2 rounded-lg text-white font-bold">
+  <!-- <div class="bg-slate-900 px-2 rounded-lg text-white font-bold">
     <a href="#" @click.prevent="isMenuOpen = !isMenuOpen" class="flex items-center py-3 px-2 sm:hidden">
       <Icon name="ic:baseline-menu" class="text-2xl" />
     </a>
@@ -273,8 +281,7 @@ const items = ref<NavigationMenuItem[]>([
         <NuxtLink :to="localePath('/page/contacts')" class="p-3 uppercase">{{ $t('menu.contacts') }}</NuxtLink>
       </div>
     </div>
-  </div>
-  <!-- before:bg-red-500 -->
+  </div> -->
   <div class="bg-slate-900 px-2 rounded-lg">
     <UNavigationMenu :items="items" :ui="ui" class="w-full" />
   </div>

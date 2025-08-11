@@ -2,7 +2,7 @@
 import { useDataTable } from '@lostui/utils';
 import { omit } from 'ramda';
 import { RESULT_TABLE_COLUMNS } from '~/constants';
-import data from '../data/2025.json';
+import data from '../data/2024.json';
 
 const { locale } = useI18n();
 const { columnModel, state } = useDataTable(omit(['best'], RESULT_TABLE_COLUMNS), data);
@@ -10,9 +10,9 @@ const { columnModel, state } = useDataTable(omit(['best'], RESULT_TABLE_COLUMNS)
 
 <template>
   <div>
-    <h1 class="text-2xl text-slate-900 font-bold my-8">{{ $t('menu.season') }} 2024-2025</h1>
+    <h1 class="text-2xl text-slate-900 font-bold my-8">{{ $t('menu.season') }} 2023-2024</h1>
 
-    <SeasonProvider class="space-y-8" :championship-id="3782" #default="{ championshipId, data }">
+    <SeasonProvider class="space-y-8" :championship-id="3444" #default="{ championshipId, data }">
       <div v-for="(tournament, index) in data">
         <h2 class="font-bold text-xl leading-10">{{ index + 1 }}. Tournament</h2>
         <mjsz-vbr-schedule
