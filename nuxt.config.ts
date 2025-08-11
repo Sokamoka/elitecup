@@ -44,25 +44,27 @@ export default defineNuxtConfig({
   plugins: [{ src: '~/plugins/facebook-page-plugin.ts', mode: 'client' }],
 
   modules: [
-    '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
     '@nuxtjs/google-fonts',
     '@nuxtjs/i18n',
     '@nuxt/content',
     '@nuxtjs/supabase',
     '@nuxt/icon',
+    '@nuxt/ui',
     'nuxt-headlessui',
     '@zadigetvoltaire/nuxt-gtm',
     '@mjsz-vbr-elements/nuxt',
   ],
 
-  tailwindcss: {
-    cssPath: '~/assets/css/tailwind.css',
-    config: {
-      content: [],
-      plugins: [tailwindTypography],
-    },
-  },
+  css: ['~/assets/css/main.css'],
+
+  // tailwindcss: {
+  //   cssPath: '~/assets/css/main.css',
+  //   config: {
+  //     content: [],
+  //     plugins: [tailwindTypography],
+  //   },
+  // },
 
   googleFonts: {
     families: {

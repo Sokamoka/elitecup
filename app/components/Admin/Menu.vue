@@ -30,6 +30,8 @@ const localePath = useLocalePath();
 </template>
 
 <style scoped>
+@reference "~/assets/css/main.css";
+
 .menu-item {
   @apply flex items-center text-slate-500 hover:text-slate-700 font-medium leading-6;
 }

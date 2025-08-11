@@ -18,7 +18,8 @@
     "standings": "Tabella",
     "statistics": "Statisztikák",
     "games": "Mérkőzések",
-    "regulations": "Versenyszabályzat"
+    "regulations": "Versenyszabályzat",
+    "season": "Szezon"
   },
   "title": {
     "schedule": "Versenynaptár",
@@ -27,7 +28,8 @@
     "standings-u16": "Menetrend U-16",
     "statistics": "Statisztikák",
     "teams": "Csapatok",
-    "videos": "Videók"
+    "videos": "Videók",
+    "tournaments": "Tornák"
   },
   "statistics": {
     "points": "Pontok",

@@ -19,7 +19,8 @@
     "statistics": "Statistics",
     "games": "Games",
     "regulations": "Game regulations",
-    "archive": "Archive"
+    "archive": "Archive",
+    "season": "Season"
   },
   "title": {
     "schedule": "Schedule",
@@ -28,7 +29,8 @@
     "standings-u16": "U-16 Standings",
     "statistics": "Statistics",
     "teams": "Teams",
-    "videos": "Videos"
+    "videos": "Videos",
+    "tournaments": "Tournaments"
   },
   "statistics": {
     "points": "Points",

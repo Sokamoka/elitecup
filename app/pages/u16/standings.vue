@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useDataTable } from '@lostui/utils';
 import { RESULT_TABLE_COLUMNS } from '~/constants';
-import data from './data/2025.json';
+import data from './data/2026.json';
 
 const { columnModel, state } = useDataTable(RESULT_TABLE_COLUMNS, data);
 </script>
