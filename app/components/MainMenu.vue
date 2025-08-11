@@ -3,6 +3,7 @@ import type { NavigationMenuItem } from '@nuxt/ui';
 
 const isMenuOpen = ref<boolean>(false);
 
+const { t } = useI18n();
 const localePath = useLocalePath();
 
 const isMiddleScreen = useMediaQuery('(min-width: 640px)');
@@ -12,20 +13,23 @@ watch(isMiddleScreen, (isMiddleScreen) => {
   }
 });
 
+const ui = {
+  link: 'text-white text-base uppercase',
+  childLink: 'text-base',
+  // content: 'bg-gray-900 border-gray-900',
+};
+
 const items = ref<NavigationMenuItem[]>([
   {
-    label: 'News',
-    // icon: 'i-lucide-book-open',
+    label: t('menu.news'),
     to: localePath('/news'),
   },
   {
     label: 'U-18',
-    // icon: 'i-lucide-database',
-    // to: '/composables',
     children: [
       {
         label: 'Turnaments',
-        to: localePath('/u18/schedule'),
+        to: localePath('/u18/tournaments'),
       },
       {
         label: 'Standings',
@@ -36,80 +40,62 @@ const items = ref<NavigationMenuItem[]>([
         to: localePath('/u18/statistics'),
       },
       {
-        label: 'Archive',
-        icon: 'i-lucide-file-text',
-        description: 'Display a modal/slideover within your application.',
-        to: '/composables/use-overlay',
+        label: t('menu.regulations'),
+        to: localePath('/files/Cup_reg_U18_24_25.pdf'),
       },
       {
-        label: 'useToast',
-        icon: 'i-lucide-file-text',
-        description: 'Display a toast within your application.',
-        to: '/composables/use-toast',
+        label: 'Season 2024-2025',
+        to: localePath('/u18/archive/season-2024-2025'),
+      },
+      {
+        label: 'Season 2023-2024',
+        to: localePath('/u18/archive/season-2023-2024'),
+      },
+      {
+        label: 'Season 2022-2023',
+        to: localePath('/u18/archive/season-2022-2023'),
       },
     ],
   },
   {
     label: 'U-16',
-    // icon: 'i-lucide-box',
-    // to: '/components',
     children: [
       {
-        label: 'Link',
-        icon: 'i-lucide-file-text',
-        description: 'Use NuxtLink with superpowers.',
-        to: '/components/link',
+        label: 'Turnaments',
+        to: localePath('/u16/tournaments'),
       },
       {
-        label: 'Modal',
-        icon: 'i-lucide-file-text',
-        description: 'Display a modal within your application.',
-        to: '/components/modal',
+        label: 'Standings',
+        to: localePath('/u16/standings'),
       },
       {
-        label: 'NavigationMenu',
-        icon: 'i-lucide-file-text',
-        description: 'Display a list of links.',
-        to: '/components/navigation-menu',
+        label: 'Statistics',
+        to: localePath('/u16/statistics'),
       },
       {
-        label: 'Pagination',
-        icon: 'i-lucide-file-text',
-        description: 'Display a list of pages.',
-        to: '/components/pagination',
+        label: t('menu.regulations'),
+        to: localePath('/files/Cup_reg_U16_24_25_v2.pdf'),
       },
       {
-        label: 'Popover',
-        icon: 'i-lucide-file-text',
-        description: 'Display a non-modal dialog that floats around a trigger element.',
-        to: '/components/popover',
-      },
-      {
-        label: 'Progress',
-        icon: 'i-lucide-file-text',
-        description: 'Show a horizontal bar to indicate task progression.',
-        to: '/components/progress',
+        label: 'Season 2024-2025',
+        to: localePath('/u16/archive/season-2024-2025'),
       },
     ],
   },
   {
     label: 'Schedule',
-    // icon: 'i-lucide-book-open',
     to: localePath('/schedule'),
   },
   {
     label: 'Videos',
-    // icon: 'i-lucide-book-open',
     to: localePath('/videos'),
   },
   {
     label: 'Project',
-    // icon: 'i-lucide-book-open',
     to: localePath('/page/project'),
   },
   {
     label: 'Contacts',
-    // icon: 'i-lucide-book-open',
     to: localePath('/page/contacts'),
   },
 ]);
@@ -290,12 +276,7 @@ const items = ref<NavigationMenuItem[]>([
   </div>
   <!-- before:bg-red-500 -->
   <div class="bg-slate-900 px-2 rounded-lg">
-    <UNavigationMenu
-      :items="items"
-      content-orientation="vertical"
-      :ui="{ link: 'text-white text-base uppercase', childLink: 'text-base' }"
-      class="w-full"
-    />
+    <UNavigationMenu :items="items" :ui="ui" class="w-full" />
   </div>
 </template>
 
