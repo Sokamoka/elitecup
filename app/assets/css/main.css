@@ -75,3 +75,8 @@ body {
     @apply py-3 px-6 text-left whitespace-nowrap;
   }
 }
+
+mjsz-vbr-standings,
+mjsz-vbr-schedule {
+  --vbr-widget-table-header-bg-color: var(--color-slate-900);
+}
