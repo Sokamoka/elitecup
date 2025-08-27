@@ -1,4 +1,4 @@
-import type { VideosResponse } from '~/types/Videos';
+import type { VideosResponse } from '~~/types/Videos';
 
 export interface UseVideoListOptions {
   from: Ref<number>;
@@ -23,7 +23,7 @@ export async function useVideoList(options: UseVideoListOptions) {
     },
     {
       immediate: true,
-    }
+    },
   );
 
   const isFetchMoreVisible = computed(() => unref(state).length < unref(totalCount));
