@@ -39,7 +39,7 @@ const localePath = useLocalePath();
           ><img src="~/assets/images/Bauer-logo-black.svg" alt="Marczi Skate" class="h-10 sm:h-16 object-contain"
         /></a>
         <a href="https://www.marcziskate.hu/" target="_blank"
-          ><img src="~/assets/images/MS_logo.webp" alt="Marczi Skate" class="h-10 sm:h-16 object-contain"
+          ><img src="~/assets/images/hockeylab-logo.svg" alt="Marczi Skate" class="h-10 sm:h-16 object-contain"
         /></a>
       </div>
     </div>
