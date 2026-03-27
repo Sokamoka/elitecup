@@ -7,7 +7,7 @@ const { locale } = useI18n();
     <h1 class="text-2xl text-slate-900 font-bold my-8">{{ $t('title.tournaments') }} U-18</h1>
     <SeasonProvider class="space-y-8" :championship-id="4056" #default="{ championshipId, data }">
       <div v-for="tournament in data">
-        <h2 class="font-bold text-xl leading-10">{{ tournament.phaseSubType.phaseSubTypeName }} Tournament</h2>
+        <h2 class="font-bold text-xl leading-10">{{ tournament.phaseSubType?.phaseSubTypeName }} Tournament</h2>
         <mjsz-vbr-schedule
           :locale="locale"
           :championship-id="championshipId?.toString()"
